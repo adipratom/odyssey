@@ -51,10 +51,10 @@ class _ProfileState extends State<Profile> {
           if(index == 0) {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
           }
-          if(index == 2) {
+          if(index == 1) {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => TransactionPage()));
           }
-          if(index == 3) {
+          if(index == 2) {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Favorite()));
           }
         },

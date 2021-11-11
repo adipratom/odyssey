@@ -50,7 +50,7 @@ class _FavoriteState extends State<Favorite> {
           if(index == 0) {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
           }
-          if(index == 2) {
+          if(index == 1) {
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
           }
           if(index == 3) {
