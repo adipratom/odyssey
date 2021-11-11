@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:odyssey/pages/home.dart';
-import 'package:odyssey/pages/transaction.dart';
-import 'package:odyssey/pages/profile.dart';
 
 class Favorite extends StatefulWidget {
   const Favorite({ Key? key }) : super(key: key);
@@ -48,13 +45,13 @@ class _FavoriteState extends State<Favorite> {
         onTap: (index) {
           setState(() => _currentIndex = index);
           if(index == 0) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+            Navigator.pushReplacementNamed(context, '/');
           }
           if(index == 1) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+            Navigator.pushReplacementNamed(context, '/transaction');
           }
           if(index == 3) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+            Navigator.pushReplacementNamed(context, '/profile');
           }
         },
       ),

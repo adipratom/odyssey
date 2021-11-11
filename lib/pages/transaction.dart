@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:odyssey/pages/home.dart';
-import 'package:odyssey/pages/favorite.dart';
-import 'package:odyssey/pages/profile.dart';
 
 class TransactionPage extends StatefulWidget {
   const TransactionPage({ Key? key }) : super(key: key);
@@ -48,13 +45,13 @@ class _TransactionPageState extends State<TransactionPage> {
         onTap: (index) {
           setState(() => _currentIndex = index);
           if(index == 0) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Home()));
+            Navigator.pushReplacementNamed(context, '/');
           }
           if(index == 2) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Favorite()));
+            Navigator.pushReplacementNamed(context, '/favorite');
           }
           if(index == 3) {
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Profile()));
+            Navigator.pushReplacementNamed(context, '/profile');
           }
         },
       ),
