@@ -11,6 +11,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@mipmap/odyssey_logo" />
+            android:src="@mipmap/white_logo" />
     </item>
 </layer-list>
