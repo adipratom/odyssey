@@ -13,24 +13,6 @@ void main() => runApp(new MaterialApp(
   },
 ));
 
-// void main() {
-//   runApp(MyApp());
-// }
-
-// class MyApp extends StatelessWidget{
-//   @override
-//   Widget build(BuildContext context){
-//     return MaterialApp(
-//     debugShowCheckedModeBanner: false,
-//     home: SplashScreen(),
-//   );
-//   }
-// }
-
-// void main() {
-//   runApp(Main());
-// }
-
 class Main extends StatefulWidget {
   const Main({Key? key}) : super(key: key);
 
