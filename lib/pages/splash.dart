@@ -47,14 +47,10 @@ initWidget() {
           ),
         ),
         Center(
-          child: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/images/white_logo.png')
-              )
-            ),
-            // child: Image.asset("white_logo.png"),
-          ),
+          child: Image.asset('assets/images/white_logo.png', width: 235),
+        ),
+        Center(
+          child: Text('odyssey', style: TextStyle(fontFamily: 'KulimPark', fontWeight : FontWeight.w300, height: 13, fontSize: 40, color: Colors.white)) 
         )
       ],
     ),
