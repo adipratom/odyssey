@@ -5,26 +5,86 @@ import 'package:odyssey/pages/profile.dart';
 import 'package:odyssey/pages/transaction.dart';
 import 'package:odyssey/pages/splash.dart';
 
-// void main() => runApp(new MaterialApp(
-//   initialRoute: '/',
-//   routes: {
-//     '/': (context) => Home(),
-//     '/favorite': (context) => Favorite(),
-//     '/transaction': (context) => TransactionPage(),
-//     '/profile': (context) => Profile(),
-//   },
-// ));
+void main() => runApp(new MaterialApp(
+  initialRoute: '/splash',
+  routes: {
+    '/': (context) => Main(),
+    '/splash': (context) => SplashScreen(),
+  },
+));
 
-void main() {
-  runApp(MyApp());
+// void main() {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget{
+//   @override
+//   Widget build(BuildContext context){
+//     return MaterialApp(
+//     debugShowCheckedModeBanner: false,
+//     home: SplashScreen(),
+//   );
+//   }
+// }
+
+// void main() {
+//   runApp(Main());
+// }
+
+class Main extends StatefulWidget {
+  const Main({Key? key}) : super(key: key);
+
+  @override
+  _MainState createState() => _MainState();
 }
 
-class MyApp extends StatelessWidget{
+class _MainState extends State<Main> {
+  int _currentIndex = 0;
+
+  List<Widget> pageList = <Widget>[
+    Home(),
+    TransactionPage(),
+    Favorite(),
+    Profile(),
+  ];
+
+  void onTap(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
   @override
-  Widget build(BuildContext context){
-    return MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: SplashScreen(),
-  );
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: pageList[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
+        currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        selectedItemColor: Color(0xFF21574A),
+        unselectedItemColor: Colors.grey,
+        items: [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: "Home",
+              backgroundColor: Colors.grey),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.payment),
+              label: "Search",
+              backgroundColor: Colors.grey),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite),
+              label: "Favorite",
+              backgroundColor: Colors.grey),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: "Profile",
+              backgroundColor: Colors.grey),
+        ],
+        onTap: onTap,
+      ),
+    );
   }
 }

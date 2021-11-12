@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:odyssey/main.dart';
 import 'package:odyssey/pages/sign-in.dart';
 import 'dart:async';
 
@@ -16,9 +17,14 @@ class InitState extends State<SplashScreen> {
 
   startTimer() async {
     var duration = Duration(seconds: 2);
-    return new Timer(duration, signInRoute);
+    return new Timer(duration, homeRoute);
   }
 
+  homeRoute() {
+    Navigator.pushReplacement(context, MaterialPageRoute(
+      builder: (context) => Main()
+    ));
+  }
   signInRoute(){
     Navigator.pushReplacement(context, MaterialPageRoute(
       builder: (context) => SignInScreen()
@@ -42,7 +48,12 @@ initWidget() {
         ),
         Center(
           child: Container(
-            child: Image.asset("white_logo.png"),
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/images/white_logo.png')
+              )
+            ),
+            // child: Image.asset("white_logo.png"),
           ),
         )
       ],
