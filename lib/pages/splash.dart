@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:odyssey/main.dart';
+import 'package:odyssey/pages/edit-guide.dart';
 import 'package:odyssey/pages/sign-in.dart';
 import 'dart:async';
 
@@ -22,7 +23,7 @@ class InitState extends State<SplashScreen> {
 
   homeRoute() {
     Navigator.pushReplacement(context, MaterialPageRoute(
-      builder: (context) => Main()
+      builder: (context) => EditGuide()
     ));
   }
   signInRoute(){
