@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:odyssey/main.dart';
-import 'package:odyssey/pages/sign-in.dart';
+import 'package:odyssey/pages/sign_up.dart';
 import 'dart:async';
 
 class SplashScreen extends StatefulWidget {
@@ -27,7 +27,7 @@ class InitState extends State<SplashScreen> {
   }
   signInRoute(){
     Navigator.pushReplacement(context, MaterialPageRoute(
-      builder: (context) => SignInScreen()
+      builder: (context) => SignUpScreen()
     ));
   }
 
@@ -47,10 +47,15 @@ initWidget() {
           ),
         ),
         Center(
-          child: Image.asset('assets/images/white_logo.png', width: 235),
+          child: Image.asset('assets/images/white_logo.png', width: 220),
         ),
         Center(
-          child: Text('odyssey', style: TextStyle(fontFamily: 'KulimPark', fontWeight : FontWeight.w300, height: 13, fontSize: 40, color: Colors.white)) 
+          child: Text('odyssey', style: TextStyle(
+            fontFamily: 'KulimPark', 
+            fontWeight : FontWeight.w300, 
+            height: 13, 
+            fontSize: 40, 
+            color: Colors.white)) 
         )
       ],
     ),
