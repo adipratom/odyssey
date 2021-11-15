@@ -15,6 +15,6 @@ class InitState extends State<SignInScreen> {
 Widget initWidget() {
   return Scaffold(
       body: Center(
-        child: Text('LOGIN PAGE'),
+        child: Text('Login'),
   ));
 }

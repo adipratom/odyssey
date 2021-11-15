@@ -12,10 +12,13 @@ class _TransactionPageState extends State<TransactionPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Text("Transaction Page"),
+    Size size = MediaQuery.of(context).size;
+
+
+    return SafeArea(
+      child: Container(
+        child: Text("Transaction"),
       ),
-    );
+      );
   }
 }
