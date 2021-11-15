@@ -39,6 +39,7 @@ class _MainState extends State<Main> {
       _currentIndex = index;
     });
   }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
