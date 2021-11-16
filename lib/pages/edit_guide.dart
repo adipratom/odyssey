@@ -15,7 +15,7 @@ class EditGuide extends StatelessWidget {
         appBar: AppBar(
           leading: const Icon(Icons.chevron_left),
           title: const Text(appTitle,
-              style: TextStyle(fontFamily: 'KulimPark', fontSize: 20)),
+              style: TextStyle(fontFamily: 'Poppins', fontSize: 20)),
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
         ),
@@ -62,12 +62,12 @@ class MyCustomFormState extends State<MyCustomForm> {
             Container(
               child: Center(
                 child: Text('Change Profile Picture',
-                    style: TextStyle(fontFamily: 'KulimPark', fontSize: 14)),
+                    style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               ),
             ),
             Container(
               child: Text('What should we call you?',
-                  style: TextStyle(fontFamily: 'KulimPark', fontSize: 14)),
+                  style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
 
@@ -85,7 +85,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             ),
             Container(
               child: Text('What is your email?',
-                  style: TextStyle(fontFamily: 'KulimPark', fontSize: 14)),
+                  style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
             TextFormField(
@@ -102,7 +102,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             ),
             Container(
               child: Text('What is your phone number?',
-                  style: TextStyle(fontFamily: 'KulimPark', fontSize: 14)),
+                  style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
 
@@ -120,7 +120,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             ),
             Container(
               child: Text('What is your address?',
-                  style: TextStyle(fontFamily: 'KulimPark', fontSize: 14)),
+                  style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
             TextFormField(
@@ -138,7 +138,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             ),
             Container(
               child: Text('What are words to describe you?',
-                  style: TextStyle(fontFamily: 'KulimPark', fontSize: 14)),
+                  style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
             
@@ -157,7 +157,7 @@ class MyCustomFormState extends State<MyCustomForm> {
             ),
             Container(
               child: Text('What is your bank account?',
-                  style: TextStyle(fontFamily: 'KulimPark', fontSize: 14)),
+                  style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
             Container(
@@ -213,7 +213,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               ),
               child: Text(
                 'Submit',
-                style: TextStyle(color: Colors.white,fontFamily: 'KulimPark', fontSize: 14, fontWeight: FontWeight.w700), 
+                style: TextStyle(color: Colors.white,fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.w700), 
               ),
             ),
             ),
