@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:odyssey/main.dart';
+import 'package:getwidget/getwidget.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -169,7 +170,7 @@ class _HomeState extends State<Home> {
                 ),
                 Container(
                   padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                  height: 140,
+                  height: 270,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
@@ -192,11 +193,51 @@ class _HomeState extends State<Home> {
   }
 
   Widget buildCard() => Container(
-        width: 200,
-        height: 100,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
+        ),
+        child: Column(
+          children: [
+            Container(
+                padding: EdgeInsets.all(10),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: Image.asset(
+                    'assets/images/home/badui.png',
+                    width: 140,
+                    height: 125,
+                    fit: BoxFit.cover,
+                  ),
+                )),
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                    child: Text("2D1N Lembang",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontFamily: "KulimPark",
+                          fontWeight: FontWeight.bold,
+                        )))),
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                    child: Text("Open Trip | Challenging",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(fontFamily: "KulimPark")))),
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                    child: Text("4.0",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(fontFamily: "KulimPark")))),
+            Align(
+                alignment: Alignment.centerLeft,
+                child: Container(
+                    child: Text("Rp200.000,00/pax",
+                        textAlign: TextAlign.left,
+                        style: TextStyle(fontFamily: "KulimPark")))),
+          ],
         ),
       );
 }

@@ -8,7 +8,7 @@ import 'package:odyssey/pages/sign_up.dart';
 import 'package:odyssey/pages/sign_in.dart';
 
 void main() => runApp(new MaterialApp(
-  initialRoute: '/sign_in',
+  initialRoute: '/',
   routes: {
     '/': (context) => Main(),
     //'/sign_up': (context) => SignUpScreen(),
