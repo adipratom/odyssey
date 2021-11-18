@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:odyssey/pages/home.dart';
+import 'package:odyssey/pages/sign_up.dart';
+
+import '../main.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -9,11 +13,11 @@ class SignInScreen extends StatefulWidget {
 class InitState extends State<SignInScreen> {
   @override
   Widget build(BuildContext context) {
-    return initWidget();
+    return initWidget(context);
   }
 }
 
-Widget initWidget() {
+Widget initWidget(BuildContext context) {
   return Scaffold(
     resizeToAvoidBottomInset: false,
     body: Stack(
@@ -104,7 +108,9 @@ Widget initWidget() {
                 alignment: Alignment.centerRight,
                 child: MaterialButton(
                   height: 45,
-                  onPressed: () => {},
+                  onPressed: () => {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Main()))
+                  },
                   child: Image.asset('assets/images/submit.png', width: 45),
                 ),
               ),
@@ -128,7 +134,7 @@ Widget initWidget() {
                           fontSize: 18,
                         ),
                         recognizer: new TapGestureRecognizer()..onTap = () => {
-
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => SignUpScreen()))
                         },
                     ),
                   ],

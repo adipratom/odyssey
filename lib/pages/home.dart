@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:odyssey/components/card.dart';
 import 'package:odyssey/main.dart';
 import 'package:getwidget/getwidget.dart';
 
@@ -44,22 +45,29 @@ class _HomeState extends State<Home> {
                                   blurRadius: 50,
                                   color: Colors.black.withOpacity(0.23))
                             ]),
-                        child: TextField(
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 15,
-                            color: Colors.white.withOpacity(0.7),
-                          ),
-                          decoration: InputDecoration(
-                            hintText: "Search a place you want to go...",
-                            hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.7),
-                              fontFamily: 'Poppins',
-                              fontSize: 15,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 15,
+                                  color: Colors.white.withOpacity(0.7),
+                                ),
+                                decoration: InputDecoration(
+                                  hintText: "Search a place you want to go...",
+                                  hintStyle: TextStyle(
+                                    color: Colors.white.withOpacity(0.7),
+                                    fontFamily: 'Poppins',
+                                    fontSize: 15,
+                                  ),
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                ),
+                              ),
                             ),
-                            enabledBorder: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                          ),
+                            IconButton(onPressed: () {}, icon: Icon(Icons.search, color: Colors.white)),
+                          ],
                         ))),
                 Align(
                     alignment: Alignment.centerLeft,
@@ -175,11 +183,11 @@ class _HomeState extends State<Home> {
                     scrollDirection: Axis.horizontal,
                     children: [
                       SizedBox(width: 12),
-                      buildCard(),
+                      CardComponent(),
                       SizedBox(width: 12),
-                      buildCard(),
+                      CardComponent(),
                       SizedBox(width: 12),
-                      buildCard(),
+                      CardComponent(),
                       SizedBox(width: 12),
                     ],
                   ),
@@ -191,53 +199,4 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-
-  Widget buildCard() => Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Column(
-          children: [
-            Container(
-                padding: EdgeInsets.all(10),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20.0),
-                  child: Image.asset(
-                    'assets/images/home/badui.png',
-                    width: 140,
-                    height: 125,
-                    fit: BoxFit.cover,
-                  ),
-                )),
-            Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                    child: Text("2D1N Lembang",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontFamily: "KulimPark",
-                          fontWeight: FontWeight.bold,
-                        )))),
-            Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                    child: Text("Open Trip | Challenging",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(fontFamily: "KulimPark")))),
-            Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                    child: Text("4.0",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(fontFamily: "KulimPark")))),
-            Align(
-                alignment: Alignment.centerLeft,
-                child: Container(
-                    child: Text("Rp200.000,00/pax",
-                        textAlign: TextAlign.left,
-                        style: TextStyle(fontFamily: "KulimPark")))),
-          ],
-        ),
-      );
 }
