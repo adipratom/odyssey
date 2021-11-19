@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:odyssey/main.dart';
 import 'package:odyssey/pages/edit_guide.dart';
+import 'package:odyssey/pages/edit_profile.dart';
 import 'package:odyssey/pages/sign_in.dart';
 import 'package:odyssey/pages/sign_up.dart';
+import 'package:odyssey/pages/add_destination.dart';
 import 'dart:async';
 
 class SplashScreen extends StatefulWidget {
@@ -24,7 +26,7 @@ class InitState extends State<SplashScreen> {
 
   homeRoute() {
     Navigator.pushReplacement(context, MaterialPageRoute(
-      builder: (context) => EditGuide()
+      builder: (context) => AddDestination()
     ));
   }
   signInRoute(){

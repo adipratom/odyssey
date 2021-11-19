@@ -8,12 +8,12 @@ import 'package:odyssey/pages/sign_up.dart';
 import 'package:odyssey/pages/sign_in.dart';
 
 void main() => runApp(new MaterialApp(
-  initialRoute: '/sign_in',
+  initialRoute: '/splash',
   routes: {
     '/': (context) => Main(),
     //'/sign_up': (context) => SignUpScreen(),
-    '/sign_in': (context) => SignInScreen(),
-    // '/splash': (context) => SplashScreen(),
+    // '/sign_in': (context) => SignInScreen(),
+    '/splash': (context) => SplashScreen(),
   },
 ));
 

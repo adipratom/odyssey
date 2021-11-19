@@ -56,10 +56,18 @@ class MyCustomFormState extends State<MyCustomForm> {
             Container(
              child: Center(
                child:
-               Image.asset('../assets/images/profile.jpg')
+               CircleAvatar(
+                  radius: 50.0,
+                  child: ClipRRect(
+                      child: Image.asset('../assets/images/profile.jpg'),
+                      borderRadius: BorderRadius.circular(50.0),
+                  ),
+              ),
+              //  Image.asset('../assets/images/profile.jpg')
              )     
             ),
             Container(
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
                 child: Text('Change Profile Picture',
                     style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
@@ -93,7 +101,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                 fillColor: Color.fromARGB(100, 196, 196, 196),
                 filled: true,
-                hintText: 'Enter a phone number',
+                hintText: 'Enter an email',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide.none,
@@ -177,7 +185,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                             borderRadius: BorderRadius.circular(10),
                             borderSide: BorderSide.none,
                           ),
-                          hintText: 'Enter your bank account',
+                          hintText: 'Bank',
                           ), 
                       ),)),
                   ),
@@ -193,7 +201,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide.none,
                         ),
-                        hintText: 'Enter your bank account',
+                        hintText: 'Account number',
                         ), 
                     ),)),
                 
@@ -202,20 +210,29 @@ class MyCustomFormState extends State<MyCustomForm> {
             ),
            
             Container(
-            width: 320.0,
-            padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
-            child: ElevatedButton(
-              onPressed: () {  },
-              style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 20),
-                primary: Color.fromARGB(255, 204,164,137),
-                onPrimary: Colors.white,
+              width: 320.0,
+              padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
+              child: ElevatedButton(
+                onPressed: () {
+                // Validate returns true if the form is valid, or false otherwise.
+                if (_formKey.currentState!.validate()) {
+                  // If the form is valid, display a snackbar. In the real world,
+                  // you'd often call a server or save the information in a database.
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Processing Data')),
+                  );
+                  }
+                },
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  primary: Color.fromARGB(255, 204,164,137),
+                  onPrimary: Colors.white,
+                ),
+                child: Text(
+                  'Submit',
+                  style: TextStyle(color: Colors.white,fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.w700), 
+                ),
               ),
-              child: Text(
-                'Submit',
-                style: TextStyle(color: Colors.white,fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.w700), 
-              ),
-            ),
             ),
           ],
         ),
@@ -223,3 +240,4 @@ class MyCustomFormState extends State<MyCustomForm> {
     );
   }
 }
+
