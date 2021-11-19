@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:odyssey/components/card.dart';
 import 'package:odyssey/main.dart';
+import 'package:getwidget/getwidget.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -43,22 +45,29 @@ class _HomeState extends State<Home> {
                                   blurRadius: 50,
                                   color: Colors.black.withOpacity(0.23))
                             ]),
-                        child: TextField(
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 15,
-                            color: Colors.white.withOpacity(0.7),
-                          ),
-                          decoration: InputDecoration(
-                            hintText: "Search a place you want to go...",
-                            hintStyle: TextStyle(
-                              color: Colors.white.withOpacity(0.7),
-                              fontFamily: 'Poppins',
-                              fontSize: 15,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: TextField(
+                                style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 15,
+                                  color: Colors.white.withOpacity(0.7),
+                                ),
+                                decoration: InputDecoration(
+                                  hintText: "Search a place you want to go...",
+                                  hintStyle: TextStyle(
+                                    color: Colors.white.withOpacity(0.7),
+                                    fontFamily: 'Poppins',
+                                    fontSize: 15,
+                                  ),
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                ),
+                              ),
                             ),
-                            enabledBorder: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                          ),
+                            IconButton(onPressed: () {}, icon: Icon(Icons.search, color: Colors.white)),
+                          ],
                         ))),
                 Align(
                     alignment: Alignment.centerLeft,
@@ -169,16 +178,16 @@ class _HomeState extends State<Home> {
                 ),
                 Container(
                   padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                  height: 140,
+                  height: 270,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: [
                       SizedBox(width: 12),
-                      buildCard(),
+                      CardComponent(),
                       SizedBox(width: 12),
-                      buildCard(),
+                      CardComponent(),
                       SizedBox(width: 12),
-                      buildCard(),
+                      CardComponent(),
                       SizedBox(width: 12),
                     ],
                   ),
@@ -190,13 +199,4 @@ class _HomeState extends State<Home> {
       ),
     );
   }
-
-  Widget buildCard() => Container(
-        width: 200,
-        height: 100,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-        ),
-      );
 }
