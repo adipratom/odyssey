@@ -7,11 +7,11 @@ class AddDestination extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const appTitle = 'Edit Profile';
+    const appTitle = 'Add Destination';
     return MaterialApp(
       title: appTitle,
       home: Scaffold(
-        backgroundColor:Colors.white ,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           leading: const Icon(Icons.chevron_left),
           title: const Text(appTitle,
@@ -20,8 +20,8 @@ class AddDestination extends StatelessWidget {
           foregroundColor: Colors.black,
         ),
         body: SingleChildScrollView(
-          child:MyCustomForm(), 
-        ), 
+          child: MyCustomForm(),
+        ),
       ),
     );
   }
@@ -44,9 +44,12 @@ class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
   List<String> optionsTrip = <String>['Open Trip', 'Private Trip', 'Honeymoon'];
   String dropdownValueTrip = 'Open Trip';
-  List<String> optionsActivity = <String>['Leisurely', 'Moderate', 'Challenging'];
+  List<String> optionsActivity = <String>[
+    'Leisurely',
+    'Moderate',
+    'Challenging'
+  ];
   String dropdownValueActivity = 'Leisurely';
-  
 
   @override
   Widget build(BuildContext context) {
@@ -59,18 +62,16 @@ class MyCustomFormState extends State<MyCustomForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-             child: Center(
-               child:
-               CircleAvatar(
-                  radius: 50.0,
-                  child: ClipRRect(
-                      child: Image.asset('../assets/images/profile.jpg'),
-                      borderRadius: BorderRadius.circular(50.0),
-                  ),
+                child: Center(
+              child: CircleAvatar(
+                radius: 50.0,
+                child: ClipRRect(
+                  child: Image.asset('assets/images/profile.jpg'),
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
               ),
               //  Image.asset('../assets/images/profile.jpg')
-             )     
-            ),
+            )),
             Container(
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
@@ -83,7 +84,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
-
             TextFormField(
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -96,120 +96,112 @@ class MyCustomFormState extends State<MyCustomForm> {
                 ),
               ),
             ),
-
             Container(
               child: Text('Choose the type and activity level:',
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
-
             Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[ 
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Color.fromARGB(100, 196, 196, 196),
-                        borderRadius: BorderRadius.circular(10)),
-                    width: 160,
-                    child: Flexible(child: Padding(
-                      padding: EdgeInsets.fromLTRB(5, 0, 10, 0),
-                      
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(100, 196, 196, 196),
+                      borderRadius: BorderRadius.circular(10)),
+                  width: 150,
+                  child: Flexible(
+                    child: Padding(
+                        padding: EdgeInsets.fromLTRB(5, 0, 10, 0),
+                        child: DropdownButtonFormField(
+                          isDense: true,
+                          value: dropdownValueTrip,
+                          items: optionsTrip
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                                value: value,
+                                child: value == dropdownValueTrip
+                                    ? Text(
+                                        value,
+                                        style: TextStyle(color: Colors.black),
+                                      )
+                                    : Text(value));
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              dropdownValueTrip = newValue!;
+                            });
+                          },
+                          dropdownColor: Colors.white,
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                          selectedItemBuilder: (BuildContext context) {
+                            return optionsTrip.map((String value) {
+                              return Text(dropdownValueTrip,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    // fontWeight: FontWeight.bold
+                                  ));
+                            }).toList();
+                          },
+                        )),
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Color.fromARGB(100, 196, 196, 196),
+                      borderRadius: BorderRadius.circular(10)),
+                  width: 150,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(5, 0, 10, 0),
+                    child: Flexible(
                       child: DropdownButtonFormField(
                         isDense: true,
-                        value: dropdownValueTrip,
-                        items: optionsTrip.map<DropdownMenuItem<String>>((String value){
+                        value: dropdownValueActivity,
+                        items: optionsActivity
+                            .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                               value: value,
-                              child: value == dropdownValueTrip?
-                              Text(
-                                value,
-                                style: TextStyle(color: Colors.black),
-                                    ) : Text(value)
-                                );
-                              }).toList(),
+                              child: value == dropdownValueActivity
+                                  ? Text(
+                                      value,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: "Poppins"),
+                                    )
+                                  : Text(value,
+                                      style: TextStyle(fontFamily: "Poppins")));
+                        }).toList(),
                         onChanged: (String? newValue) {
                           setState(() {
-                          dropdownValueTrip = newValue!;
+                            dropdownValueActivity = newValue!;
                           });
                         },
                         dropdownColor: Colors.white,
                         style: TextStyle(
-                        color: Colors.black,
-                        ), 
-                        selectedItemBuilder: (BuildContext context){
-                          return optionsTrip.map((String value) {
-                            return Text(
-                              dropdownValueTrip,
+                          color: Colors.black,
+                        ),
+                        selectedItemBuilder: (BuildContext context) {
+                          return optionsActivity.map((String value) {
+                            return Text(dropdownValueActivity,
                                 style: const TextStyle(
-                                    color: Colors.black,
-                                      // fontWeight: FontWeight.bold
-                                    )
-                                  );
+                                  color: Colors.black,
+                                  // fontWeight: FontWeight.bold
+                                ));
                           }).toList();
                         },
-                      )
-                    ),
-                    ),
-                  ),
-                  
-                  
-                    Container(
-                      decoration: BoxDecoration(
-                        color: Color.fromARGB(100, 196, 196, 196),
-                        borderRadius: BorderRadius.circular(10)),
-                      width: 160,
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(5, 0, 10, 0),
-                        child: Flexible(
-                          child: DropdownButtonFormField(
-                            isDense: true,
-                            value: dropdownValueActivity,
-                            items: optionsActivity.map<DropdownMenuItem<String>>((String value){
-                              return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: value == dropdownValueActivity?
-                                  Text(
-                                    value,
-                                    style: TextStyle(color: Colors.black),
-                                        ) : Text(value)
-                                    );
-                                  }).toList(),
-                            onChanged: (String? newValue) {
-                              setState(() {
-                              dropdownValueActivity = newValue!;
-                              });
-                            },
-                            dropdownColor: Colors.white,
-                            style: TextStyle(
-                            color: Colors.black,
-                            ), 
-                            selectedItemBuilder: (BuildContext context){
-                              return optionsActivity.map((String value) {
-                                return Text(
-                                  dropdownValueActivity,
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                          // fontWeight: FontWeight.bold
-                                        )
-                                      );
-                              }).toList();
-                            },
-                          ),
-                        ),
                       ),
                     ),
-                  
+                  ),
+                ),
               ],
-              )
-            ),
-
+            )),
             Container(
               child: Text('What is the description?',
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
-
             TextFormField(
               maxLines: 3,
               decoration: InputDecoration(
@@ -228,7 +220,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
-            
             TextFormField(
               maxLines: 3,
               decoration: InputDecoration(
@@ -242,29 +233,32 @@ class MyCustomFormState extends State<MyCustomForm> {
                 hintText: "Enter the destination's itinerary",
               ),
             ),
-           
             Container(
               width: 320.0,
               padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
               child: ElevatedButton(
                 onPressed: () {
-                // Validate returns true if the form is valid, or false otherwise.
-                if (_formKey.currentState!.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
-                  // you'd often call a server or save the information in a database.
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processing Data')),
-                  );
+                  // Validate returns true if the form is valid, or false otherwise.
+                  if (_formKey.currentState!.validate()) {
+                    // If the form is valid, display a snackbar. In the real world,
+                    // you'd often call a server or save the information in a database.
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Processing Data')),
+                    );
                   }
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  primary: Color.fromARGB(255, 204,164,137),
+                  primary: Color.fromARGB(255, 204, 164, 137),
                   onPrimary: Colors.white,
                 ),
                 child: Text(
                   'Submit',
-                  style: TextStyle(color: Colors.white,fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.w700), 
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Poppins',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700),
                 ),
               ),
             ),
@@ -274,4 +268,3 @@ class MyCustomFormState extends State<MyCustomForm> {
     );
   }
 }
-
