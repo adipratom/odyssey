@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:odyssey/main.dart';
+import 'package:odyssey/pages/profile.dart';
 
 void main() => runApp(const EditProfile());
 
@@ -11,17 +13,25 @@ class EditProfile extends StatelessWidget {
     return MaterialApp(
       title: appTitle,
       home: Scaffold(
-        backgroundColor:Colors.white ,
+        backgroundColor: Colors.white,
         appBar: AppBar(
-          leading: const Icon(Icons.chevron_left),
+          // leading: const Icon(Icons.chevron_left),
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(onPressed: () {
+                // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("ASDASD")));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Main()));
+              }, icon: Icon(Icons.chevron_left));
+            },
+          ),
           title: const Text(appTitle,
               style: TextStyle(fontFamily: 'Poppins', fontSize: 20)),
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
         ),
         body: SingleChildScrollView(
-          child:MyCustomForm(), 
-        ), 
+          child: MyCustomForm(),
+        ),
       ),
     );
   }
@@ -54,18 +64,16 @@ class MyCustomFormState extends State<MyCustomForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-             child: Center(
-               child:
-               CircleAvatar(
-                  radius: 50.0,
-                  child: ClipRRect(
-                      child: Image.asset('../assets/images/profile.jpg'),
-                      borderRadius: BorderRadius.circular(50.0),
-                  ),
+                child: Center(
+              child: CircleAvatar(
+                radius: 50.0,
+                child: ClipRRect(
+                  child: Image.asset('assets/images/profile.jpg'),
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
               ),
               //  Image.asset('../assets/images/profile.jpg')
-             )     
-            ),
+            )),
             Container(
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
@@ -78,7 +86,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
-
             TextFormField(
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -113,7 +120,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
-
             TextFormField(
               decoration: InputDecoration(
                 fillColor: Color.fromARGB(100, 196, 196, 196),
@@ -149,7 +155,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
-            
             TextFormField(
               maxLines: 3,
               decoration: InputDecoration(
@@ -163,29 +168,32 @@ class MyCustomFormState extends State<MyCustomForm> {
                 hintText: 'Enter description',
               ),
             ),
-           
             Container(
               width: 320.0,
               padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
               child: ElevatedButton(
                 onPressed: () {
-                // Validate returns true if the form is valid, or false otherwise.
-                if (_formKey.currentState!.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
-                  // you'd often call a server or save the information in a database.
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processing Data')),
-                  );
+                  // Validate returns true if the form is valid, or false otherwise.
+                  if (_formKey.currentState!.validate()) {
+                    // If the form is valid, display a snackbar. In the real world,
+                    // you'd often call a server or save the information in a database.
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Processing Data')),
+                    );
                   }
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  primary: Color.fromARGB(255, 204,164,137),
+                  primary: Color.fromARGB(255, 204, 164, 137),
                   onPrimary: Colors.white,
                 ),
                 child: Text(
                   'Submit',
-                  style: TextStyle(color: Colors.white,fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.w700), 
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Poppins',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700),
                 ),
               ),
             ),
@@ -195,4 +203,3 @@ class MyCustomFormState extends State<MyCustomForm> {
     );
   }
 }
-

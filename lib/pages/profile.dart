@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:odyssey/pages/edit_profile.dart';
+import 'package:odyssey/pages/guide.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -41,14 +43,20 @@ class _ProfileState extends State<Profile> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               TextButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => Guide()));
+                },
                 icon: Icon(Icons.store),
                 label: Text(""),
                 style: ButtonStyle(
                     foregroundColor: MaterialStateProperty.all(Colors.black)),
               ),
               TextButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => EditProfile()));
+                },
                 icon: Icon(Icons.settings),
                 label: Text(""),
                 style: ButtonStyle(
