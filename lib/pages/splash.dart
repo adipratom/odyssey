@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:odyssey/components/paymentCard.dart';
 import 'package:odyssey/main.dart';
 import 'package:odyssey/pages/about.dart';
 import 'package:odyssey/pages/edit_guide.dart';
