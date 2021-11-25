@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:odyssey/main.dart';
+import 'package:odyssey/pages/about.dart';
+import 'package:odyssey/pages/edit_guide.dart';
+import 'package:odyssey/pages/edit_profile.dart';
 import 'package:odyssey/pages/profile.dart';
 import 'package:settings_ui/settings_ui.dart';
 
@@ -39,7 +42,7 @@ class _SettingsState extends State<Settings> {
           children: <Widget>[
             ListTile(
               onTap: (){
-
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EditProfile()));
               },
               title: Text("Edit Profile", 
                style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
@@ -66,7 +69,7 @@ class _SettingsState extends State<Settings> {
             ),
             ListTile(
               onTap: (){
-
+                
               },
               enabled: isEnableTile,
               title: Text("Verified Status", 
@@ -74,7 +77,7 @@ class _SettingsState extends State<Settings> {
             ),
             ListTile(
               onTap: (){
-
+                Navigator.push(context, MaterialPageRoute(builder: (context) => EditGuide()));
               },
               enabled: isEnableTile,
               title: Text("Edit Guide Profile", 
@@ -90,7 +93,7 @@ class _SettingsState extends State<Settings> {
             ),
             ListTile(
               onTap: (){
-
+                Navigator.push(context, MaterialPageRoute(builder: (context) => About()));
               },
               title: Text("About Us", 
                style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
