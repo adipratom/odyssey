@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:odyssey/components/transactionCard.dart';
 
 class TransactionPage extends StatefulWidget {
   const TransactionPage({Key? key}) : super(key: key);
@@ -47,31 +48,47 @@ class _TransactionPageState extends State<TransactionPage> {
                       Tab(
                         child: Text(
                           'Guide',
-                          style: TextStyle(fontFamily: 'Poppins', color: Color(0xff21574A)),
+                          style: TextStyle(
+                              fontFamily: 'Poppins', color: Color(0xff21574A)),
                         ),
                       ),
                     ]),
               ),
             ),
-            SizedBox(
-                height: 300,
+            Container(
+                height: size.height * 0.7,
                 child: TabBarView(
                   children: [
                     Container(
                         height: 100,
                         width: 100,
                         decoration: BoxDecoration(
-                          color: Colors.orangeAccent,
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Center(
-                            child: Text(
-                          'Januari',
-                          style: TextStyle(
-                            fontSize: 30,
+                          child: Column(
+                            children: [
+                              TransactionCard(context),
+                              TransactionCard(context),
+                              TransactionCard(context),
+                            ],
                           ),
-                        ))),
-                    Container(child: Text('2021'))
+                        )),
+                    Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Center(
+                          child: Column(
+                            children: [
+                              TransactionCard(context),
+                              TransactionCard(context),
+                              TransactionCard(context),
+                            ],
+                          ),
+                        )),
                   ],
                 ))
           ],
