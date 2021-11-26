@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
-import 'package:odyssey/pages/explore.dart';
+import 'package:odyssey/pages/home.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'dart:async';
 
@@ -75,7 +75,7 @@ class PickedExploreState extends State<PickedExplore> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (BuildContext context) =>
-                                                  Explore()))
+                                                  Home()))
                                     },
                                 icon: Icon(Icons.arrow_back_ios,
                                     color: Colors.white)),
