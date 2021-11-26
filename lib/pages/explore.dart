@@ -16,6 +16,7 @@ class ExplorePage extends State<Explore> {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
+            constraints: BoxConstraints(minHeight: 776),
             decoration: const BoxDecoration(
               color : Color(0xff9CA18D)
             ),
@@ -69,11 +70,6 @@ class ExplorePage extends State<Explore> {
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     children: [
-                      CardComponent(),
-                      CardComponent(),
-                      CardComponent(),
-                      CardComponent(),
-                      CardComponent(),
                       CardComponent(),
                       CardComponent(),
                       CardComponent(),

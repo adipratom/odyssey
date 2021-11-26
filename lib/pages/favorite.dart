@@ -39,7 +39,7 @@ class _FavoriteState extends State<Favorite> {
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
                     child: GridView(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
