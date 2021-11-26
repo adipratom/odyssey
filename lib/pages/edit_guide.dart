@@ -59,7 +59,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                CircleAvatar(
                   radius: 50.0,
                   child: ClipRRect(
-                      child: Image.asset('../assets/images/profile.jpg'),
+                      child: Image.asset('assets/images/profile.jpg'),
                       borderRadius: BorderRadius.circular(50.0),
                   ),
               ),

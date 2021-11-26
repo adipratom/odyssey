@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:odyssey/pages/edit_profile.dart';
 import 'package:odyssey/pages/guide.dart';
+import 'package:odyssey/pages/settings.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -55,7 +56,7 @@ class _ProfileState extends State<Profile> {
               TextButton.icon(
                 onPressed: () {
                   Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => EditProfile()));
+                      MaterialPageRoute(builder: (context) => Settings()));
                 },
                 icon: Icon(Icons.settings),
                 label: Text(""),

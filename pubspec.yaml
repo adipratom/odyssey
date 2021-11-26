@@ -29,6 +29,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  numberpicker: ^2.0.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -36,6 +37,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   image_form_field: ^0.1.0
   getwidget: ^2.0.4
+  settings_ui: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +60,7 @@ flutter:
   - assets/images/submit.png
   - assets/images/home/badui.png
   - assets/images/pickedExplore/image9.png
+  - assets/images/odyssey-green.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -78,8 +81,10 @@ flutter:
     - asset: assets/fonts/KulimPark/KulimPark-ExtraLight.ttf
       weight: 200
     - asset: assets/fonts/KulimPark/KulimPark-Regular.ttf
-    - asset: assets/fonts/KulimPark/KulimPark-Bold.ttf
+    - asset: assets/fonts/KulimPark/KulimPark-SemiBold.ttf
       weight: 600
+    - asset: assets/fonts/KulimPark/KulimPark-Bold.ttf
+      weight: 700
   - family: Poppins
     fonts:
     - asset: assets/fonts/Poppins/Poppins-Regular.ttf
