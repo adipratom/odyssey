@@ -3,6 +3,7 @@ import 'package:odyssey/components/card.dart';
 import 'package:odyssey/main.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:dio/dio.dart';
+import 'package:odyssey/pages/explore.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -141,7 +142,9 @@ class _HomeState extends State<Home> {
                             fontWeight: FontWeight.w700,
                             fontSize: 25,
                           )),
-                      onPressed: () {},
+                      onPressed: () => {
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Explore()))
+                      },
                     ),
                   ),
                 ),

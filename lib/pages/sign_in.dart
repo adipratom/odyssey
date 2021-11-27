@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:odyssey/pages/home.dart';
 import 'package:odyssey/pages/sign_up.dart';
-
+import 'dart:ui';
 import '../main.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -11,14 +10,11 @@ class SignInScreen extends StatefulWidget {
 }
 
 class InitState extends State<SignInScreen> {
+  bool isHiddenPassword = true;
+
   @override
   Widget build(BuildContext context) {
-    return initWidget(context);
-  }
-}
-
-Widget initWidget(BuildContext context) {
-  return Scaffold(
+    return Scaffold(
     resizeToAvoidBottomInset: false,
     body: Stack(
       children: [
@@ -40,7 +36,7 @@ Widget initWidget(BuildContext context) {
             children: <Widget>[
               Padding(padding: EdgeInsets.only(top: 200)),
               RichText(
-                text: const TextSpan(
+                text: TextSpan(
                   text: 'Welcome Back!',
                   style: TextStyle(
                       fontFamily: 'KulimPark',
@@ -67,12 +63,16 @@ Widget initWidget(BuildContext context) {
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w400,
                     ),
-                    decoration: const InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
+                    decoration: InputDecoration(
+                        focusedBorder:UnderlineInputBorder(
                             borderSide: BorderSide(
-                          color: Colors.white,
-                          width: 3.0,
-                        )),
+                              color: Colors.white,
+                              width: 1.5)),
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(
+                            color: Colors.white,
+                            width: 3.0,
+                          )),
                         labelText: 'Email',
                         labelStyle: TextStyle(
                           fontFamily: 'KulimPark',
@@ -89,19 +89,29 @@ Widget initWidget(BuildContext context) {
                         fontFamily: 'Poppins',
                         fontWeight: FontWeight.w400,
                       ),
-                      decoration: const InputDecoration(
+                      obscureText: isHiddenPassword,
+                      decoration: InputDecoration(
+                          focusedBorder:UnderlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Colors.white,
+                              width: 1.5)),
                           enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                             color: Colors.white,
                             width: 3.0,
                           )),
+                          suffixIcon: InkWell(
+                            onTap: _togglePasswordView,
+                            child: (isHiddenPassword == true) ? Icon(Icons.visibility,color: Colors.white): Icon(Icons.visibility_off,color: Colors.white)
+                          ),
                           labelText: 'Password',
                           labelStyle: TextStyle(
                             fontFamily: 'KulimPark',
                             fontWeight: FontWeight.w600,
                             fontSize: 20,
                             color: Colors.white60,
-                          )))),
+                          ),
+                          ))),
               Padding(padding: EdgeInsets.only(bottom: 20)),
               Container(
                 margin: EdgeInsets.only(right: 30),
@@ -146,4 +156,10 @@ Widget initWidget(BuildContext context) {
       ],
     ),
   );
+  }
+  void _togglePasswordView() {
+    setState(() {
+      isHiddenPassword = !isHiddenPassword;
+    });
+  }
 }

@@ -6,14 +6,18 @@ import 'package:odyssey/pages/transaction.dart';
 import 'package:odyssey/pages/splash.dart';
 import 'package:odyssey/pages/sign_up.dart';
 import 'package:odyssey/pages/sign_in.dart';
+import 'package:odyssey/pages/explore.dart';
+import 'package:odyssey/pages/picked_explore.dart';
 
 void main() => runApp(new MaterialApp(
   initialRoute: '/splash',
   routes: {
     '/': (context) => Main(),
-    //'/sign_up': (context) => SignUpScreen(),
-    // '/sign_in': (context) => SignInScreen(),
+    '/sign_up': (context) => SignUpScreen(),
+    '/explore': (context) => Explore(),
+    '/sign_in': (context) => SignInScreen(),
     '/splash': (context) => SplashScreen(),
+    '/picked_explore': (context) => PickedExplore(),
   },
 ));
 
