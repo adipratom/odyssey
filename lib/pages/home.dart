@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:odyssey/components/card.dart';
 import 'package:odyssey/main.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:dio/dio.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -12,6 +13,26 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int _currentIndex = 2;
+  List<Object> users = [];
+
+  // void getDio() async {
+  //   try {
+  //     var response =
+  //         await Dio(BaseOptions(headers: {"Content-Type": "application/json"}))
+  //             .get('http://localhost:3000/api/v1/destination');
+  //     users = response.data;
+  //     print(users);
+  //     setState(() {});
+  //   } catch (e) {
+  //     print(e);
+  //   }
+  // }
+
+  @override
+  void initState() {
+    super.initState() ;
+    // getDio();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +87,9 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                             ),
-                            IconButton(onPressed: () {}, icon: Icon(Icons.search, color: Colors.white)),
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(Icons.search, color: Colors.white)),
                           ],
                         ))),
                 Align(
@@ -181,15 +204,7 @@ class _HomeState extends State<Home> {
                   height: 270,
                   child: ListView(
                     scrollDirection: Axis.horizontal,
-                    children: [
-                      SizedBox(width: 12),
-                      CardComponent(),
-                      SizedBox(width: 12),
-                      CardComponent(),
-                      SizedBox(width: 12),
-                      CardComponent(),
-                      SizedBox(width: 12),
-                    ],
+                    children: [],
                   ),
                 ),
               ],

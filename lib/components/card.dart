@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 
-class CardComponent extends StatelessWidget {
-  const CardComponent({Key? key}) : super(key: key);
+class CardComponent extends StatefulWidget {
+  // const CardComponent({Key? key}) : super(key: key);
+  var myObject;
+  CardComponent(e, {this.myObject});
 
+  @override
+  State<CardComponent> createState() => _CardComponentState();
+}
+
+class _CardComponentState extends State<CardComponent> {
   @override
   Widget build(BuildContext context) {
     return buildCard();
@@ -30,7 +37,7 @@ class CardComponent extends StatelessWidget {
               Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
-                      child: Text("2D1N Lembang",
+                      child: Text(widget.myObject.name,
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontFamily: "KulimPark",
@@ -39,19 +46,19 @@ class CardComponent extends StatelessWidget {
               Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
-                      child: Text("Open Trip | Challenging",
+                      child: Text("${widget.myObject.type} | ${widget.myObject.activityLevel}",
                           textAlign: TextAlign.left,
                           style: TextStyle(fontFamily: "KulimPark")))),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
-                      child: Text("4.0",
+                      child: Text("${widget.myObject.rating}",
                           textAlign: TextAlign.left,
                           style: TextStyle(fontFamily: "KulimPark")))),
               Align(
                   alignment: Alignment.centerLeft,
                   child: Container(
-                      child: Text("Rp200.000,00/pax",
+                      child: Text("Rp${widget.myObject.price}/pax",
                           textAlign: TextAlign.left,
                           style: TextStyle(fontFamily: "KulimPark")))),
             ],

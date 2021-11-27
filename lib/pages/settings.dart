@@ -6,6 +6,8 @@ import 'package:odyssey/pages/edit_profile.dart';
 import 'package:odyssey/pages/profile.dart';
 import 'package:settings_ui/settings_ui.dart';
 
+import 'guide.dart';
+
 class Settings extends StatefulWidget {
   const Settings({ Key? key }) : super(key: key);
 
@@ -28,7 +30,8 @@ class _SettingsState extends State<Settings> {
             builder: (BuildContext context) {
               return IconButton(onPressed: () {
                 // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("ASDASD")));
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Main()));
+                Navigator.pop(context);
+                // Navigator.push(context, MaterialPageRoute(builder: (context) => Main()));
               }, icon: Icon(Icons.chevron_left));
             },
           ),
@@ -61,7 +64,7 @@ class _SettingsState extends State<Settings> {
             ),
             ListTile(
               onTap: () {
-
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Guide()));
               },
               enabled: isEnableTile,
               title: Text("Open Guide Profile", 
@@ -69,7 +72,7 @@ class _SettingsState extends State<Settings> {
             ),
             ListTile(
               onTap: (){
-                
+                Navigator.push(context, MaterialPageRoute(builder: (context) => Main()));
               },
               enabled: isEnableTile,
               title: Text("Verified Status", 
