@@ -1,42 +1,72 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:json_serializable/builder.dart';
+// import 'package:json_serializable/builder.dart';
 import 'package:odyssey/model/review.dart';
 part 'destination.g.dart';
 
 @JsonSerializable()
 class Destination {
   @JsonKey(name: "id")
-  late String id;
+  final String id;
 
   @JsonKey(name: "guide")
-  late String guide;
+  final String guide;
 
   @JsonKey(name: "type")
-  late String type;
+  final String type;
 
   @JsonKey(name: "activityLevel")
-  late String activityLevel;
+  final String activityLevel;
 
   @JsonKey(name: "review")
-  late List<Review> review;
+  final List<Review> review;
 
   @JsonKey(name: "description")
-  late String description;
+  final String description;
 
   @JsonKey(name: "benefits")
-  late String benefits;
+  final String benefits;
 
   @JsonKey(name: "photo")
-  late String photo;
+  final String photo;
 
   @JsonKey(name: "price")
-  late int price;
+  final int price;
 
   @JsonKey(name: "rating")
-  late int rating;
+  final int rating;
 
-  Destination();
+  @JsonKey(name: "name")
+  final String name;
 
-  factory Destination.fromJson(Map<String, dynamic> json) => _$DestinationFromJson(json);
-  Map<String, dynamic> toJson() => _$DestinationToJson(this);
+  Destination(
+      {required this.name,
+      required this.rating,
+      required this.price,
+      required this.photo,
+      required this.benefits,
+      required this.description,
+      required this.activityLevel,
+      required this.type,
+      required this.review,
+      required this.guide,
+      required this.id});
+
+  // factory Destination.fromJson(Map<String, dynamic> json) =>
+  //     _$DestinationFromJson(json);
+  // Map<String, dynamic> toJson() => _$DestinationToJson(this);
+  factory Destination.fromJson(Map<String, dynamic> json) {
+    return Destination(
+      activityLevel: json["activityLevel"],
+      name: json["name"],
+      rating: json["rating"],
+      price: json["price"],
+      photo: json["photo"],
+      benefits: json["benefits"],
+      description: json["description"],
+      type: json["type"],
+      guide: json["guide"],
+      id: json["id"],
+      review: json["review"].cast<Review>(),
+    );
+  }
 }

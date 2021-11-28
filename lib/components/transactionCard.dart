@@ -8,11 +8,6 @@ Widget TransactionCard(BuildContext context) {
           onTap: () {
             print('Card tapped.');
           },
-          // child: const SizedBox(
-          //   width: 300,
-          //   height: 100,
-          //   child: Text('A card that can be tapped'),
-          // ),
           child: Column(
             children: [
               const ListTile(

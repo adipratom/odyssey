@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:odyssey/model/destination.dart';
 
-import 'multiple_destination_response.g.dart';
+part 'multiple_destination_response.g.dart';
 
 @JsonSerializable()
 class MultipleDestinationResponse {
