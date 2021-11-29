@@ -42,14 +42,18 @@ class _TransactionPageState extends State<TransactionPage> {
                         child: Text(
                           'Adventure',
                           style: TextStyle(
-                              fontFamily: 'Poppins', color: Color(0xff21574A)),
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xff21574A)),
                         ),
                       ),
                       Tab(
                         child: Text(
                           'Guide',
                           style: TextStyle(
-                              fontFamily: 'Poppins', color: Color(0xff21574A)),
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w600, 
+                              color: Color(0xff21574A)),
                         ),
                       ),
                     ]),

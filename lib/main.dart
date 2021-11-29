@@ -62,7 +62,7 @@ class _MainState extends State<Main> {
               label: "Home",
               backgroundColor: Colors.grey),
           BottomNavigationBarItem(
-              icon: Icon(Icons.payment),
+              icon: Icon(Icons.receipt_long),
               label: "Search",
               backgroundColor: Colors.grey),
           BottomNavigationBarItem(
