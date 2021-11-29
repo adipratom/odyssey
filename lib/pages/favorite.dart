@@ -44,8 +44,8 @@ class _FavoriteState extends State<Favorite> {
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       children: [
-                        CardComponent(),
-                        CardComponent(),
+                        // CardComponent(),
+                        // CardComponent(),
                       ],
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,

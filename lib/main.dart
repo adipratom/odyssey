@@ -17,7 +17,7 @@ void main() => runApp(new MaterialApp(
     '/explore': (context) => Explore(),
     '/sign_in': (context) => SignInScreen(),
     '/splash': (context) => SplashScreen(),
-    '/picked_explore': (context) => PickedExplore(),
+    // '/picked_explore': (context) => PickedExplore(),
   },
 ));
 

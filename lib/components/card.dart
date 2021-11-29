@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:odyssey/model/destination.dart';
 import 'package:odyssey/pages/picked_explore.dart';
 import 'dart:ui';
 
-class CardComponent extends StatelessWidget {
-  const CardComponent({Key? key}) : super(key: key);
+class CardComponent extends StatefulWidget {
+  // const CardComponent({Key? key}) : super(key: key);
+  Destination destination = {} as Destination;
+  CardComponent({required this.destination});
 
+  @override
+  State<CardComponent> createState() => _CardComponentState();
+}
+
+class _CardComponentState extends State<CardComponent> {
   @override
   Widget build(BuildContext context) {
     return buildCard(context);
@@ -12,7 +20,7 @@ class CardComponent extends StatelessWidget {
 
   Widget buildCard(context) => InkWell(
     onTap: () => {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) =>PickedExplore()))},
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) =>PickedExplore(id: "nulll")))},
     child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
@@ -26,7 +34,7 @@ class CardComponent extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20.0),
                       child: Image.asset(
-                        'assets/images/home/badui.png',
+                        "destination.photo",
                         width: 140,
                         height: 125,
                         fit: BoxFit.cover,

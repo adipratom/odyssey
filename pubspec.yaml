@@ -38,11 +38,16 @@ dependencies:
   image_form_field: ^0.1.0
   getwidget: ^2.0.4
   settings_ui: ^1.0.0
+  dio: ^3.0.10
+  json_serializable: ^6.0.1
+  json_annotation: ^4.3.0
+  http: ^0.12.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
+  build_runner: ^1.11.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
