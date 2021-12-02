@@ -20,6 +20,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  TextEditingController nameController = TextEditingController();
   int _currentIndex = 2;
 
   bool isLoading = false;
@@ -29,6 +30,7 @@ class _HomeState extends State<Home> {
     super.initState();
     _populateDestinations();
   }
+
   void _populateDestinations() async {
     final destinations = await _fetchAllDestinations();
     setState(() {
@@ -38,8 +40,8 @@ class _HomeState extends State<Home> {
   }
 
   Future<List<Destination>> _fetchAllDestinations() async {
-    final response =
-        await http.get("http://192.168.0.20:3000/api/v1/destination");
+    final response = await http
+        .get("https://odyssey-app-staging.herokuapp.com/api/v1/destination");
 
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);
@@ -49,7 +51,6 @@ class _HomeState extends State<Home> {
       throw Exception("Failed to load movies");
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +95,7 @@ class _HomeState extends State<Home> {
                             children: [
                               Expanded(
                                 child: TextField(
+                                  controller: nameController,
                                   style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontSize: 15,
@@ -113,7 +115,14 @@ class _HomeState extends State<Home> {
                                 ),
                               ),
                               IconButton(
-                                  onPressed: () {},
+                                  onPressed: () => {
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        Explore(name: nameController.text)))
+                                      },
                                   icon:
                                       Icon(Icons.search, color: Colors.white)),
                             ],
@@ -191,7 +200,7 @@ class _HomeState extends State<Home> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) =>
-                                        Explore()))
+                                        Explore(name: '',)))
                           },
                         ),
                       ),
@@ -260,11 +269,10 @@ class _HomeState extends State<Home> {
                     left: 0,
                     right: 0,
                     child: Container(
-                      margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      padding: EdgeInsets.fromLTRB(0, 20, 0, 50),
-                      height: 300,
-                      child: CardStateless(destination: _destinations)
-                    ),
+                        margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        padding: EdgeInsets.fromLTRB(0, 20, 0, 50),
+                        height: 300,
+                        child: CardStateless(destination: _destinations)),
                   ),
                 ],
               ),

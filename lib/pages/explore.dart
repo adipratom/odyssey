@@ -8,11 +8,14 @@ import 'package:http/http.dart' as http;
 import 'package:odyssey/model/destination.dart';
 
 class Explore extends StatefulWidget {
+  late final String name;
+  Explore({required this.name});
   @override
   State<StatefulWidget> createState() => ExplorePage();
 }
 
 class ExplorePage extends State<Explore> {
+  TextEditingController nameController = TextEditingController();
   List<Destination> _destinations = <Destination>[];
   @override
   void initState() {
@@ -29,9 +32,14 @@ class ExplorePage extends State<Explore> {
   }
 
   Future<List<Destination>> _fetchAllDestinations() async {
-    final response =
-        await http.get("http://192.168.0.20:3000/api/v1/destination");
-
+    late final response ;
+    if (widget.name == '') {
+      response = await http
+          .get("https://odyssey-app-staging.herokuapp.com/api/v1/destination");
+    } else {
+      response = await http.get(
+          "https://odyssey-app-staging.herokuapp.com/api/v1/destination/name/${widget.name}");
+    }
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);
       // print(response.body);
@@ -83,6 +91,7 @@ class ExplorePage extends State<Explore> {
                                 children: [
                                   Expanded(
                                     child: TextField(
+                                      controller: nameController,
                                       style: TextStyle(
                                         fontFamily: 'Poppins',
                                         fontSize: 15,
@@ -102,7 +111,14 @@ class ExplorePage extends State<Explore> {
                                     ),
                                   ),
                                   IconButton(
-                                      onPressed: () {},
+                                      onPressed: () => {
+                                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        Explore(name: nameController.text)))
+                                      },
                                       icon: Icon(Icons.search,
                                           color: Colors.white)),
                                 ],

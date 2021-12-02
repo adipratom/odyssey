@@ -96,7 +96,7 @@ class PickedExploreComponent extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                           fontFamily: 'KulimPark',
                           color: Colors.white,
-                          fontSize: 55,
+                          fontSize: 30,
                         )),
                   ]))),
             ]),
@@ -126,7 +126,7 @@ class PickedExploreComponent extends StatelessWidget {
           Padding(padding: EdgeInsets.only(bottom: 30)),
           Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
               child: RichText(
                   text: TextSpan(
                       text: 'Description: ',
@@ -148,7 +148,7 @@ class PickedExploreComponent extends StatelessWidget {
           Padding(padding: EdgeInsets.only(bottom: 30)),
           Container(
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
               child: RichText(
                   text: TextSpan(
                       text: 'What will you have: ',
@@ -169,7 +169,7 @@ class PickedExploreComponent extends StatelessWidget {
                   ]))),
           Padding(padding: EdgeInsets.only(bottom: 30)),
           Container(
-              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+              padding: EdgeInsets.fromLTRB(20, 10, 20, 0),
               alignment: Alignment.centerLeft,
               child: RichText(
                   text: TextSpan(
@@ -191,7 +191,7 @@ class PickedExploreComponent extends StatelessWidget {
                   ]))),
           Padding(padding: EdgeInsets.only(bottom: 30)),
           Container(
-            padding: EdgeInsets.fromLTRB(20, 0, 20, 30),
+            padding: EdgeInsets.fromLTRB(20, 10, 20, 30),
             alignment: Alignment.centerLeft,
             child: Text(
               'Reviews: ',
