@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:odyssey/pages/order_details.dart';
 
 Widget TransactionCard(BuildContext context) {
   return Center(
@@ -7,7 +8,10 @@ Widget TransactionCard(BuildContext context) {
       child: InkWell(
           splashColor: Colors.blue.withAlpha(30),
           onTap: () {
-            print('Card tapped.');
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => OrderDetails()));
           },
           // child: const SizedBox(
           //   width: 300,
@@ -21,15 +25,15 @@ Widget TransactionCard(BuildContext context) {
                 Expanded(
                   flex: 4,
                   child: Container(
-                    padding: EdgeInsets.all(10),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Image.asset(
-                        'assets/images/home/badui.png',
-                        width: 70,
-                        fit: BoxFit.cover,
-                      ),
-                    )),
+                      padding: EdgeInsets.all(10),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Image.asset(
+                          'assets/images/home/badui.png',
+                          width: 70,
+                          fit: BoxFit.cover,
+                        ),
+                      )),
                 ),
                 Expanded(
                   flex: 6,
@@ -37,26 +41,21 @@ Widget TransactionCard(BuildContext context) {
                     children: [
                       Padding(padding: EdgeInsets.only(bottom: 15)),
                       ListTile(
-                        title: Text(
-                          'Lembang', 
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w600,
-                          )),
-                        subtitle: Text(
-                          'Provided by Nusa Travel Agent',
-                          style: TextStyle(
-                            fontFamily: 'Poppins',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 13
-                          )),
+                        title: Text('Lembang',
+                            style: TextStyle(
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w600,
+                            )),
+                        subtitle: Text('Provided by Nusa Travel Agent',
+                            style: TextStyle(
+                                fontFamily: 'Poppins',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 13)),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          Text(
-                            'Waiting For Payment'
-                          ),
+                          Text('Waiting For Payment'),
                           const SizedBox(width: 8),
                         ],
                       ),
