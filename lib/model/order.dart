@@ -22,7 +22,7 @@ class Order {
   final String finishedDate;
 
   @JsonKey(name: "destination")
-  final String destination;
+  final Destination? destination;
 
   @JsonKey(name: "orderedBy")
   final String orderedBy;
@@ -45,7 +45,7 @@ class Order {
       dueDate: json["dueDate"],
       startDate: json["startDate"],
       finishedDate: json["finishedDate"],
-      destination: json['destination'],
+      destination: json['destination'] != null ? Destination.fromJson(json['destination']) : null,
       orderedBy: json["orderedBy"],
       id: json["id"],
     );

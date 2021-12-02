@@ -6,7 +6,8 @@ class TransactionCardStateless extends StatefulWidget {
   const TransactionCardStateless({required this.orders});
 
   @override
-  State<TransactionCardStateless> createState() => _TransactionCardStatelessState();
+  State<TransactionCardStateless> createState() =>
+      _TransactionCardStatelessState();
 }
 
 class _TransactionCardStatelessState extends State<TransactionCardStateless> {
@@ -17,6 +18,7 @@ class _TransactionCardStatelessState extends State<TransactionCardStateless> {
         itemBuilder: (context, index) {
           final item = widget.orders[index];
           return Card(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             color: Color(0x40C4C4C4),
             child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
@@ -32,13 +34,12 @@ class _TransactionCardStatelessState extends State<TransactionCardStateless> {
                         child: Container(
                             padding: EdgeInsets.all(10),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10.0),
-                              child: Image.asset(
-                                'assets/images/home/badui.png',
-                                width: 70,
-                                fit: BoxFit.cover,
-                              ),
-                            )),
+                                borderRadius: BorderRadius.circular(10.0),
+                                child: Image(
+                                  image: NetworkImage(item.destination!.photo),
+                                  width: 70,
+                                  fit: BoxFit.cover,
+                                ))),
                       ),
                       Expanded(
                         flex: 6,
@@ -46,22 +47,25 @@ class _TransactionCardStatelessState extends State<TransactionCardStateless> {
                           children: [
                             Padding(padding: EdgeInsets.only(bottom: 15)),
                             ListTile(
-                              title: Text('Order id: ${item.id}',
+                              title: Text(item.destination!.name,
                                   style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w600,
-                                    fontSize: 11,
+                                    fontSize: 13,
                                   )),
-                              subtitle: Text('Status: ${item.status}',
+                              subtitle: Text('${item.destination!.type} | ${item.destination!.activityLevel}',
                                   style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w400,
-                                      fontSize: 10)),
+                                      fontSize: 12)),
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: <Widget>[
-                                Text(""),
+                                Text(
+                                  "Status: ${item.status}",
+                                  style: TextStyle(fontFamily: 'Poppins', fontSize: 12),
+                                ),
                                 const SizedBox(width: 8),
                               ],
                             ),
@@ -75,4 +79,3 @@ class _TransactionCardStatelessState extends State<TransactionCardStateless> {
         });
   }
 }
-

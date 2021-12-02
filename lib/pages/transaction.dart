@@ -36,7 +36,7 @@ class _TransactionPageState extends State<TransactionPage> {
 
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);
-      
+      print(response.body);
       return result.map((item) => Order.fromJson(item)).toList();
     } else {
       throw Exception("Failed to load movies");

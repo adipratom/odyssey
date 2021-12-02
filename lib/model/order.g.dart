@@ -11,7 +11,9 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
       dueDate: json['dueDate'] as String,
       startDate: json['startDate'] as String,
       finishedDate: json['finishedDate'] as String,
-      destination: json['destination'] as String,
+      destination: json['destination'] == null
+          ? null
+          : Destination.fromJson(json['destination'] as Map<String, dynamic>),
       orderedBy: json['orderedBy'] as String,
       id: json['id'] as String,
     );
