@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:odyssey/components/transactionCard.dart';
+import 'package:odyssey/components/transaction_card_stateless.dart';
+import 'package:odyssey/model/order.dart';
+import 'dart:convert';
+import 'dart:ui';
+import 'package:http/http.dart' as http;
 
 class TransactionPage extends StatefulWidget {
   const TransactionPage({Key? key}) : super(key: key);
@@ -10,6 +15,33 @@ class TransactionPage extends StatefulWidget {
 
 class _TransactionPageState extends State<TransactionPage> {
   int _currentIndex = 1;
+  List<Order> _orders = <Order>[];
+  @override
+  void initState() {
+    super.initState();
+    _populateDestinations();
+  }
+
+  void _populateDestinations() async {
+    final destinations = await _fetchAllDestinations();
+    setState(() {
+      _orders = destinations;
+      print(_orders);
+    });
+  }
+
+  Future<List<Order>> _fetchAllDestinations() async {
+    final response = await http.get(
+        "http://192.168.100.10:3000/api/v1/users/6185512b11cd9b410c43833a/order");
+
+    if (response.statusCode == 200) {
+      final List<dynamic> result = jsonDecode(response.body);
+      print(response.body);
+      return result.map((item) => Order.fromJson(item)).toList();
+    } else {
+      throw Exception("Failed to load movies");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +84,7 @@ class _TransactionPageState extends State<TransactionPage> {
                           'Guide',
                           style: TextStyle(
                               fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w600, 
+                              fontWeight: FontWeight.w600,
                               color: Color(0xff21574A)),
                         ),
                       ),
@@ -64,17 +96,15 @@ class _TransactionPageState extends State<TransactionPage> {
                 child: TabBarView(
                   children: [
                     Container(
-                        height: 100,
-                        width: 100,
+                        // height: 100,
+                        // width: 100,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Center(
                           child: Column(
                             children: [
-                              TransactionCard(context),
-                              TransactionCard(context),
-                              TransactionCard(context),
+                              Flexible(child: TransactionCardStateless(orders: _orders,)),
                             ],
                           ),
                         )),
@@ -85,13 +115,7 @@ class _TransactionPageState extends State<TransactionPage> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Center(
-                          child: Column(
-                            children: [
-                              TransactionCard(context),
-                              TransactionCard(context),
-                              TransactionCard(context),
-                            ],
-                          ),
+                          child: Text("Coming real soon.")
                         )),
                   ],
                 ))
