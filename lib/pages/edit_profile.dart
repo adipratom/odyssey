@@ -1,12 +1,21 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:odyssey/main.dart';
+import 'dart:io';
+import 'package:http_parser/http_parser.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:odyssey/pages/profile.dart';
 
 void main() => runApp(const EditProfile());
 
-class EditProfile extends StatelessWidget {
+class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
 
+  @override
+  State<EditProfile> createState() => _EditProfileState();
+}
+
+class _EditProfileState extends State<EditProfile> {
   @override
   Widget build(BuildContext context) {
     const appTitle = 'Edit Profile';
@@ -18,10 +27,13 @@ class EditProfile extends StatelessWidget {
           // leading: const Icon(Icons.chevron_left),
           leading: Builder(
             builder: (BuildContext context) {
-              return IconButton(onPressed: () {
-                // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("ASDASD")));
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Main()));
-              }, icon: Icon(Icons.chevron_left));
+              return IconButton(
+                  onPressed: () {
+                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("ASDASD")));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => Main()));
+                  },
+                  icon: Icon(Icons.chevron_left));
             },
           ),
           title: const Text(appTitle,
@@ -52,6 +64,33 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   final _formKey = GlobalKey<FormState>();
+  Dio dio = new Dio();
+  late File? _image;
+
+  Future getImage() async {
+    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+
+    setState(() {
+      _image = image;
+    });
+
+    try {
+      String filename = image.path.split('/').last;
+      FormData formData = new FormData.fromMap({
+        "profileImage": await MultipartFile.fromFile(image.path,
+            filename: filename, contentType: MediaType('image', 'png')),
+        "type": "image/png"
+      });
+      Response response = await dio.put("http://192.168.100.10:3000/api/v1/users/6185512b11cd9b410c43833a",
+          data: formData,
+          options: Options(headers: {
+            "accept": "*/*",
+            'Content-Type': "multipart/form-dataa",
+          }));
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,15 +103,23 @@ class MyCustomFormState extends State<MyCustomForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-                child: Center(
-              child: CircleAvatar(
-                radius: 50.0,
-                child: ClipRRect(
-                  child: Image.asset('assets/images/profile.jpg'),
-                  borderRadius: BorderRadius.circular(50.0),
+                child: GestureDetector(
+              onTap: () {
+                getImage();
+              },
+              child: Center(
+                child: CircleAvatar(
+                  radius: 50.0,
+                  child: ClipRRect(
+                    // child: _image == null
+                    //     ? Image.asset('assets/images/profile.jpg')
+                    //     : Image.file(_image!),
+                    child: Image.asset('assets/images/profile.jpg'),
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
                 ),
+                //  Image.asset('../assets/images/profile.jpg')
               ),
-              //  Image.asset('../assets/images/profile.jpg')
             )),
             Container(
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
