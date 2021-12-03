@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:odyssey/main.dart';
@@ -5,6 +7,7 @@ import 'dart:io';
 import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:odyssey/pages/profile.dart';
+import 'package:http/http.dart' as http;
 
 void main() => runApp(const EditProfile());
 
@@ -67,6 +70,12 @@ class MyCustomFormState extends State<MyCustomForm> {
   Dio dio = new Dio();
   late File? _image;
 
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.gallery);
 
@@ -81,7 +90,8 @@ class MyCustomFormState extends State<MyCustomForm> {
             filename: filename, contentType: MediaType('image', 'png')),
         "type": "image/png"
       });
-      Response response = await dio.put("http://192.168.100.10:3000/api/v1/users/6185512b11cd9b410c43833a",
+      Response response = await dio.put(
+          "http://192.168.100.10:3000/api/v1/users/6185512b11cd9b410c43833a",
           data: formData,
           options: Options(headers: {
             "accept": "*/*",
@@ -134,6 +144,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
             TextFormField(
+              controller: nameController,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                 fillColor: Color.fromARGB(100, 196, 196, 196),
@@ -151,6 +162,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
             TextFormField(
+              controller: emailController,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                 fillColor: Color.fromARGB(100, 196, 196, 196),
@@ -168,6 +180,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
             TextFormField(
+              controller: phoneController,
               decoration: InputDecoration(
                 fillColor: Color.fromARGB(100, 196, 196, 196),
                 contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -185,6 +198,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
             TextFormField(
+              controller: addressController,
               maxLines: 3,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(10, 20, 0, 10),
@@ -203,6 +217,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
             TextFormField(
+              controller: descriptionController,
               maxLines: 3,
               decoration: InputDecoration(
                 fillColor: Color.fromARGB(100, 196, 196, 196),
@@ -219,8 +234,22 @@ class MyCustomFormState extends State<MyCustomForm> {
               width: 320.0,
               padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
               child: ElevatedButton(
-                onPressed: () {
+                onPressed: () async {
                   // Validate returns true if the form is valid, or false otherwise.
+                  try {
+                    String jsonStr = jsonEncode({
+                      'name': nameController.text,
+                      'address': addressController.text,
+                      'description': descriptionController.text,
+                      'phone': phoneController.text,
+                    });
+                    await http.put("http://192.168.100.10:3000/api/v1/users/6185512b11cd9b410c43833a",
+                    body: jsonStr, headers: { "Content-Type" : "application/json"}).then((result) {
+                      print(result);
+                    });
+                  } catch (e) {
+                    print(e);
+                  }
                   if (_formKey.currentState!.validate()) {
                     // If the form is valid, display a snackbar. In the real world,
                     // you'd often call a server or save the information in a database.

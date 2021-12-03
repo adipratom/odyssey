@@ -1,25 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:odyssey/model/order.dart';
 
-class TransactionCardStateless extends StatefulWidget {
-  final List<Order> orders;
-  const TransactionCardStateless({required this.orders});
+class TransactionCardStatelessCompleted extends StatefulWidget {
+    final List<Order> orders;
+  const TransactionCardStatelessCompleted({required this.orders});
 
   @override
-  State<TransactionCardStateless> createState() =>
-      _TransactionCardStatelessState();
+  State<TransactionCardStatelessCompleted> createState() => _TransactionCardStatelessCompletedState();
 }
 
-class _TransactionCardStatelessState extends State<TransactionCardStateless> {
+class _TransactionCardStatelessCompletedState extends State<TransactionCardStatelessCompleted> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
         itemCount: widget.orders.length,
         itemBuilder: (context, index) {
           final item = widget.orders[index];
-          if(item.status == 'waiting' || item.status == 'failed') {
-
-          return Card(
+          if(item.status == 'success') {
+                      return Card(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             color: Color(0x40C4C4C4),
             child: InkWell(
@@ -81,6 +79,7 @@ class _TransactionCardStatelessState extends State<TransactionCardStateless> {
           } else {
             return SizedBox.shrink();;
           }
+
         });
   }
 }

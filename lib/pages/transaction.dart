@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:odyssey/components/transactionCard.dart';
 import 'package:odyssey/components/transaction_card_stateless.dart';
+import 'package:odyssey/components/transaction_card_stateless_completed.dart';
 import 'package:odyssey/model/order.dart';
 import 'dart:convert';
 import 'dart:ui';
@@ -32,7 +33,7 @@ class _TransactionPageState extends State<TransactionPage> {
 
   Future<List<Order>> _fetchAllDestinations() async {
     final response = await http.get(
-        "https://odyssey-app-staging.herokuapp.com/api/v1/users/6185512b11cd9b410c43833a/order");
+        "http://192.168.100.10:3000/api/v1/users/6185512b11cd9b410c43833a/order");
 
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);
@@ -72,7 +73,7 @@ class _TransactionPageState extends State<TransactionPage> {
                     tabs: [
                       Tab(
                         child: Text(
-                          'Adventure',
+                          'Waiting/Failed',
                           style: TextStyle(
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w600,
@@ -81,7 +82,7 @@ class _TransactionPageState extends State<TransactionPage> {
                       ),
                       Tab(
                         child: Text(
-                          'Guide',
+                          'Completed',
                           style: TextStyle(
                               fontFamily: 'Poppins',
                               fontWeight: FontWeight.w600,
@@ -115,7 +116,11 @@ class _TransactionPageState extends State<TransactionPage> {
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Center(
-                          child: Text("Coming real soon.")
+                          child: Column(
+                            children: [
+                              Flexible(child: TransactionCardStatelessCompleted(orders: _orders,)),
+                            ],
+                          ),
                         )),
                   ],
                 ))

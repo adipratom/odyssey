@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'destination.dart';
 part 'profile_model.g.dart';
-
 @JsonSerializable()
 class ProfileModel {
 
@@ -17,6 +16,12 @@ class ProfileModel {
   @JsonKey(name: "name")
   final String name;
 
+  @JsonKey(name: "phone")
+  final String phone;
+
+  @JsonKey(name: "address")
+  final String address;
+
   @JsonKey(name: "id")
   final String id;
 
@@ -25,6 +30,8 @@ class ProfileModel {
     required this.profilePicture,
     required this.headerPicture,
     required this.name,
+    required this.phone,
+    required this.address,
     required this.id,
   });
 
@@ -35,6 +42,8 @@ class ProfileModel {
       headerPicture: json["headerPicture"],
       name: json["name"],
       id: json["id"],
+      phone: json["phone"],
+      address: json["address"],
     );
   }
 }

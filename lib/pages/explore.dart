@@ -35,10 +35,10 @@ class ExplorePage extends State<Explore> {
     late final response ;
     if (widget.name == '') {
       response = await http
-          .get("https://odyssey-app-staging.herokuapp.com/api/v1/destination");
+          .get("http://192.168.100.10:3000/api/v1/destination");
     } else {
       response = await http.get(
-          "https://odyssey-app-staging.herokuapp.com/api/v1/destination/name/${widget.name}");
+          "http://192.168.100.10:3000/api/v1/destination/name/${widget.name}");
     }
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);
