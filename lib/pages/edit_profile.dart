@@ -8,6 +8,15 @@ import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:odyssey/pages/profile.dart';
 import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:ffi';
+import 'dart:io';
+import 'dart:async';
+import 'package:async/async.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 
 void main() => runApp(const EditProfile());
 
@@ -67,8 +76,11 @@ class MyCustomFormState extends State<MyCustomForm> {
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   final _formKey = GlobalKey<FormState>();
-  Dio dio = new Dio();
-  late File? _image;
+  Dio dio = Dio(BaseOptions(
+    contentType: "application/json",
+  ));
+
+  late File _image;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -77,29 +89,41 @@ class MyCustomFormState extends State<MyCustomForm> {
   TextEditingController descriptionController = TextEditingController();
 
   Future getImage() async {
-    var image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    String responseString = '';
+    final picker = ImagePicker();
+    var image = await picker.getImage(
+      source: ImageSource.gallery,
+      imageQuality: 50,
+    ); // <- Reduce Image quality);
 
     setState(() {
-      _image = image;
+      if (image != null) {
+        _image = File(image.path);
+        print(_image);
+        // upload(_image);
+      } else {
+        print('No image selected.');
+      }
     });
 
-    try {
-      String filename = image.path.split('/').last;
-      FormData formData = new FormData.fromMap({
-        "profileImage": await MultipartFile.fromFile(image.path,
-            filename: filename, contentType: MediaType('image', 'png')),
-        "type": "image/png"
-      });
-      Response response = await dio.put(
-          "http://192.168.0.20:3000/api/v1/users/6185512b11cd9b410c43833a",
-          data: formData,
-          options: Options(headers: {
-            "accept": "*/*",
-            'Content-Type': "multipart/form-dataa",
-          }));
-    } catch (e) {
-      print(e);
+    final file = File(image.path);
+    print(file);
+    print(file.path);
+    // Set URI
+    final uri = Uri.parse(
+        'http://192.168.100.10:3000/api/v1/users/6185512b11cd9b410c43833a');
+    // Set the name of file parameter
+    final parameter = 'photo';
+
+    // Upload
+    final request = http.MultipartRequest('PUT', uri)
+      ..files.add(await http.MultipartFile.fromPath('photo', file.path,
+          contentType: new MediaType('image', 'jpeg')));
+    final response = await request.send();
+    if (response.statusCode == 200) {
+      responseString = String.fromCharCodes(await response.stream.toBytes());
     }
+    print(responseString);
   }
 
   @override
@@ -122,8 +146,8 @@ class MyCustomFormState extends State<MyCustomForm> {
                   radius: 50.0,
                   child: ClipRRect(
                     // child: _image == null
-                    //     ? Image.asset('assets/images/profile.jpg')
-                    //     : Image.file(_image!),
+                    // ? Image.asset('assets/images/profile.jpg')
+                    // : Image.file(_image!),
                     child: Image.asset('assets/images/profile.jpg'),
                     borderRadius: BorderRadius.circular(50.0),
                   ),
@@ -150,24 +174,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                 fillColor: Color.fromARGB(100, 196, 196, 196),
                 filled: true,
                 hintText: 'Enter your name',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: BorderSide.none,
-                ),
-              ),
-            ),
-            Container(
-              child: Text('What is your email?',
-                  style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
-              padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
-            ),
-            TextFormField(
-              controller: emailController,
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                fillColor: Color.fromARGB(100, 196, 196, 196),
-                filled: true,
-                hintText: 'Enter an email',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                   borderSide: BorderSide.none,
@@ -243,8 +249,12 @@ class MyCustomFormState extends State<MyCustomForm> {
                       'description': descriptionController.text,
                       'phone': phoneController.text,
                     });
-                    await http.put("http://192.168.100.10:3000/api/v1/users/6185512b11cd9b410c43833a",
-                    body: jsonStr, headers: { "Content-Type" : "application/json"}).then((result) {
+                    await http.put(
+                        "http://192.168.100.10:3000/api/v1/users/6185512b11cd9b410c43833a",
+                        body: jsonStr,
+                        headers: {
+                          "Content-Type": "application/json"
+                        }).then((result) {
                       print(result);
                     });
                   } catch (e) {
