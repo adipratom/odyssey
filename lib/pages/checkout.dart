@@ -5,12 +5,12 @@ import 'package:odyssey/pages/payment_success.dart';
 import 'package:odyssey/pages/payment_pending.dart';
 import 'package:odyssey/pages/payment_fail.dart';
 
-class OrderDetails extends StatefulWidget {
+class CheckOut extends StatefulWidget {
   @override
-  OrderDetailsPage createState() => OrderDetailsPage();
+  CheckOutPage createState() => CheckOutPage();
 }
 
-class OrderDetailsPage extends State<OrderDetails> {
+class CheckOutPage extends State<CheckOut> {
   @override
   Widget build(BuildContext context) {
     const appTitle = 'Checkout';
@@ -284,12 +284,14 @@ class OrderDetailsPage extends State<OrderDetails> {
                                   Text(
                                     'BCA',
                                     style: TextStyle(
+                                      color: Colors.white,
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                   Text('12345678',
                                       style: TextStyle(
+                                        color: Colors.white,
                                         fontFamily: 'Poppins',
                                         fontWeight: FontWeight.w600,
                                       )),
@@ -299,10 +301,10 @@ class OrderDetailsPage extends State<OrderDetails> {
                                           children: [
                                             Icon(
                                               Icons.content_copy,
-                                              color: Colors.black,
+                                              color: Colors.white,
                                               size: 15,
                                             ),
-                                            Text(' Copy'),
+                                            Text(' Copy', style:TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontFamily: 'Poppins')),
                                           ],
                                         ),
                                         style: TextButton.styleFrom(
@@ -339,12 +341,14 @@ class OrderDetailsPage extends State<OrderDetails> {
                                     style: TextStyle(
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w600,
+                                      color: Colors.white
                                     ),
                                   ),
                                   Text('837491234',
                                       style: TextStyle(
                                         fontFamily: 'Poppins',
                                         fontWeight: FontWeight.w600,
+                                        color: Colors.white
                                       )),
                                   Container(
                                     child: TextButton(
@@ -352,10 +356,10 @@ class OrderDetailsPage extends State<OrderDetails> {
                                           children: [
                                             Icon(
                                               Icons.content_copy,
-                                              color: Colors.black,
+                                              color: Colors.white,
                                               size: 15,
                                             ),
-                                            Text(' Copy'),
+                                            Text(' Copy', style:TextStyle(color: Colors.white, fontWeight: FontWeight.w600,fontFamily: 'Poppins')),
                                           ],
                                         ),
                                         style: TextButton.styleFrom(

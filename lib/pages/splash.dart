@@ -25,7 +25,7 @@ class InitState extends State<SplashScreen> {
 
   startTimer() async {
     var duration = Duration(seconds: 2);
-    return new Timer(duration, homeRoute);
+    return new Timer(duration, signInRoute);
   }
 
   homeRoute() {
