@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:odyssey/pages/order_details.dart';
+import 'package:odyssey/pages/checkout.dart';
+import 'package:odyssey/pages/payment_success.dart';
 
 Widget TransactionCard(BuildContext context) {
   return Center(
@@ -11,7 +12,7 @@ Widget TransactionCard(BuildContext context) {
             Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (BuildContext context) => OrderDetails()));
+                    builder: (BuildContext context) => PaymentSuccess()));
           },
           // child: const SizedBox(
           //   width: 300,
