@@ -32,13 +32,13 @@ class ExplorePage extends State<Explore> {
   }
 
   Future<List<Destination>> _fetchAllDestinations() async {
-    late final response ;
+    late final response;
     if (widget.name == '') {
-      response = await http
-          .get("http://192.168.18.6:3000/api/v1/destination");
+      response =
+          await http.get("http://192.168.100.10:3000/api/v1/destination");
     } else {
       response = await http.get(
-          "http://192.168.18.6:3000/api/v1/destination/name/${widget.name}");
+          "http://192.168.100.10:3000/api/v1/destination/name/${widget.name}");
     }
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);
@@ -112,13 +112,15 @@ class ExplorePage extends State<Explore> {
                                   ),
                                   IconButton(
                                       onPressed: () => {
-                                        Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        Explore(name: nameController.text)))
-                                      },
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (BuildContext
+                                                            context) =>
+                                                        Explore(
+                                                            name: nameController
+                                                                .text)))
+                                          },
                                       icon: Icon(Icons.search,
                                           color: Colors.white)),
                                 ],

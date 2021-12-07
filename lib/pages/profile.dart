@@ -17,7 +17,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   int _currentIndex = 3;
 
-    List<ProfileModel> _destinations = <ProfileModel>[];
+  List<ProfileModel> _destinations = <ProfileModel>[];
   @override
   void initState() {
     super.initState();
@@ -33,8 +33,8 @@ class _ProfileState extends State<Profile> {
   }
 
   Future<List<ProfileModel>> _fetchAllDestinations() async {
-    final response =
-        await http.get("http://192.168.18.6:3000/api/v1/users/6185512b11cd9b410c43833a");
+    final response = await http.get(
+        "http://192.168.100.10:3000/api/v1/users/6185512b11cd9b410c43833a");
 
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);
@@ -48,15 +48,16 @@ class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: FutureBuilder(
-        future: _fetchAllDestinations(),
-        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-          if(snapshot.hasData) {
-            return ProfileComponent(profile: _destinations);
-          } else {
-            return Center(child: CircularProgressIndicator(),);
-          }
-        })
-    );
+        child: FutureBuilder(
+            future: _fetchAllDestinations(),
+            builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+              if (snapshot.hasData) {
+                return ProfileComponent(profile: _destinations);
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            }));
   }
 }

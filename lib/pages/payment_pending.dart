@@ -86,26 +86,34 @@ class PaymentPendingPage extends State<PaymentPending> {
                                       fontSize: 20)),
                               onPressed: () async {
                                 try {
-                          String jsonStr = jsonEncode({
-                            'status': 'failed'
-                          });
-                          await http.put(
-                              "http://192.168.18.6:3000/api/v1/order/${widget.id}",
-                              body: jsonStr,
-                              headers: {
-                                "Content-Type": "application/json"
-                              }).then((result) {
-                            print(result);
-                          });
-                        } catch (e) {
-                          print(e);
-                        }
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder:
-                                  (BuildContext context) =>
-                                      PaymentFailed(id: widget.id, name: widget.name, dueDate: widget.dueDate,startDate: widget.startDate, finishedDate: widget.finishedDate, status: widget.status, price: widget.price, photo: widget.photo, desPrice: widget.desPrice)));
+                                  String jsonStr =
+                                      jsonEncode({'status': 'failed'});
+                                  await http.put(
+                                      "http://192.168.100.1:3000/api/v1/order/${widget.id}",
+                                      body: jsonStr,
+                                      headers: {
+                                        "Content-Type": "application/json"
+                                      }).then((result) {
+                                    print(result);
+                                  });
+                                } catch (e) {
+                                  print(e);
+                                }
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            PaymentFailed(
+                                                id: widget.id,
+                                                name: widget.name,
+                                                dueDate: widget.dueDate,
+                                                startDate: widget.startDate,
+                                                finishedDate:
+                                                    widget.finishedDate,
+                                                status: widget.status,
+                                                price: widget.price,
+                                                photo: widget.photo,
+                                                desPrice: widget.desPrice)));
                               },
                               child: Text('Yes')),
                         ),
@@ -141,7 +149,7 @@ class PaymentPendingPage extends State<PaymentPending> {
   Widget build(BuildContext context) {
     var dateDue = DateTime.parse('${widget.dueDate}');
     var dateStart = dateDue.subtract(const Duration(days: 3));
-    var totalPerson = widget.price / widget.desPrice;  
+    var totalPerson = widget.price / widget.desPrice;
     const appTitle = 'Order Details';
     return MaterialApp(
       title: appTitle,
@@ -229,7 +237,10 @@ class PaymentPendingPage extends State<PaymentPending> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
                                           children: [
-                                            Text(dateStart.toIso8601String().split("T")[0],
+                                            Text(
+                                                dateStart
+                                                    .toIso8601String()
+                                                    .split("T")[0],
                                                 style: TextStyle(
                                                   height: 2.5,
                                                   fontFamily: 'Poppins',
@@ -448,7 +459,8 @@ class PaymentPendingPage extends State<PaymentPending> {
                                           fontSize: 13,
                                         )),
                                     TextSpan(
-                                        text: '\n${widget.startDate.split("T")[0]}',
+                                        text:
+                                            '\n${widget.startDate.split("T")[0]}',
                                         style: TextStyle(
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.w500,
@@ -487,7 +499,8 @@ class PaymentPendingPage extends State<PaymentPending> {
                                               fontSize: 13,
                                             )),
                                         TextSpan(
-                                            text: '\n${widget.finishedDate.split("T")[0]}',
+                                            text:
+                                                '\n${widget.finishedDate.split("T")[0]}',
                                             style: TextStyle(
                                               fontFamily: 'Poppins',
                                               fontWeight: FontWeight.w500,

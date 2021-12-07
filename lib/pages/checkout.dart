@@ -462,7 +462,7 @@ class CheckOutPage extends State<CheckOut> {
                             'orderedBy': '6185512b11cd9b410c43833a',
                           });
                           await http.post(
-                              "http://192.168.18.6:3000/api/v1/order/",
+                              "http://192.168.100.10:3000/api/v1/order/",
                               body: jsonStr,
                               headers: {
                                 "Content-Type": "application/json"
@@ -472,12 +472,10 @@ class CheckOutPage extends State<CheckOut> {
                         } catch (e) {
                           print(e);
                         }
-                         Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        Main()));
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => Main()));
                       },
                       child: Text('Pay Now'),
                     ),

@@ -32,7 +32,7 @@ class _TransactionPageState extends State<TransactionPage> {
 
   Future<List<Order>> _fetchAllDestinations() async {
     final response = await http.get(
-        "http://192.168.18.6:3000/api/v1/users/6185512b11cd9b410c43833a/order");
+        "http://192.168.100.10:3000/api/v1/users/6185512b11cd9b410c43833a/order");
 
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);
@@ -104,7 +104,10 @@ class _TransactionPageState extends State<TransactionPage> {
                         child: Center(
                           child: Column(
                             children: [
-                              Flexible(child: TransactionCardStateless(orders: _orders,)),
+                              Flexible(
+                                  child: TransactionCardStateless(
+                                orders: _orders,
+                              )),
                             ],
                           ),
                         )),
@@ -117,7 +120,10 @@ class _TransactionPageState extends State<TransactionPage> {
                         child: Center(
                           child: Column(
                             children: [
-                              Flexible(child: TransactionCardStatelessCompleted(orders: _orders,)),
+                              Flexible(
+                                  child: TransactionCardStatelessCompleted(
+                                orders: _orders,
+                              )),
                             ],
                           ),
                         )),

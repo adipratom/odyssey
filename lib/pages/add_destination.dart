@@ -1,4 +1,24 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:odyssey/main.dart';
+import 'dart:io';
+import 'package:http_parser/http_parser.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:odyssey/pages/profile.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'dart:io';
+import 'dart:async';
+import 'package:async/async.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:path/path.dart';
 
 void main() => runApp(const AddDestination());
 
@@ -39,6 +59,13 @@ class MyCustomForm extends StatefulWidget {
 
 // Create a corresponding State class. This class holds data related to the form.
 class MyCustomFormState extends State<MyCustomForm> {
+  late File _image;
+  TextEditingController nameController = TextEditingController();
+  // TextEditingController typeController = TextEditingController();
+  TextEditingController priceController = TextEditingController();
+  TextEditingController benefitsController = TextEditingController();
+  TextEditingController descriptionController = TextEditingController();
+
   // Create a global key that uniquely identifies the Form widget
   // and allows validation of the form.
   final _formKey = GlobalKey<FormState>();
@@ -51,6 +78,54 @@ class MyCustomFormState extends State<MyCustomForm> {
   ];
   String dropdownValueActivity = 'Leisurely';
 
+  Future getImage() async {
+    String responseString = '';
+    final picker = ImagePicker();
+    var image = await picker.getImage(
+      source: ImageSource.gallery,
+      imageQuality: 50,
+    ); // <- Reduce Image quality);
+
+    setState(() {
+      if (image != null) {
+        _image = File(image.path);
+        print(_image);
+        // upload(_image);
+      } else {
+        print('No image selected.');
+      }
+    });
+  }
+
+  Future upload() async {
+    String responseString = '';
+    final file = File(_image.path);
+    print(file);
+    print(file.path);
+    // Set URI
+    final uri = Uri.parse('http://192.168.100.10:3000/api/v1/destination');
+    // Set the name of file parameter
+    final parameter = 'photo';
+
+    // Upload
+    final request = http.MultipartRequest('POST', uri)
+      ..files.add(await http.MultipartFile.fromPath('photo', file.path,
+          contentType: new MediaType('image', 'jpeg')));
+    request.fields['name'] = nameController.text;
+    request.fields['type'] = dropdownValueTrip.toLowerCase();
+    request.fields['activityLevel'] = dropdownValueActivity.toLowerCase();
+    request.fields['description'] = descriptionController.text;
+    request.fields['benefits'] = benefitsController.text;
+    request.fields['price'] = priceController.text;
+    request.fields['guide'] = "6185512b11cd9b410c43833a";
+
+    final response = await request.send();
+    if (response.statusCode == 201) {
+      responseString = String.fromCharCodes(await response.stream.toBytes());
+    }
+    print(responseString);
+  }
+
   @override
   Widget build(BuildContext context) {
     // Build a Form widget using the _formKey created above.
@@ -62,29 +137,53 @@ class MyCustomFormState extends State<MyCustomForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-                child: Center(
-              child: CircleAvatar(
-                radius: 50.0,
-                child: ClipRRect(
-                  child: Image.asset('assets/images/profile.jpg'),
-                  borderRadius: BorderRadius.circular(50.0),
+                child: GestureDetector(
+              onTap: () {
+                getImage();
+              },
+              child: Center(
+                child: CircleAvatar(
+                  radius: 50.0,
+                  child: ClipRRect(
+                    child: Image.asset('assets/images/profile.jpg'),
+                    borderRadius: BorderRadius.circular(50.0),
+                  ),
                 ),
+                //  Image.asset('../assets/images/profile.jpg')
               ),
-              //  Image.asset('../assets/images/profile.jpg')
             )),
             Container(
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
-                child: Text('Change Profile Picture',
+                child: Text('Add Destination Picture',
                     style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               ),
             ),
             Container(
-              child: Text('What is the adventure name?',
+              child: Text('What is the adventure`s name?',
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
             TextFormField(
+              controller: nameController,
+              decoration: InputDecoration(
+                contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                fillColor: Color.fromARGB(100, 196, 196, 196),
+                filled: true,
+                hintText: 'Enter the adventure name',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+            Container(
+              child: Text('What is the adventure`s price?',
+                  style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
+              padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
+            ),
+            TextFormField(
+              controller: priceController,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                 fillColor: Color.fromARGB(100, 196, 196, 196),
@@ -203,6 +302,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
             TextFormField(
+              controller: descriptionController,
               maxLines: 3,
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(10, 20, 0, 10),
@@ -221,6 +321,7 @@ class MyCustomFormState extends State<MyCustomForm> {
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
             TextFormField(
+              controller: benefitsController,
               maxLines: 3,
               decoration: InputDecoration(
                 fillColor: Color.fromARGB(100, 196, 196, 196),
@@ -245,6 +346,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('Processing Data')),
                     );
+                    upload();
                   }
                 },
                 style: ElevatedButton.styleFrom(

@@ -57,7 +57,7 @@ class PickedExploreState extends State<PickedExplore> {
 
   Future<List<Destination>> _fetchAllDestinations() async {
     final response = await http
-        .get("http://192.168.18.6:3000/api/v1/destination/${widget.id}");
+        .get("http://192.168.100.10:3000/api/v1/destination/${widget.id}");
 
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);
@@ -187,7 +187,12 @@ class PickedExploreState extends State<PickedExplore> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) => CheckOut(
-                                        person: person, date: dateChoosen, name: _destinations[0].name, price: _destinations[0].price, picture: _destinations[0].photo, id: _destinations[0].id)))
+                                        person: person,
+                                        date: dateChoosen,
+                                        name: _destinations[0].name,
+                                        price: _destinations[0].price,
+                                        picture: _destinations[0].photo,
+                                        id: _destinations[0].id)))
                           },
                         ),
                       ),
