@@ -9,7 +9,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:odyssey/pages/profile.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:io';
 import 'dart:async';
 import 'package:async/async.dart';
@@ -111,7 +110,7 @@ class MyCustomFormState extends State<MyCustomForm> {
     print(file.path);
     // Set URI
     final uri = Uri.parse(
-        'http://192.168.100.10:3000/api/v1/users/6185512b11cd9b410c43833a');
+        'http://192.168.18.6:3000/api/v1/users/6185512b11cd9b410c43833a');
     // Set the name of file parameter
     final parameter = 'photo';
 
@@ -250,7 +249,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                       'phone': phoneController.text,
                     });
                     await http.put(
-                        "http://192.168.100.10:3000/api/v1/users/6185512b11cd9b410c43833a",
+                        "http://192.168.18.6:3000/api/v1/users/6185512b11cd9b410c43833a",
                         body: jsonStr,
                         headers: {
                           "Content-Type": "application/json"

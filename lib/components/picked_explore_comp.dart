@@ -87,8 +87,11 @@ class PickedExploreComponent extends StatelessWidget {
                           fontSize: 22,
                         )),
                     WidgetSpan(
-                      child: Icon(Icons.info_rounded,
-                          size: 25, color: Colors.white),
+                      child: IconButton(
+                        onPressed : (){},
+                        icon :Icon(Icons.favorite,
+                          size: 25, color: Colors.white)               
+                      )
                     ),
                     TextSpan(
                         text: '\n${destination[0].name}',

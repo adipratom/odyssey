@@ -1,11 +1,28 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:odyssey/main.dart';
 import 'package:odyssey/pages/payment_success.dart';
 import 'package:odyssey/pages/payment_pending.dart';
 import 'package:odyssey/pages/payment_fail.dart';
+import 'package:http/http.dart' as http;
 
 class CheckOut extends StatefulWidget {
+  late final int person;
+  late final DateTime date;
+  late final String name;
+  late final String picture;
+  late final String id;
+  late final int price;
+
+  CheckOut(
+      {required this.person,
+      required this.date,
+      required this.name,
+      required this.price,
+      required this.picture,
+      required this.id});
   @override
   CheckOutPage createState() => CheckOutPage();
 }
@@ -13,6 +30,9 @@ class CheckOut extends StatefulWidget {
 class CheckOutPage extends State<CheckOut> {
   @override
   Widget build(BuildContext context) {
+    var dateStart = widget.date;
+    var dateEnd = dateStart.add(const Duration(days: 2));
+    var totalPrice = widget.person * widget.price;
     const appTitle = 'Checkout';
     return MaterialApp(
       title: appTitle,
@@ -22,11 +42,12 @@ class CheckOutPage extends State<CheckOut> {
           leading: Builder(
             builder: (BuildContext context) {
               return IconButton(
-                  onPressed: () {
-                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("ASDASD")));
-                    Navigator.pop(context);
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => Main()));
-                  },
+                  onPressed: () => {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => Main()))
+                      },
                   icon: Icon(Icons.chevron_left));
             },
           ),
@@ -55,8 +76,8 @@ class CheckOutPage extends State<CheckOut> {
                           Container(
                               child: ClipRRect(
                             borderRadius: BorderRadius.circular(12.0),
-                            child: Image.asset(
-                              'assets/images/sangiang.png',
+                            child: Image.network(
+                              widget.picture,
                               fit: BoxFit.cover,
                               height: 130,
                             ),
@@ -66,9 +87,9 @@ class CheckOutPage extends State<CheckOut> {
                               alignment: Alignment.centerLeft,
                               child: RichText(
                                 textAlign: TextAlign.left,
-                                text: const TextSpan(children: [
+                                text: TextSpan(children: [
                                   TextSpan(
-                                      text: 'Sangiang Island',
+                                      text: widget.name,
                                       style: TextStyle(
                                         fontFamily: 'Poppins',
                                         fontWeight: FontWeight.w600,
@@ -85,7 +106,7 @@ class CheckOutPage extends State<CheckOut> {
                                         fontSize: 13,
                                       )),
                                   TextSpan(
-                                      text: 'Nusa Travel Agent',
+                                      text: 'Nusa Travel Agent\n',
                                       style: TextStyle(
                                         height: 2.5,
                                         fontFamily: 'Poppins',
@@ -94,7 +115,7 @@ class CheckOutPage extends State<CheckOut> {
                                         fontSize: 13,
                                       )),
                                   TextSpan(
-                                      text: '\nRp250.000/pax',
+                                      text: 'Rp ${widget.price.toString()}',
                                       style: TextStyle(
                                         height: 1.5,
                                         fontFamily: 'Poppins',
@@ -115,63 +136,67 @@ class CheckOutPage extends State<CheckOut> {
                               children: [
                                 Container(
                                   child: RichText(
-                                    text: TextSpan(children: [
-                                      TextSpan(
-                                        text: 'Start From',
+                                      text: TextSpan(children: [
+                                    TextSpan(
+                                        text: 'Start From\n',
                                         style: TextStyle(
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.w500,
                                           color: Colors.black38,
                                           fontSize: 13,
-                                      )),
-                                      TextSpan(
-                                        text: '\nOct 21, 2021',
+                                        )),
+                                    TextSpan(
+                                        text: widget.date
+                                            .toIso8601String()
+                                            .split("T")[0],
                                         style: TextStyle(
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.w500,
                                           color: Colors.black,
                                           fontSize: 13,
-                                      )),
+                                        )),
                                   ])),
                                 ),
                                 Container(
                                   child: Container(
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                      color: Color(0xffC4C4C4),
-                                      borderRadius:
-                                        BorderRadius.circular(30.0)),
-                                    child: Text(
-                                      '2 nights',
-                                      style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black,
-                                        fontSize: 13,
-                                      ),
-                                    )),
-                                ),
-                                Container(
-                                  child: RichText(
-                                    textAlign: TextAlign.right,
-                                    text: TextSpan(children: [
-                                      TextSpan(
-                                        text: 'End',
-                                        style: TextStyle(
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black38,
-                                          fontSize: 13,
-                                        )),
-                                      TextSpan(
-                                        text: '\nOct 23, 2021',
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          color: Color(0xffC4C4C4),
+                                          borderRadius:
+                                              BorderRadius.circular(30.0)),
+                                      child: Text(
+                                        '2 nights',
                                         style: TextStyle(
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.w500,
                                           color: Colors.black,
                                           fontSize: 13,
-                                        )),
-                                    ])),
+                                        ),
+                                      )),
+                                ),
+                                Container(
+                                  child: RichText(
+                                      textAlign: TextAlign.right,
+                                      text: TextSpan(children: [
+                                        TextSpan(
+                                            text: 'End\n',
+                                            style: TextStyle(
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.black38,
+                                              fontSize: 13,
+                                            )),
+                                        TextSpan(
+                                            text: dateEnd
+                                                .toIso8601String()
+                                                .split("T")[0],
+                                            style: TextStyle(
+                                              fontFamily: 'Poppins',
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.black,
+                                              fontSize: 13,
+                                            )),
+                                      ])),
                                 ),
                               ],
                             ),
@@ -184,12 +209,12 @@ class CheckOutPage extends State<CheckOut> {
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 5),
                     alignment: Alignment.centerLeft,
-                    child: Text('Payment Details',
+                    child: Text(
+                      'Payment Details',
                       style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w600,
-                        fontSize: 20
-                      ),
+                          fontFamily: 'Poppins',
+                          fontWeight: FontWeight.w600,
+                          fontSize: 20),
                     ),
                   ),
                   Padding(padding: EdgeInsets.only(bottom: 10)),
@@ -207,16 +232,16 @@ class CheckOutPage extends State<CheckOut> {
                           child: Row(
                             children: [
                               RichText(
-                                  text: const TextSpan(children: [
-                                TextSpan(
-                                    text: 'Sangiang Island',
-                                    style: TextStyle(
-                                      height: 1.5,
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black,
-                                      fontSize: 13,
-                                    )),
+                                  text: TextSpan(children: [
+                                // TextSpan(
+                                //     text: widget.name,
+                                //     style: TextStyle(
+                                //       height: 1.5,
+                                //       fontFamily: 'Poppins',
+                                //       fontWeight: FontWeight.w500,
+                                //       color: Colors.black,
+                                //       fontSize: 13,
+                                //     )),
                                 TextSpan(
                                     text: '\nTotal Price',
                                     style: TextStyle(
@@ -230,9 +255,9 @@ class CheckOutPage extends State<CheckOut> {
                               ])),
                               RichText(
                                   textAlign: TextAlign.end,
-                                  text: const TextSpan(children: [
+                                  text: TextSpan(children: [
                                     TextSpan(
-                                        text: '2 Guest',
+                                        text: '${widget.person} Guest',
                                         style: TextStyle(
                                           height: 1.5,
                                           fontFamily: 'Poppins',
@@ -241,7 +266,8 @@ class CheckOutPage extends State<CheckOut> {
                                           fontSize: 13,
                                         )),
                                     TextSpan(
-                                        text: '\nRp500.000',
+                                        text:
+                                            '\nRp ${(widget.price * widget.person)}',
                                         style: TextStyle(
                                           height: 2,
                                           fontFamily: 'Poppins',
@@ -304,7 +330,11 @@ class CheckOutPage extends State<CheckOut> {
                                               color: Colors.white,
                                               size: 15,
                                             ),
-                                            Text(' Copy', style:TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontFamily: 'Poppins')),
+                                            Text(' Copy',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontFamily: 'Poppins')),
                                           ],
                                         ),
                                         style: TextButton.styleFrom(
@@ -339,17 +369,15 @@ class CheckOutPage extends State<CheckOut> {
                                   Text(
                                     'Mandiri',
                                     style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white
-                                    ),
+                                        fontFamily: 'Poppins',
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white),
                                   ),
                                   Text('837491234',
                                       style: TextStyle(
-                                        fontFamily: 'Poppins',
-                                        fontWeight: FontWeight.w600,
-                                        color: Colors.white
-                                      )),
+                                          fontFamily: 'Poppins',
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white)),
                                   Container(
                                     child: TextButton(
                                         child: Row(
@@ -359,11 +387,16 @@ class CheckOutPage extends State<CheckOut> {
                                               color: Colors.white,
                                               size: 15,
                                             ),
-                                            Text(' Copy', style:TextStyle(color: Colors.white, fontWeight: FontWeight.w600,fontFamily: 'Poppins')),
+                                            Text(' Copy',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontFamily: 'Poppins')),
                                           ],
                                         ),
                                         style: TextButton.styleFrom(
-                                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                          tapTargetSize:
+                                              MaterialTapTargetSize.shrinkWrap,
                                           alignment: Alignment.centerRight,
                                           primary: Colors.black,
                                           textStyle: const TextStyle(
@@ -404,31 +437,50 @@ class CheckOutPage extends State<CheckOut> {
                   Padding(padding: EdgeInsets.all(10)),
                   //Pay Now button
                   Container(
-                    child:  
-                      Container(
-                        height: 60,
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style: 
-                          ElevatedButton.styleFrom(
-                            primary: Color(0xff21574A),
-                            alignment: Alignment.center,
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-                            textStyle: const TextStyle(
-                              fontFamily: 'Poppins',
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                              fontSize: 20
-                            ),
-                          ),
-                          onPressed: () => {
-                            // Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => PaymentSuccess()))
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => PaymentPending()))
-                            // Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => PaymentFailed()))
-                          },
-                          child: Text('Pay Now'),
-                        ),
-                      )),
+                      child: Container(
+                    height: 60,
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        primary: Color(0xff21574A),
+                        alignment: Alignment.center,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)),
+                        textStyle: const TextStyle(
+                            fontFamily: 'Poppins',
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                            fontSize: 20),
+                      ),
+                      onPressed: () async {
+                        try {
+                          String jsonStr = jsonEncode({
+                            'startDate': '${widget.date}',
+                            'finishedDate': '${dateEnd}',
+                            'destination': '${widget.id}',
+                            'orderedBy': '6185512b11cd9b410c43833a',
+                          });
+                          await http.post(
+                              "http://192.168.18.6:3000/api/v1/order/",
+                              body: jsonStr,
+                              headers: {
+                                "Content-Type": "application/json"
+                              }).then((result) {
+                            print(result);
+                          });
+                        } catch (e) {
+                          print(e);
+                        }
+                         Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        Main()));
+                      },
+                      child: Text('Pay Now'),
+                    ),
+                  )),
                 ],
               ),
             ),

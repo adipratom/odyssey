@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:odyssey/model/order.dart';
 import 'package:odyssey/pages/checkout.dart';
+import 'package:odyssey/pages/payment_pending.dart';
 
 class TransactionCardStateless extends StatefulWidget {
   final List<Order> orders;
@@ -29,7 +30,7 @@ class _TransactionCardStatelessState extends State<TransactionCardStateless> {
                   Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => CheckOut()));
+                      builder: (BuildContext context) => PaymentPending()));
                 },
                 child: IntrinsicHeight(
                   child: Row(
