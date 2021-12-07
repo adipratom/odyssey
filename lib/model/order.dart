@@ -25,8 +25,8 @@ class Order {
   @JsonKey(name: "orderedBy")
   final String orderedBy;
 
-  @JsonKey(name: "totakPrice")
-  final String totalPrice;
+  @JsonKey(name: "totalPrice")
+  final int totalPrice;
 
   Order(
       {required this.status,

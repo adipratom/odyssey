@@ -16,7 +16,7 @@ Order _$OrderFromJson(Map<String, dynamic> json) => Order(
           : Destination.fromJson(json['destination'] as Map<String, dynamic>),
       orderedBy: json['orderedBy'] as String,
       id: json['id'] as String,
-      totalPrice: json['totakPrice'] as String,
+      totalPrice: json['totalPrice'] as int,
     );
 
 Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
@@ -27,5 +27,5 @@ Map<String, dynamic> _$OrderToJson(Order instance) => <String, dynamic>{
       'finishedDate': instance.finishedDate,
       'destination': instance.destination,
       'orderedBy': instance.orderedBy,
-      'totakPrice': instance.totalPrice,
+      'totalPrice': instance.totalPrice,
     };
