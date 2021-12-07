@@ -32,7 +32,7 @@ class _TransactionCardStatelessState extends State<TransactionCardStateless> {
                   Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => PaymentPending(id: item.id, name: item.destination!.name, dueDate: item.dueDate,startDate: item.startDate, finishedDate: item.finishedDate, status: item.status )));
+                      builder: (BuildContext context) => PaymentPending(id: item.id, name: item.destination!.name, dueDate: item.dueDate,startDate: item.startDate, finishedDate: item.finishedDate, status: item.status, price: item.totalPrice, photo: item.destination!.photo, desPrice: item.destination!.price)));
                   }else{
                   Navigator.pushReplacement(
                   context,

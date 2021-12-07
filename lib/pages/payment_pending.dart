@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:odyssey/main.dart';
 import 'package:odyssey/model/order.dart';
+import 'package:odyssey/pages/payment_fail.dart';
 import 'package:odyssey/pages/transaction.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
@@ -16,7 +17,8 @@ class PaymentPending extends StatefulWidget {
   late final String finishedDate;
   late final String status;
   late final int price;
-
+  late final String photo;
+  late final int desPrice;
 
   // ignore: non_constant_identifier_names
   PaymentPending({
@@ -26,6 +28,9 @@ class PaymentPending extends StatefulWidget {
     required this.startDate,
     required this.finishedDate,
     required this.status,
+    required this.price,
+    required this.photo,
+    required this.desPrice,
   });
   @override
   PaymentPendingPage createState() => PaymentPendingPage();
@@ -33,34 +38,7 @@ class PaymentPending extends StatefulWidget {
 
 class PaymentPendingPage extends State<PaymentPending> {
   final phoneNumber = '081388122001';
- 
-  // List<Order> _orders = <Order>[];
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _populateDestinations();
-  // }
 
-  // void _populateDestinations() async {
-  //   final destinations = await _fetchAllOrders();
-  //   setState(() {
-  //     _orders = destinations;
-  //     print(_orders);
-  //   });
-  // }
-
-  // Future<List<Order>> _fetchAllOrders() async {
-  //   final response =
-  //       await http.get("http://192.168.18.6:3000/api/v1/destination");
-
-  //   if (response.statusCode == 200) {
-  //     final List<dynamic> result = jsonDecode(response.body);
-  //     // print(response.body);
-  //     return result.map((item) => Order.fromJson(item)).toList();
-  //   } else {
-  //     throw Exception("Failed to load movies");
-  //   }
-  // }
 
   cancelPopUpFunc(context) {
     return showDialog(
@@ -108,7 +86,29 @@ class PaymentPendingPage extends State<PaymentPending> {
                                       fontWeight: FontWeight.w600,
                                       color: Colors.white,
                                       fontSize: 20)),
-                              onPressed: () {},
+                              onPressed: () async {
+                                 try {
+                          String jsonStr = jsonEncode({
+                            'status': 'failed'
+                          });
+                          await http.put(
+                              "http://192.168.18.6:3000/api/v1/order/${widget.id}",
+                              body: jsonStr,
+                              headers: {
+                                "Content-Type": "application/json"
+                              }).then((result) {
+                            print(result);
+                          });
+                        } catch (e) {
+                          print(e);
+                        }
+                        Navigator.pushReplacement(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder:
+                                                    (BuildContext context) =>
+                                                        PaymentFailed()));
+                              },
                               child: Text('Yes')),
                         ),
                         //Tombol No
@@ -143,6 +143,7 @@ class PaymentPendingPage extends State<PaymentPending> {
   Widget build(BuildContext context) {
     var dateDue = DateTime.parse('${widget.dueDate}');
     var dateStart = dateDue.subtract(const Duration(days: 3));
+    var totalPerson = widget.price / widget.desPrice;  
     const appTitle = 'Order Details';
     return MaterialApp(
       title: appTitle,
@@ -240,7 +241,7 @@ class PaymentPendingPage extends State<PaymentPending> {
                                                   height: 2.5,
                                                   fontFamily: 'Poppins',
                                                 )),
-                                            Text('Rp',
+                                            Text('Rp ${widget.price}',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w600,
                                                   height: 2.5,
@@ -312,8 +313,8 @@ class PaymentPendingPage extends State<PaymentPending> {
                           Container(
                               child: ClipRRect(
                             borderRadius: BorderRadius.circular(12.0),
-                            child: Image.asset(
-                              'assets/images/sangiang.png',
+                            child: Image.network(
+                              widget.photo,
                               fit: BoxFit.cover,
                               height: 130,
                             ),
@@ -324,9 +325,9 @@ class PaymentPendingPage extends State<PaymentPending> {
                               alignment: Alignment.centerLeft,
                               child: RichText(
                                 textAlign: TextAlign.left,
-                                text: const TextSpan(children: [
+                                text: TextSpan(children: [
                                   TextSpan(
-                                      text: 'Sangiang Island',
+                                      text: '${widget.name}',
                                       style: TextStyle(
                                         fontFamily: 'Poppins',
                                         fontWeight: FontWeight.w600,
@@ -449,7 +450,7 @@ class PaymentPendingPage extends State<PaymentPending> {
                                           fontSize: 13,
                                         )),
                                     TextSpan(
-                                        text: '\nOct 21, 2021',
+                                        text: '\n${widget.startDate.split("T")[0]}',
                                         style: TextStyle(
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.w500,
@@ -488,7 +489,7 @@ class PaymentPendingPage extends State<PaymentPending> {
                                               fontSize: 13,
                                             )),
                                         TextSpan(
-                                            text: '\nOct 23, 2021',
+                                            text: '\n${widget.finishedDate.split("T")[0]}',
                                             style: TextStyle(
                                               fontFamily: 'Poppins',
                                               fontWeight: FontWeight.w500,
@@ -542,7 +543,7 @@ class PaymentPendingPage extends State<PaymentPending> {
                                         color: Colors.black26)),
                               ),
                               Container(
-                                child: Text('Satriyo Adipratomo',
+                                child: Text('Muhammad Hadi',
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
                                         color: Colors.black)),
@@ -569,7 +570,7 @@ class PaymentPendingPage extends State<PaymentPending> {
                                         color: Colors.black26)),
                               ),
                               Container(
-                                child: Text('2 Pax',
+                                child: Text('${totalPerson} Pax',
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
                                         color: Colors.black)),

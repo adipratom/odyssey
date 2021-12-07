@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:odyssey/model/order.dart';
+import 'package:odyssey/pages/payment_success.dart';
 
 class TransactionCardStatelessCompleted extends StatefulWidget {
     final List<Order> orders;
@@ -23,7 +24,10 @@ class _TransactionCardStatelessCompletedState extends State<TransactionCardState
             child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
                 onTap: () {
-                  print('Card tapped.');
+                Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => PaymentSuccess()));
                 },
                 child: IntrinsicHeight(
                   child: Row(
