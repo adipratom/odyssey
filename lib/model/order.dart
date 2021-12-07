@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:odyssey/model/destination.dart';
-part 'order.g.dart';
+
 
 @JsonSerializable()
 class Order {
@@ -27,6 +27,9 @@ class Order {
   @JsonKey(name: "orderedBy")
   final String orderedBy;
 
+  @JsonKey(name: "totakPrice")
+  final String totalPrice;
+
   Order(
       {required this.status,
       required this.dueDate,
@@ -34,7 +37,8 @@ class Order {
       required this.finishedDate,
       required this.destination,
       required this.orderedBy,
-      required this.id});
+      required this.id,
+      required this.totalPrice});
 
   // Order({required this.id, required this.order});
 
@@ -48,6 +52,7 @@ class Order {
       destination: json['destination'] != null ? Destination.fromJson(json['destination']) : null,
       orderedBy: json["orderedBy"],
       id: json["id"],
+      totalPrice: json["totalPrice"],
     );
   }
 }

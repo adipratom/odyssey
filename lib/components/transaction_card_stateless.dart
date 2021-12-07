@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:odyssey/model/order.dart';
 import 'package:odyssey/pages/checkout.dart';
+import 'package:odyssey/pages/payment_fail.dart';
 import 'package:odyssey/pages/payment_pending.dart';
 
 class TransactionCardStateless extends StatefulWidget {
@@ -27,10 +28,17 @@ class _TransactionCardStatelessState extends State<TransactionCardStateless> {
             child: InkWell(
                 splashColor: Colors.blue.withAlpha(30),
                 onTap: () {
+                  if(item.status == 'waiting'){
                   Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                      builder: (BuildContext context) => PaymentPending()));
+                      builder: (BuildContext context) => PaymentPending(id: item.id, name: item.destination!.name, dueDate: item.dueDate,startDate: item.startDate, finishedDate: item.finishedDate, status: item.status )));
+                  }else{
+                  Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (BuildContext context) => PaymentFailed()));
+                  }
                 },
                 child: IntrinsicHeight(
                   child: Row(

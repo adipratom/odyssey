@@ -458,6 +458,7 @@ class CheckOutPage extends State<CheckOut> {
                             'startDate': '${widget.date}',
                             'finishedDate': '${dateEnd}',
                             'destination': '${widget.id}',
+                            'totalPrice': '${totalPrice}',
                             'orderedBy': '6185512b11cd9b410c43833a',
                           });
                           await http.post(

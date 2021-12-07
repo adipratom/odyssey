@@ -1,15 +1,66 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:odyssey/main.dart';
+import 'package:odyssey/model/order.dart';
+import 'package:odyssey/pages/transaction.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
 
 class PaymentPending extends StatefulWidget {
+  late final String id;
+  late final String name;
+  late final String dueDate;
+  late final String startDate;
+  late final String finishedDate;
+  late final String status;
+  late final int price;
+
+
+  // ignore: non_constant_identifier_names
+  PaymentPending({
+    required this.id,
+    required this.name,
+    required this.dueDate,
+    required this.startDate,
+    required this.finishedDate,
+    required this.status,
+  });
   @override
   PaymentPendingPage createState() => PaymentPendingPage();
 }
 
 class PaymentPendingPage extends State<PaymentPending> {
   final phoneNumber = '081388122001';
+ 
+  // List<Order> _orders = <Order>[];
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _populateDestinations();
+  // }
+
+  // void _populateDestinations() async {
+  //   final destinations = await _fetchAllOrders();
+  //   setState(() {
+  //     _orders = destinations;
+  //     print(_orders);
+  //   });
+  // }
+
+  // Future<List<Order>> _fetchAllOrders() async {
+  //   final response =
+  //       await http.get("http://192.168.18.6:3000/api/v1/destination");
+
+  //   if (response.statusCode == 200) {
+  //     final List<dynamic> result = jsonDecode(response.body);
+  //     // print(response.body);
+  //     return result.map((item) => Order.fromJson(item)).toList();
+  //   } else {
+  //     throw Exception("Failed to load movies");
+  //   }
+  // }
 
   cancelPopUpFunc(context) {
     return showDialog(
@@ -20,8 +71,7 @@ class PaymentPendingPage extends State<PaymentPending> {
             type: MaterialType.transparency,
             child: Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15), color: Colors.white
-              ),
+                  borderRadius: BorderRadius.circular(15), color: Colors.white),
               padding: EdgeInsets.all(20),
               width: MediaQuery.of(context).size.width * 0.8,
               height: 180,
@@ -32,15 +82,14 @@ class PaymentPendingPage extends State<PaymentPending> {
                       'Are you sure you want to cancel your booking?',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.black,
-                        fontFamily: 'KulimPark',
-                        fontWeight: FontWeight.w600
-                      ),
+                          fontSize: 22,
+                          color: Colors.black,
+                          fontFamily: 'KulimPark',
+                          fontWeight: FontWeight.w600),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(top:25),
+                    padding: EdgeInsets.only(top: 25),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -49,43 +98,36 @@ class PaymentPendingPage extends State<PaymentPending> {
                           height: MediaQuery.of(context).size.height * 0.065,
                           width: MediaQuery.of(context).size.width * 0.34,
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Color(0xff920000),
-                              alignment: Alignment.center,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)
-                              ),
-                              textStyle: const TextStyle(
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                                fontSize: 20)
-                            ),
-                            onPressed: (){},
-                            child: Text('Yes')
-                          ),
+                              style: ElevatedButton.styleFrom(
+                                  primary: Color(0xff920000),
+                                  alignment: Alignment.center,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  textStyle: const TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                      fontSize: 20)),
+                              onPressed: () {},
+                              child: Text('Yes')),
                         ),
                         //Tombol No
                         Container(
                           height: MediaQuery.of(context).size.height * 0.065,
                           width: MediaQuery.of(context).size.width * 0.34,
                           child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              primary: Color(0xff21574A),
-                              alignment: Alignment.center,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10)
-                              ),
-                              textStyle: const TextStyle(
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                                fontSize: 20
-                              )
-                            ),
-                            onPressed: (){},
-                            child: Text('No')
-                            ),
+                              style: ElevatedButton.styleFrom(
+                                  primary: Color(0xff21574A),
+                                  alignment: Alignment.center,
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10)),
+                                  textStyle: const TextStyle(
+                                      fontFamily: 'Poppins',
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                      fontSize: 20)),
+                              onPressed: () {},
+                              child: Text('No')),
                         )
                       ],
                     ),
@@ -99,6 +141,8 @@ class PaymentPendingPage extends State<PaymentPending> {
 
   @override
   Widget build(BuildContext context) {
+    var dateDue = DateTime.parse('${widget.dueDate}');
+    var dateStart = dateDue.subtract(const Duration(days: 3));
     const appTitle = 'Order Details';
     return MaterialApp(
       title: appTitle,
@@ -109,9 +153,10 @@ class PaymentPendingPage extends State<PaymentPending> {
             builder: (BuildContext context) {
               return IconButton(
                   onPressed: () {
-                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("ASDASD")));
-                    Navigator.pop(context);
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => Main()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => Main()));
                   },
                   icon: Icon(Icons.chevron_left));
             },
@@ -185,7 +230,7 @@ class PaymentPendingPage extends State<PaymentPending> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
                                           children: [
-                                            Text('Sat, 16 Oct 2021',
+                                            Text(dateStart.toIso8601String().split("T")[0],
                                                 style: TextStyle(
                                                   height: 2.5,
                                                   fontFamily: 'Poppins',
@@ -195,7 +240,7 @@ class PaymentPendingPage extends State<PaymentPending> {
                                                   height: 2.5,
                                                   fontFamily: 'Poppins',
                                                 )),
-                                            Text('Rp500.000',
+                                            Text('Rp',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w600,
                                                   height: 2.5,
@@ -553,9 +598,7 @@ class PaymentPendingPage extends State<PaymentPending> {
                             color: Colors.white,
                             fontSize: 20),
                       ),
-                      onPressed: () => {
-                        cancelPopUpFunc(context)
-                      },
+                      onPressed: () => {cancelPopUpFunc(context)},
                       child: Text('Cancel Booking'),
                     ),
                   )),
