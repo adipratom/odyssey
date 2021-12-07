@@ -38,8 +38,6 @@ class PaymentPending extends StatefulWidget {
 
 class PaymentPendingPage extends State<PaymentPending> {
   final phoneNumber = '081388122001';
-
-
   cancelPopUpFunc(context) {
     return showDialog(
         context: context,
@@ -87,7 +85,7 @@ class PaymentPendingPage extends State<PaymentPending> {
                                       color: Colors.white,
                                       fontSize: 20)),
                               onPressed: () async {
-                                 try {
+                                try {
                           String jsonStr = jsonEncode({
                             'status': 'failed'
                           });
@@ -103,11 +101,11 @@ class PaymentPendingPage extends State<PaymentPending> {
                           print(e);
                         }
                         Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder:
-                                                    (BuildContext context) =>
-                                                        PaymentFailed()));
+                          context,
+                          MaterialPageRoute(
+                              builder:
+                                  (BuildContext context) =>
+                                      PaymentFailed(id: widget.id, name: widget.name, dueDate: widget.dueDate,startDate: widget.startDate, finishedDate: widget.finishedDate, status: widget.status, price: widget.price, photo: widget.photo, desPrice: widget.desPrice)));
                               },
                               child: Text('Yes')),
                         ),

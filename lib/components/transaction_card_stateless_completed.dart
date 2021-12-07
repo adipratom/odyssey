@@ -27,7 +27,7 @@ class _TransactionCardStatelessCompletedState extends State<TransactionCardState
                 Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (BuildContext context) => PaymentSuccess()));
+                    builder: (BuildContext context) => PaymentSuccess(id: item.id, name: item.destination!.name, dueDate: item.dueDate,startDate: item.startDate, finishedDate: item.finishedDate, status: item.status, price: item.totalPrice, photo: item.destination!.photo, desPrice: item.destination!.price)));
                 },
                 child: IntrinsicHeight(
                   child: Row(

@@ -4,6 +4,28 @@ import 'package:odyssey/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PaymentFailed extends StatefulWidget {
+  late final String id;
+  late final String name;
+  late final String dueDate;
+  late final String startDate;
+  late final String finishedDate;
+  late final String status;
+  late final int price;
+  late final String photo;
+  late final int desPrice;
+
+  // ignore: non_constant_identifier_names
+  PaymentFailed({
+    required this.id,
+    required this.name,
+    required this.dueDate,
+    required this.startDate,
+    required this.finishedDate,
+    required this.status,
+    required this.price,
+    required this.photo,
+    required this.desPrice,
+  });
   @override
   PaymentFailedPage createState() => PaymentFailedPage();
 }
@@ -12,6 +34,9 @@ class PaymentFailedPage extends State<PaymentFailed> {
   final phoneNumber = '081388122001';
   @override
   Widget build(BuildContext context) {
+    var dateDue = DateTime.parse('${widget.dueDate}');
+    var dateStart = dateDue.subtract(const Duration(days: 2));
+    var totalPerson = widget.price / widget.desPrice;  
     const appTitle = 'Order Details';
     return MaterialApp(
       title: appTitle,
@@ -192,9 +217,9 @@ class PaymentFailedPage extends State<PaymentFailed> {
                               alignment: Alignment.centerLeft,
                               child: RichText(
                                 textAlign: TextAlign.left,
-                                text: const TextSpan(children: [
+                                text: TextSpan(children: [
                                   TextSpan(
-                                      text: 'Sangiang Island',
+                                      text: '${widget.name}',
                                       style: TextStyle(
                                         fontFamily: 'Poppins',
                                         fontWeight: FontWeight.w600,
@@ -317,7 +342,7 @@ class PaymentFailedPage extends State<PaymentFailed> {
                                           fontSize: 13,
                                         )),
                                     TextSpan(
-                                        text: '\nOct 21, 2021',
+                                        text: '\n${widget.startDate.split("T")[0]}',
                                         style: TextStyle(
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.w500,
@@ -356,7 +381,7 @@ class PaymentFailedPage extends State<PaymentFailed> {
                                               fontSize: 13,
                                             )),
                                         TextSpan(
-                                            text: '\nOct 23, 2021',
+                                            text: '\n${widget.finishedDate.split("T")[0]}',
                                             style: TextStyle(
                                               fontFamily: 'Poppins',
                                               fontWeight: FontWeight.w500,

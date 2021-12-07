@@ -4,6 +4,28 @@ import 'package:odyssey/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PaymentSuccess extends StatefulWidget {
+  late final String id;
+  late final String name;
+  late final String dueDate;
+  late final String startDate;
+  late final String finishedDate;
+  late final String status;
+  late final int price;
+  late final String photo;
+  late final int desPrice;
+
+  // ignore: non_constant_identifier_names
+  PaymentSuccess({
+    required this.id,
+    required this.name,
+    required this.dueDate,
+    required this.startDate,
+    required this.finishedDate,
+    required this.status,
+    required this.price,
+    required this.photo,
+    required this.desPrice,
+  });
   @override
   PaymentSuccessPage createState() => PaymentSuccessPage();
 }
@@ -12,6 +34,9 @@ class PaymentSuccessPage extends State<PaymentSuccess> {
   final phoneNumber = '081388122001';
   @override
   Widget build(BuildContext context) {
+    var dateDue = DateTime.parse('${widget.dueDate}');
+    var dateStart = dateDue.subtract(const Duration(days: 2));
+    var totalPerson = widget.price / widget.desPrice;  
     const appTitle = 'Order Details';
     return MaterialApp(
       title: appTitle,
@@ -98,7 +123,7 @@ class PaymentSuccessPage extends State<PaymentSuccess> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
                                           children: [
-                                            Text('Sat, 16 Oct 2021',
+                                            Text(dateStart.toIso8601String().split("T")[0],
                                                 style: TextStyle(
                                                   height: 2.5,
                                                   fontFamily: 'Poppins',
@@ -108,7 +133,7 @@ class PaymentSuccessPage extends State<PaymentSuccess> {
                                                   height: 2.5,
                                                   fontFamily: 'Poppins',
                                                 )),
-                                            Text('Rp500.000',
+                                            Text('Rp ${widget.price}',
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.w600,
                                                   height: 2.5,
@@ -180,8 +205,8 @@ class PaymentSuccessPage extends State<PaymentSuccess> {
                           Container(
                               child: ClipRRect(
                             borderRadius: BorderRadius.circular(12.0),
-                            child: Image.asset(
-                              'assets/images/sangiang.png',
+                            child: Image.network(
+                              widget.photo,
                               fit: BoxFit.cover,
                               height: 130,
                             ),
@@ -192,9 +217,9 @@ class PaymentSuccessPage extends State<PaymentSuccess> {
                               alignment: Alignment.centerLeft,
                               child: RichText(
                                 textAlign: TextAlign.left,
-                                text: const TextSpan(children: [
+                                text: TextSpan(children: [
                                   TextSpan(
-                                      text: 'Sangiang Island',
+                                      text: '${widget.name}',
                                       style: TextStyle(
                                         fontFamily: 'Poppins',
                                         fontWeight: FontWeight.w600,
@@ -317,7 +342,7 @@ class PaymentSuccessPage extends State<PaymentSuccess> {
                                           fontSize: 13,
                                         )),
                                     TextSpan(
-                                        text: '\nOct 21, 2021',
+                                        text: '\n${widget.startDate.split("T")[0]}',
                                         style: TextStyle(
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.w500,
@@ -356,7 +381,7 @@ class PaymentSuccessPage extends State<PaymentSuccess> {
                                               fontSize: 13,
                                             )),
                                         TextSpan(
-                                            text: '\nOct 23, 2021',
+                                            text: '\n${widget.finishedDate.split("T")[0]}',
                                             style: TextStyle(
                                               fontFamily: 'Poppins',
                                               fontWeight: FontWeight.w500,
@@ -413,7 +438,7 @@ class PaymentSuccessPage extends State<PaymentSuccess> {
                                 ),
                                 Container(
                                   child: Text(
-                                    'Satriyo Adipratomo',
+                                    'Muhammad Hadi',
                                     style: TextStyle(
                                       fontFamily: 'Poppins',
                                       color: Colors.black
@@ -446,7 +471,7 @@ class PaymentSuccessPage extends State<PaymentSuccess> {
                                 ),
                                 Container(
                                   child: Text(
-                                    '2 Pax',
+                                    '${totalPerson} Pax',
                                     style: TextStyle(
                                       fontFamily: 'Poppins',
                                       color: Colors.black

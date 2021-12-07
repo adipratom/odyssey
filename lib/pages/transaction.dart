@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:odyssey/components/transactionCard.dart';
 import 'package:odyssey/components/transaction_card_stateless.dart';
 import 'package:odyssey/components/transaction_card_stateless_completed.dart';
 import 'package:odyssey/model/order.dart';
