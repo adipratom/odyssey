@@ -14,6 +14,10 @@ ProfileModel _$ProfileModelFromJson(Map<String, dynamic> json) => ProfileModel(
       phone: json['phone'] as String,
       address: json['address'] as String,
       id: json['id'] as String,
+      isGuide: json['isGuide'] as bool,
+      guideDetails: json['guideDetails'] == null
+          ? null
+          : GuideModel.fromJson(json['guideDetails'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$ProfileModelToJson(ProfileModel instance) =>
@@ -24,5 +28,7 @@ Map<String, dynamic> _$ProfileModelToJson(ProfileModel instance) =>
       'name': instance.name,
       'phone': instance.phone,
       'address': instance.address,
+      'isGuide': instance.isGuide,
       'id': instance.id,
+      'guideDetails': instance.guideDetails,
     };

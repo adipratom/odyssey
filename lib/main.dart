@@ -10,28 +10,30 @@ import 'package:odyssey/pages/explore.dart';
 import 'package:odyssey/pages/picked_explore.dart';
 
 void main() => runApp(new MaterialApp(
-  initialRoute: '/splash',
-  routes: {
-    '/': (context) => Main(),
-    '/sign_up': (context) => SignUpScreen(),
-    // '/explore': (context) => Explore(
-    // ),
-    '/sign_in': (context) => SignInScreen(),
-    '/splash': (context) => SplashScreen(),
-    // '/picked_explore': (context) => PickedExplore(),
-  },
-));
+      initialRoute: '/splash',
+      routes: {
+        // '/': (context) => Main(),
+        '/sign_up': (context) => SignUpScreen(),
+        // '/explore': (context) => Explore(
+        // ),
+        '/sign_in': (context) => SignInScreen(),
+        '/splash': (context) => SplashScreen(),
+        // '/picked_explore': (context) => PickedExplore(),
+      },
+    ));
 
 class Main extends StatefulWidget {
-  const Main({Key? key}) : super(key: key);
+  late String id;
+  late int indexPage;
+
+  Main({required this.id, required this.indexPage});
 
   @override
   _MainState createState() => _MainState();
 }
 
 class _MainState extends State<Main> {
-  int _currentIndex = 0;
-
+  int _currentIndex = 1;
   List<Widget> pageList = <Widget>[
     Home(),
     TransactionPage(),
@@ -42,16 +44,17 @@ class _MainState extends State<Main> {
   void onTap(int index) {
     setState(() {
       _currentIndex = index;
+      widget.indexPage = index;
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pageList[_currentIndex],
+      body: pageList[widget.indexPage],
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
-        currentIndex: _currentIndex,
+        currentIndex: widget.indexPage,
         type: BottomNavigationBarType.fixed,
         showSelectedLabels: false,
         showUnselectedLabels: false,

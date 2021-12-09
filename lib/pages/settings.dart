@@ -4,35 +4,48 @@ import 'package:odyssey/pages/about.dart';
 import 'package:odyssey/pages/edit_guide.dart';
 import 'package:odyssey/pages/edit_profile.dart';
 import 'package:odyssey/pages/profile.dart';
+import 'package:odyssey/pages/sign_in.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 import 'guide.dart';
 
 class Settings extends StatefulWidget {
-  const Settings({ Key? key }) : super(key: key);
+  late bool guide;
+  late bool verified;
+  late String id;
+  Settings({required this.guide, required this.verified, required this.id});
+  // const Settings({Key? key}) : super(key: key);
 
   @override
   _SettingsState createState() => _SettingsState();
 }
 
 class _SettingsState extends State<Settings> {
-   bool isSwitched = false;
-   bool isEnableTile = false;
+  bool isSwitched = false;
+  bool isEnableTile = false;
   @override
   Widget build(BuildContext context) {
     const appTitle = 'Settings';
     return MaterialApp(
       title: appTitle,
       home: Scaffold(
-        backgroundColor:Colors.white ,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           leading: Builder(
             builder: (BuildContext context) {
-              return IconButton(onPressed: () {
-                // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("ASDASD")));
-                Navigator.pop(context);
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => Main()));
-              }, icon: Icon(Icons.chevron_left));
+              return IconButton(
+                  onPressed: () {
+                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("ASDASD")));
+                    // Navigator.pop(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Main(
+                                  id: widget.id,
+                                  indexPage: 3,
+                                )));
+                  },
+                  icon: Icon(Icons.chevron_left));
             },
           ),
           title: const Text(appTitle,
@@ -44,62 +57,86 @@ class _SettingsState extends State<Settings> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             ListTile(
-              onTap: (){
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => EditProfile()));
+              onTap: () {
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => EditProfile()));
               },
-              title: Text("Edit Profile", 
-               style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
+              title: Text("Edit Profile",
+                  style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
             ),
-            SwitchListTile(
-              activeColor: Color.fromARGB(255, 204, 164, 137),
-              value: isSwitched,
-              title: Text("Guide",
-               style: TextStyle(fontFamily: 'Poppins', fontSize: 14)), 
-              onChanged: (value) {
-                  setState(() {
-                    isSwitched = value;
-                    isEnableTile = value;
-                  });
-                },
+            widget.guide
+                ? SwitchListTile(
+                    activeColor: Color.fromARGB(255, 204, 164, 137),
+                    value: isSwitched,
+                    title: Text("Guide",
+                        style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
+                    onChanged: (value) {
+                      setState(() {
+                        isSwitched = value;
+                        isEnableTile = value;
+                      });
+                    },
+                  )
+                : SizedBox(),
+            widget.guide
+                ? ListTile(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Guide()));
+                    },
+                    enabled: isEnableTile,
+                    title: Text("Open Guide Profile",
+                        style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
+                  )
+                : SizedBox(),
+            widget.guide
+                ? ListTile(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Main(
+                                    id: "6185512b11cd9b410c43833a",
+                                    indexPage: 0,
+                                  )));
+                    },
+                    enabled: isEnableTile,
+                    title: Text("Verified Status: ${widget.verified}",
+                        style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
+                  )
+                : SizedBox(),
+            // widget.guide
+            //     ? ListTile(
+            //         onTap: () {
+            //           Navigator.push(context,
+            //               MaterialPageRoute(builder: (context) => EditGuide()));
+            //         },
+            //         enabled: isEnableTile,
+            //         title: Text("Edit Guide Profile",
+            //             style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
+            //       )
+            //     : SizedBox(),
+            Divider(
+              color: Colors.black,
             ),
             ListTile(
               onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Guide()));
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => SignInScreen()));
               },
-              enabled: isEnableTile,
-              title: Text("Open Guide Profile", 
-               style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
+              title: Text("Logout",
+                  style: TextStyle(
+                      fontFamily: 'Poppins',
+                      fontSize: 14,
+                      color: Color.fromARGB(255, 204, 164, 137))),
             ),
             ListTile(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => Main()));
+              onTap: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => About()));
               },
-              enabled: isEnableTile,
-              title: Text("Verified Status", 
-               style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
-            ),
-            ListTile(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => EditGuide()));
-              },
-              enabled: isEnableTile,
-              title: Text("Edit Guide Profile", 
-               style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
-            ),
-            Divider(color: Colors.black,),
-            ListTile(
-              onTap: (){
-
-              },
-              title: Text("Logout", 
-               style: TextStyle(fontFamily: 'Poppins', fontSize: 14, color: Color.fromARGB(255, 204, 164, 137))),
-            ),
-            ListTile(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => About()));
-              },
-              title: Text("About Us", 
-               style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
+              title: Text("About Us",
+                  style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
             ),
           ],
         ),
@@ -151,8 +188,7 @@ class _SettingsState extends State<Settings> {
         //     ],
         //   ),
         // ],
-      ), 
-      
+      ),
     );
   }
 }

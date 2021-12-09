@@ -163,7 +163,10 @@ class PaymentPendingPage extends State<PaymentPending> {
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (BuildContext context) => Main()));
+                            builder: (BuildContext context) => Main(
+                                  id: "6185512b11cd9b410c43833a",
+                                  indexPage: 0,
+                                )));
                   },
                   icon: Icon(Icons.chevron_left));
             },

@@ -27,8 +27,13 @@ class GuideComponent extends StatelessWidget {
               return IconButton(
                   onPressed: () {
                     // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("ASDASD")));
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Main()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Main(
+                                  id: profile[0].id,
+                                  indexPage: 3,
+                                )));
                   },
                   icon: Icon(Icons.chevron_left));
             },
@@ -87,7 +92,7 @@ class GuideComponent extends StatelessWidget {
                 height: 10,
               ),
               ListTile(
-                title: Text("Nusantara Travelindo",
+                title: Text(profile[0].guideDetails!.guideName,
                     style: TextStyle(
                         fontFamily: "KulimPark",
                         fontSize: 30.0,
@@ -109,7 +114,7 @@ class GuideComponent extends StatelessWidget {
                         color: Colors.black,
                         fontSize: 20.0,
                         fontWeight: FontWeight.w600)),
-                subtitle: Text(profile[0].description,
+                subtitle: Text(profile[0].guideDetails!.description,
                     style: TextStyle(fontFamily: "Poppins")),
               ),
               SizedBox(

@@ -41,8 +41,13 @@ class _EditProfileState extends State<EditProfile> {
               return IconButton(
                   onPressed: () {
                     // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("ASDASD")));
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Main()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Main(
+                                  id: "6185512b11cd9b410c43833a",
+                                  indexPage: 0,
+                                )));
                   },
                   icon: Icon(Icons.chevron_left));
             },

@@ -34,20 +34,36 @@ class ProfileComponent extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
+            profile[0].isGuide
+                ? TextButton.icon(
+                    onPressed: () {
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) => Guide()));
+                    },
+                    icon: Icon(Icons.store),
+                    label: Text(""),
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.black)),
+                  )
+                : TextButton.icon(
+                    onPressed: () {},
+                    icon: Icon(Icons.store),
+                    label: Text(""),
+                    style: ButtonStyle(
+                        foregroundColor:
+                            MaterialStateProperty.all(Colors.grey)),
+                  ),
             TextButton.icon(
               onPressed: () {
                 Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (context) => Guide()));
-              },
-              icon: Icon(Icons.store),
-              label: Text(""),
-              style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all(Colors.black)),
-            ),
-            TextButton.icon(
-              onPressed: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => Settings()));
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Settings(
+                              guide: profile[0].isGuide,
+                              verified: profile[0].guideDetails!.isVerified,
+                              id: profile[0].id,
+                            )));
               },
               icon: Icon(Icons.settings),
               label: Text(""),

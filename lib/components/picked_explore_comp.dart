@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:odyssey/main.dart';
 import 'package:odyssey/model/destination.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class PickedExploreComponent extends StatelessWidget {
   // const PickedExploreComponent({ Key? key }) : super(key: key);
   final List<Destination> destination;
-  const PickedExploreComponent({required this.destination});
-
+  PickedExploreComponent({required this.destination});
+  TextEditingController destinationId = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -52,7 +55,10 @@ class PickedExploreComponent extends StatelessWidget {
                                         context,
                                         MaterialPageRoute(
                                             builder: (BuildContext context) =>
-                                                Main()))
+                                                Main(
+                                                  id: "6185512b11cd9b410c43833a",
+                                                  indexPage: 0,
+                                                )))
                                   },
                               icon: Icon(Icons.arrow_back_ios,
                                   color: Colors.white)),
@@ -87,12 +93,27 @@ class PickedExploreComponent extends StatelessWidget {
                           fontSize: 22,
                         )),
                     WidgetSpan(
-                      child: IconButton(
-                        onPressed : (){},
-                        icon :Icon(Icons.favorite,
-                          size: 25, color: Colors.white)               
-                      )
-                    ),
+                        child: IconButton(
+                            onPressed: () async {
+                              try {
+                                String destinationId = destination[0].id;
+                                String jsonStr = jsonEncode({
+                                  'destinationId': destinationId,
+                                });
+                                await http.put(
+                                    "http://192.168.100.10:3000/api/v1/users/6185512b11cd9b410c43833a/favorite",
+                                    body: jsonStr,
+                                    headers: {
+                                      "Content-Type": "application/json"
+                                    }).then((result) {
+                                  print(result);
+                                });
+                              } catch (e) {
+                                print(e);
+                              }
+                            },
+                            icon: Icon(Icons.favorite,
+                                size: 25, color: Colors.white))),
                     TextSpan(
                         text: '\n${destination[0].name}',
                         style: TextStyle(

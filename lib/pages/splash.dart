@@ -28,15 +28,14 @@ class InitState extends State<SplashScreen> {
     return new Timer(duration, signInRoute);
   }
 
-  homeRoute() {
-    Navigator.pushReplacement(context, MaterialPageRoute(
-      builder: (context) => Main()
-    ));
-  }
-  signInRoute(){
-    Navigator.pushReplacement(context, MaterialPageRoute(
-      builder: (context) => SignUpScreen()
-    ));
+  // homeRoute() {
+  //   Navigator.pushReplacement(context, MaterialPageRoute(
+  //     builder: (context) => Main()
+  //   ));
+  // }
+  signInRoute() {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => SignUpScreen()));
   }
 
   @override
@@ -58,13 +57,13 @@ initWidget() {
           child: Image.asset('assets/images/white_logo.png', width: 220),
         ),
         Center(
-          child: Text('odyssey', style: TextStyle(
-            fontFamily: 'KulimPark', 
-            fontWeight : FontWeight.w300, 
-            height: 13, 
-            fontSize: 40, 
-            color: Colors.white)) 
-        )
+            child: Text('odyssey',
+                style: TextStyle(
+                    fontFamily: 'KulimPark',
+                    fontWeight: FontWeight.w300,
+                    height: 13,
+                    fontSize: 40,
+                    color: Colors.white)))
       ],
     ),
   );

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import 'package:odyssey/model/login.dart';
 import 'package:odyssey/pages/sign_up.dart';
 import 'dart:ui';
+import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart' as http;
 import '../main.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -11,6 +15,53 @@ class SignInScreen extends StatefulWidget {
 
 class InitState extends State<SignInScreen> {
   bool isHiddenPassword = true;
+  String userId = '';
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  List<Login> _destinations = <Login>[];
+  @override
+  void initState() {
+    super.initState();
+    // _populateDestinations();
+  }
+
+  void _populateDestinations() async {
+    final destinations = await _fetchAllDestinations();
+    setState(() {
+      _destinations = destinations;
+      print(_destinations);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Main(
+                    id: _destinations[0].id,
+                    indexPage: 0,
+                  )));
+    });
+  }
+
+  Future<List<Login>> _fetchAllDestinations() async {
+    final response =
+        await http.post("http://192.168.100.10:3000/api/v1/auth/login",
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: jsonEncode(<String, String>{
+              'email': 'testing1@gmail.com',
+              'password': 'Password0'
+              // 'email': emailController.text,
+              // 'password': passwordController.text
+            }));
+    print(emailController.text + " EMAIL");
+    print(passwordController.text + " PASSWORD");
+    if (response.statusCode == 200) {
+      final List<dynamic> result = jsonDecode(response.body);
+      return result.map((item) => Login.fromJson(item)).toList();
+    } else {
+      throw Exception("Failed to load movies");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,6 +116,7 @@ class InitState extends State<SignInScreen> {
               SizedBox(
                 width: 300,
                 child: TextFormField(
+                    controller: emailController,
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'Poppins',
@@ -91,6 +143,7 @@ class InitState extends State<SignInScreen> {
               SizedBox(
                   width: 300,
                   child: TextFormField(
+                      controller: passwordController,
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Poppins',
@@ -128,10 +181,11 @@ class InitState extends State<SignInScreen> {
                 child: MaterialButton(
                   height: 45,
                   onPressed: () => {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => Main()))
+                    _populateDestinations()
+                    // Navigator.pushReplacement(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (BuildContext context) => Main()))
                   },
                   child: Image.asset('assets/images/submit.png', width: 45),
                 ),
@@ -141,7 +195,7 @@ class InitState extends State<SignInScreen> {
               RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                  text: 'Don''t have an account?',
+                  text: 'Don' 't have an account?',
                   style: TextStyle(
                       fontFamily: 'Poppins',
                       fontWeight: FontWeight.w400,

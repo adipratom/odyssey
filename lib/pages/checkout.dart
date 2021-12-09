@@ -15,12 +15,14 @@ class CheckOut extends StatefulWidget {
   late final String picture;
   late final String id;
   late final int price;
+  // late final String userId;
 
   CheckOut(
       {required this.person,
       required this.date,
       required this.name,
       required this.price,
+      // required this.userId,
       required this.picture,
       required this.id});
   @override
@@ -46,7 +48,10 @@ class CheckOutPage extends State<CheckOut> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => Main()))
+                                builder: (BuildContext context) => Main(
+                                      id: "6185512b11cd9b410c43833a",
+                                      indexPage: 0,
+                                    )))
                       },
                   icon: Icon(Icons.chevron_left));
             },
@@ -475,7 +480,10 @@ class CheckOutPage extends State<CheckOut> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (BuildContext context) => Main()));
+                                builder: (BuildContext context) => Main(
+                                      id: "6185512b11cd9b410c43833a",
+                                      indexPage: 0,
+                                    )));
                       },
                       child: Text('Pay Now'),
                     ),
