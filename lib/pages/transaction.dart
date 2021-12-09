@@ -1,3 +1,5 @@
+// ignore_for_file: import_of_legacy_library_into_null_safe, prefer_final_fields, avoid_print, unused_field, prefer_const_constructors, prefer_const_literals_to_create_immutables, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:odyssey/components/transaction_card_stateless.dart';
 import 'package:odyssey/components/transaction_card_stateless_completed.dart';

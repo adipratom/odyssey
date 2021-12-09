@@ -1,15 +1,12 @@
+// ignore_for_file: import_of_legacy_library_into_null_safe, avoid_print, prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables, unnecessary_new
+
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:odyssey/main.dart';
 import 'package:odyssey/pages/sign_in.dart';
 import 'dart:ui';
-import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
 import 'package:odyssey/model/login.dart';
-import 'package:odyssey/pages/sign_up.dart';
-import 'dart:ui';
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 
 class SignUpScreen extends StatefulWidget {

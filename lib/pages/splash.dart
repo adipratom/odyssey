@@ -1,14 +1,7 @@
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, unnecessary_new
+
 import 'package:flutter/material.dart';
-import 'package:odyssey/components/paymentCard.dart';
-import 'package:odyssey/main.dart';
-import 'package:odyssey/pages/about.dart';
-import 'package:odyssey/pages/edit_guide.dart';
-import 'package:odyssey/pages/edit_profile.dart';
-import 'package:odyssey/pages/home.dart';
-import 'package:odyssey/pages/sign_in.dart';
 import 'package:odyssey/pages/sign_up.dart';
-import 'package:odyssey/pages/add_destination.dart';
-import 'package:odyssey/pages/settings.dart';
 import 'dart:async';
 
 class SplashScreen extends StatefulWidget {

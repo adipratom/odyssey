@@ -1,11 +1,10 @@
+// ignore_for_file: prefer_const_constructors, must_be_immutable, use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:odyssey/main.dart';
 import 'package:odyssey/pages/about.dart';
-import 'package:odyssey/pages/edit_guide.dart';
 import 'package:odyssey/pages/edit_profile.dart';
-import 'package:odyssey/pages/profile.dart';
 import 'package:odyssey/pages/sign_in.dart';
-import 'package:settings_ui/settings_ui.dart';
 
 import 'guide.dart';
 

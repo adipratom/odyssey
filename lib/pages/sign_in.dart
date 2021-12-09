@@ -1,10 +1,11 @@
+// ignore_for_file: prefer_const_constructors, import_of_legacy_library_into_null_safe, use_key_in_widget_constructors, avoid_print, prefer_const_literals_to_create_immutables, unnecessary_new
+
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 import 'package:odyssey/model/login.dart';
 import 'package:odyssey/pages/sign_up.dart';
 import 'dart:ui';
 import 'dart:convert';
-import 'dart:io';
 import 'package:http/http.dart' as http;
 import '../main.dart';
 

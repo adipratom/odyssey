@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_new, must_be_immutable, prefer_const_constructors, use_key_in_widget_constructors, unused_field, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:odyssey/pages/favorite.dart';
 import 'package:odyssey/pages/home.dart';
@@ -6,8 +8,6 @@ import 'package:odyssey/pages/transaction.dart';
 import 'package:odyssey/pages/splash.dart';
 import 'package:odyssey/pages/sign_up.dart';
 import 'package:odyssey/pages/sign_in.dart';
-import 'package:odyssey/pages/explore.dart';
-import 'package:odyssey/pages/picked_explore.dart';
 
 void main() => runApp(new MaterialApp(
       initialRoute: '/splash',

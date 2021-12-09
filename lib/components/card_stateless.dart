@@ -4,6 +4,7 @@ import 'package:odyssey/pages/picked_explore.dart';
 
 class CardStateless extends StatelessWidget {
   final List<Destination> destination;
+  // ignore: use_key_in_widget_constructors
   const CardStateless({required this.destination});
 
   @override
@@ -16,14 +17,19 @@ class CardStateless extends StatelessWidget {
               final item = destination[index];
 
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 5.0, vertical: 0),
                 child: Card(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
                   child: InkWell(
                     splashColor: Colors.blue.withAlpha(30),
                     onTap: () {
-                      print('Taping ${item.name} with id ${item.id}');
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => PickedExplore(id: item.id)));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  PickedExplore(id: item.id)));
                     },
                     child: ListTile(
                       title: Row(
@@ -40,14 +46,14 @@ class CardStateless extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Text(item.name,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontFamily: "Poppins",
                                         color: Colors.black,
                                         fontSize: 15,
                                       )),
                                   Text(
                                       "${item.type} | ${item.activityLevel} | rating: ${item.rating}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontFamily: "Poppins",
                                         color: Colors.black,
                                         fontSize: 12,

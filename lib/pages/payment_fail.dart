@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:odyssey/main.dart';
@@ -36,7 +38,7 @@ class PaymentFailedPage extends State<PaymentFailed> {
   Widget build(BuildContext context) {
     var dateDue = DateTime.parse('${widget.dueDate}');
     var dateStart = dateDue.subtract(const Duration(days: 2));
-    var totalPerson = widget.price / widget.desPrice;  
+    var totalPerson = widget.price / widget.desPrice;
     const appTitle = 'Order Details';
     return MaterialApp(
       title: appTitle,
@@ -342,7 +344,8 @@ class PaymentFailedPage extends State<PaymentFailed> {
                                           fontSize: 13,
                                         )),
                                     TextSpan(
-                                        text: '\n${widget.startDate.split("T")[0]}',
+                                        text:
+                                            '\n${widget.startDate.split("T")[0]}',
                                         style: TextStyle(
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.w500,
@@ -381,7 +384,8 @@ class PaymentFailedPage extends State<PaymentFailed> {
                                               fontSize: 13,
                                             )),
                                         TextSpan(
-                                            text: '\n${widget.finishedDate.split("T")[0]}',
+                                            text:
+                                                '\n${widget.finishedDate.split("T")[0]}',
                                             style: TextStyle(
                                               fontFamily: 'Poppins',
                                               fontWeight: FontWeight.w500,

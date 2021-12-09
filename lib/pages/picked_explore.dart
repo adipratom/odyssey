@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_void_to_null, prefer_const_constructors_in_immutables, use_key_in_widget_constructors, prefer_typing_uninitialized_variables, import_of_legacy_library_into_null_safe, avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/gestures.dart';
@@ -6,9 +8,7 @@ import 'package:odyssey/components/picked_explore_comp.dart';
 import 'package:odyssey/model/destination.dart';
 import 'package:odyssey/pages/checkout.dart';
 import 'dart:ui';
-import 'package:odyssey/pages/home.dart';
 import 'package:http/http.dart' as http;
-import 'package:numberpicker/numberpicker.dart';
 import 'dart:async';
 
 class PickedExplore extends StatefulWidget {

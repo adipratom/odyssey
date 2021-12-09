@@ -1,11 +1,15 @@
+// ignore_for_file: avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 import 'package:odyssey/model/destination.dart';
 import 'package:odyssey/pages/picked_explore.dart';
 import 'dart:ui';
 
+// ignore: must_be_immutable
 class CardComponent extends StatefulWidget {
   // const CardComponent({Key? key}) : super(key: key);
   Destination destination = {} as Destination;
+  // ignore: use_key_in_widget_constructors
   CardComponent({required this.destination});
 
   @override
@@ -19,9 +23,14 @@ class _CardComponentState extends State<CardComponent> {
   }
 
   Widget buildCard(context) => InkWell(
-    onTap: () => {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) =>PickedExplore(id: "nulll")))},
-    child: Container(
+        onTap: () => {
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (BuildContext context) =>
+                      PickedExplore(id: "nulll")))
+        },
+        child: Container(
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
@@ -30,7 +39,7 @@ class _CardComponentState extends State<CardComponent> {
             child: Column(
               children: [
                 Container(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(20.0),
                       child: Image.asset(
@@ -43,7 +52,7 @@ class _CardComponentState extends State<CardComponent> {
                 Align(
                     alignment: Alignment.center,
                     child: Container(
-                        child: Text("2D1N Lembang",
+                        child: const Text("2D1N Lembang",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontFamily: "KulimPark",
@@ -52,24 +61,24 @@ class _CardComponentState extends State<CardComponent> {
                 Align(
                     alignment: Alignment.center,
                     child: Container(
-                        child: Text("Open Trip | Challenging",
+                        child: const Text("Open Trip | Challenging",
                             textAlign: TextAlign.center,
                             style: TextStyle(fontFamily: "KulimPark")))),
                 Align(
                     alignment: Alignment.center,
                     child: Container(
-                        child: Text("4.0",
+                        child: const Text("4.0",
                             textAlign: TextAlign.center,
                             style: TextStyle(fontFamily: "KulimPark")))),
                 Align(
                     alignment: Alignment.center,
                     child: Container(
-                        child: Text("Rp200.000,00/pax",
+                        child: const Text("Rp200.000,00/pax",
                             textAlign: TextAlign.center,
                             style: TextStyle(fontFamily: "KulimPark")))),
               ],
             ),
           ),
         ),
-  );
+      );
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, unused_import, import_of_legacy_library_into_null_safe, duplicate_import, avoid_print, unused_local_variable, unnecessary_null_comparison, prefer_const_declarations, avoid_unnecessary_containers, unnecessary_new
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';

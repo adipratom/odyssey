@@ -1,3 +1,5 @@
+// ignore_for_file: import_of_legacy_library_into_null_safe, camel_case_types, avoid_init_to_null, unused_local_variable, avoid_types_as_parameter_names, non_constant_identifier_names
+
 import 'dart:convert';
 
 import 'package:odyssey/model/destination.dart';

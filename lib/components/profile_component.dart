@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable, use_key_in_widget_constructors, prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:odyssey/model/profile_model.dart';
 import 'package:odyssey/pages/guide.dart';
@@ -12,6 +14,7 @@ class ProfileComponent extends StatelessWidget {
     return Column(
       children: <Widget>[
         Stack(
+          // ignore: deprecated_member_use
           overflow: Overflow.visible,
           // alignment: Alignment.center,
           children: <Widget>[

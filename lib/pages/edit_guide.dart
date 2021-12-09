@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(const EditGuide());
@@ -11,7 +13,7 @@ class EditGuide extends StatelessWidget {
     return MaterialApp(
       title: appTitle,
       home: Scaffold(
-        backgroundColor:Colors.white ,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           leading: const Icon(Icons.chevron_left),
           title: const Text(appTitle,
@@ -20,8 +22,8 @@ class EditGuide extends StatelessWidget {
           foregroundColor: Colors.black,
         ),
         body: SingleChildScrollView(
-          child:MyCustomForm(), 
-        ), 
+          child: MyCustomForm(),
+        ),
       ),
     );
   }
@@ -54,18 +56,16 @@ class MyCustomFormState extends State<MyCustomForm> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-             child: Center(
-               child:
-               CircleAvatar(
-                  radius: 50.0,
-                  child: ClipRRect(
-                      child: Image.asset('assets/images/profile.jpg'),
-                      borderRadius: BorderRadius.circular(50.0),
-                  ),
+                child: Center(
+              child: CircleAvatar(
+                radius: 50.0,
+                child: ClipRRect(
+                  child: Image.asset('assets/images/profile.jpg'),
+                  borderRadius: BorderRadius.circular(50.0),
+                ),
               ),
               //  Image.asset('../assets/images/profile.jpg')
-             )     
-            ),
+            )),
             Container(
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
               child: Center(
@@ -78,7 +78,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
-
             TextFormField(
               decoration: InputDecoration(
                 contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -113,7 +112,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
-
             TextFormField(
               decoration: InputDecoration(
                 fillColor: Color.fromARGB(100, 196, 196, 196),
@@ -149,7 +147,6 @@ class MyCustomFormState extends State<MyCustomForm> {
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
-            
             TextFormField(
               maxLines: 3,
               decoration: InputDecoration(
@@ -169,29 +166,14 @@ class MyCustomFormState extends State<MyCustomForm> {
               padding: EdgeInsets.fromLTRB(5, 20, 0, 5),
             ),
             Container(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[ 
-                  Container(
-                    width: 120,
-                    child: Flexible(child: Padding(
-                      padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                      child: TextFormField(
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                          fillColor: Color.fromARGB(100, 196, 196, 196),
-                          filled: true,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide.none,
-                          ),
-                          hintText: 'Bank',
-                          ), 
-                      ),)),
-                  ),
-                  
-                  Flexible(child: Padding(
-                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Container(
+                  width: 120,
+                  child: Flexible(
+                      child: Padding(
+                    padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
                     child: TextFormField(
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
@@ -201,36 +183,55 @@ class MyCustomFormState extends State<MyCustomForm> {
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide.none,
                         ),
-                        hintText: 'Account number',
-                        ), 
-                    ),)),
-                
+                        hintText: 'Bank',
+                      ),
+                    ),
+                  )),
+                ),
+                Flexible(
+                    child: Padding(
+                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                      fillColor: Color.fromARGB(100, 196, 196, 196),
+                      filled: true,
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide.none,
+                      ),
+                      hintText: 'Account number',
+                    ),
+                  ),
+                )),
               ],
-              )
-            ),
-           
+            )),
             Container(
               width: 320.0,
               padding: EdgeInsets.fromLTRB(0, 30, 0, 30),
               child: ElevatedButton(
                 onPressed: () {
-                // Validate returns true if the form is valid, or false otherwise.
-                if (_formKey.currentState!.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
-                  // you'd often call a server or save the information in a database.
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processing Data')),
-                  );
+                  // Validate returns true if the form is valid, or false otherwise.
+                  if (_formKey.currentState!.validate()) {
+                    // If the form is valid, display a snackbar. In the real world,
+                    // you'd often call a server or save the information in a database.
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('Processing Data')),
+                    );
                   }
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 20),
-                  primary: Color.fromARGB(255, 204,164,137),
+                  primary: Color.fromARGB(255, 204, 164, 137),
                   onPrimary: Colors.white,
                 ),
                 child: Text(
                   'Submit',
-                  style: TextStyle(color: Colors.white,fontFamily: 'Poppins', fontSize: 14, fontWeight: FontWeight.w700), 
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Poppins',
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700),
                 ),
               ),
             ),
@@ -240,4 +241,3 @@ class MyCustomFormState extends State<MyCustomForm> {
     );
   }
 }
-

@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, unused_import, prefer_final_fields, prefer_const_constructors, import_of_legacy_library_into_null_safe
+
 import 'package:flutter/material.dart';
 import 'package:odyssey/components/profile_component.dart';
 import 'package:odyssey/model/profile_model.dart';

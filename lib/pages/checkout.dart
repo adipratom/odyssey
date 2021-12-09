@@ -1,11 +1,10 @@
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers, prefer_const_literals_to_create_immutables, import_of_legacy_library_into_null_safe, prefer_const_constructors_in_immutables, sized_box_for_whitespace, avoid_print, use_key_in_widget_constructors, unnecessary_string_interpolations, unnecessary_brace_in_string_interps
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:odyssey/main.dart';
-import 'package:odyssey/pages/payment_success.dart';
-import 'package:odyssey/pages/payment_pending.dart';
-import 'package:odyssey/pages/payment_fail.dart';
 import 'package:http/http.dart' as http;
 
 class CheckOut extends StatefulWidget {

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, camel_case_types, avoid_unnecessary_containers, file_names, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 
 class paymentCard extends StatelessWidget {
@@ -19,16 +21,16 @@ class paymentCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              padding: EdgeInsets.all(5),
+                padding: EdgeInsets.all(5),
                 child: ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image.asset(
-                'assets/images/home/badui.png',
-                width: 60,
-                height: 60,
-                fit: BoxFit.cover,
-              ),
-            )),
+                  borderRadius: BorderRadius.circular(20.0),
+                  child: Image.asset(
+                    'assets/images/home/badui.png',
+                    width: 60,
+                    height: 60,
+                    fit: BoxFit.cover,
+                  ),
+                )),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -80,9 +82,6 @@ class paymentCard extends StatelessWidget {
               padding: EdgeInsets.fromLTRB(0, 16, 0, 0),
               child: Icon(Icons.chevron_right),
             )
-
-            
-            
           ],
         ),
       );

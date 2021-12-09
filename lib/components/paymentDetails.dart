@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import, avoid_unnecessary_containers, camel_case_types, prefer_const_constructors, prefer_const_literals_to_create_immutables, file_names
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:odyssey/main.dart';

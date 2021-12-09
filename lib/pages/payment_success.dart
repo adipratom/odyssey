@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:odyssey/main.dart';
@@ -36,7 +38,7 @@ class PaymentSuccessPage extends State<PaymentSuccess> {
   Widget build(BuildContext context) {
     var dateDue = DateTime.parse('${widget.dueDate}');
     var dateStart = dateDue.subtract(const Duration(days: 2));
-    var totalPerson = widget.price / widget.desPrice;  
+    var totalPerson = widget.price / widget.desPrice;
     const appTitle = 'Order Details';
     return MaterialApp(
       title: appTitle,
@@ -123,7 +125,10 @@ class PaymentSuccessPage extends State<PaymentSuccess> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.end,
                                           children: [
-                                            Text(dateStart.toIso8601String().split("T")[0],
+                                            Text(
+                                                dateStart
+                                                    .toIso8601String()
+                                                    .split("T")[0],
                                                 style: TextStyle(
                                                   height: 2.5,
                                                   fontFamily: 'Poppins',
@@ -342,7 +347,8 @@ class PaymentSuccessPage extends State<PaymentSuccess> {
                                           fontSize: 13,
                                         )),
                                     TextSpan(
-                                        text: '\n${widget.startDate.split("T")[0]}',
+                                        text:
+                                            '\n${widget.startDate.split("T")[0]}',
                                         style: TextStyle(
                                           fontFamily: 'Poppins',
                                           fontWeight: FontWeight.w500,
@@ -381,7 +387,8 @@ class PaymentSuccessPage extends State<PaymentSuccess> {
                                               fontSize: 13,
                                             )),
                                         TextSpan(
-                                            text: '\n${widget.finishedDate.split("T")[0]}',
+                                            text:
+                                                '\n${widget.finishedDate.split("T")[0]}',
                                             style: TextStyle(
                                               fontFamily: 'Poppins',
                                               fontWeight: FontWeight.w500,
@@ -412,77 +419,65 @@ class PaymentSuccessPage extends State<PaymentSuccess> {
                   ),
                   Padding(padding: EdgeInsets.only(bottom: 15)),
                   Container(
-                    child: Container(
-                      padding: EdgeInsets.all(15),
-                      alignment: Alignment.topCenter,
-                      constraints: BoxConstraints(maxWidth: 355),
-                      decoration: BoxDecoration(
-                          color: Color(0x40C4C4C4),
-                          borderRadius: BorderRadius.circular(15.0)),
-                      child: Column(
-                        children: [
-                          //atas
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Text(
-                                    'Lead Guest',
+                      child: Container(
+                    padding: EdgeInsets.all(15),
+                    alignment: Alignment.topCenter,
+                    constraints: BoxConstraints(maxWidth: 355),
+                    decoration: BoxDecoration(
+                        color: Color(0x40C4C4C4),
+                        borderRadius: BorderRadius.circular(15.0)),
+                    child: Column(
+                      children: [
+                        //atas
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                child: Text('Lead Guest',
                                     style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.black26
-                                    )
-                                  ),
-                                ),
-                                Container(
-                                  child: Text(
-                                    'Muhammad Hadi',
+                                        fontFamily: 'Poppins',
+                                        color: Colors.black26)),
+                              ),
+                              Container(
+                                child: Text('Muhammad Hadi',
                                     style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.black
-                                    )
-                                  ),
-                                ),
-                              ],
-                            ),
+                                        fontFamily: 'Poppins',
+                                        color: Colors.black)),
+                              ),
+                            ],
                           ),
-                          //pembatas
-                          Divider(
-                            color: Colors.black26,
-                            thickness: 1.4,
-                            height: 30.0,
-                          ),
-                          //bawah
-                          Container(
-                            alignment: Alignment.centerLeft,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Text(
-                                    'Booked Capacity',
+                        ),
+                        //pembatas
+                        Divider(
+                          color: Colors.black26,
+                          thickness: 1.4,
+                          height: 30.0,
+                        ),
+                        //bawah
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(
+                                child: Text('Booked Capacity',
                                     style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.black26
-                                    )
-                                  ),
-                                ),
-                                Container(
-                                  child: Text(
-                                    '${totalPerson} Pax',
+                                        fontFamily: 'Poppins',
+                                        color: Colors.black26)),
+                              ),
+                              Container(
+                                child: Text('${totalPerson} Pax',
                                     style: TextStyle(
-                                      fontFamily: 'Poppins',
-                                      color: Colors.black
-                                    )
-                                  ),
-                                ),
-                              ],
-                            ),
+                                        fontFamily: 'Poppins',
+                                        color: Colors.black)),
+                              ),
+                            ],
                           ),
-                          ],
-                      ),
+                        ),
+                      ],
+                    ),
                   )),
                   Padding(padding: EdgeInsets.all(10)),
                 ],

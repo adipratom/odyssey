@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:odyssey/model/guide_model.dart';
-import 'destination.dart';
 part 'profile_model.g.dart';
 
 @JsonSerializable()

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, avoid_print, import_of_legacy_library_into_null_safe, unnecessary_null_comparison
+
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -6,16 +8,8 @@ import 'package:odyssey/main.dart';
 import 'dart:io';
 import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:odyssey/pages/profile.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'dart:io';
 import 'dart:async';
-import 'package:async/async.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
 
 void main() => runApp(const EditProfile());
 

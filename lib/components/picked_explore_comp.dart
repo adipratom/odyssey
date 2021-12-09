@@ -1,3 +1,5 @@
+// ignore_for_file: import_of_legacy_library_into_null_safe, must_be_immutable, use_key_in_widget_constructors, prefer_const_constructors, avoid_print, avoid_unnecessary_containers, unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:odyssey/main.dart';
 import 'package:odyssey/model/destination.dart';
@@ -9,7 +11,6 @@ class PickedExploreComponent extends StatelessWidget {
   final List<Destination> destination;
   PickedExploreComponent({required this.destination});
   TextEditingController destinationId = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(

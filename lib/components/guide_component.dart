@@ -1,17 +1,15 @@
+// ignore_for_file: prefer_const_constructors, deprecated_member_use
+
 import 'package:flutter/material.dart';
-import 'package:odyssey/components/profile_component.dart';
 import 'package:odyssey/model/profile_model.dart';
 import 'package:odyssey/pages/add_destination.dart';
-import 'package:odyssey/pages/edit_profile.dart';
-import 'package:odyssey/pages/guide.dart';
-import 'package:odyssey/pages/settings.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 import '../main.dart';
 
+// ignore: must_be_immutable
 class GuideComponent extends StatelessWidget {
   late List<ProfileModel> profile;
+  // ignore: use_key_in_widget_constructors
   GuideComponent({required this.profile});
 
   @override
@@ -35,11 +33,11 @@ class GuideComponent extends StatelessWidget {
                                   indexPage: 3,
                                 )));
                   },
-                  icon: Icon(Icons.chevron_left));
+                  icon: const Icon(Icons.chevron_left));
             },
           ),
           title: Text(title,
-              style: TextStyle(fontFamily: 'Poppins', fontSize: 20)),
+              style: const TextStyle(fontFamily: 'Poppins', fontSize: 20)),
           backgroundColor: Colors.white,
           foregroundColor: Colors.black,
         ),
