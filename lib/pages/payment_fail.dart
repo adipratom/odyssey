@@ -49,9 +49,13 @@ class PaymentFailedPage extends State<PaymentFailed> {
             builder: (BuildContext context) {
               return IconButton(
                   onPressed: () {
-                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("ASDASD")));
-                    Navigator.pop(context);
-                    // Navigator.push(context, MaterialPageRoute(builder: (context) => Main()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => Main(
+                                  id: "6185512b11cd9b410c43833a",
+                                  indexPage: 1,
+                                )));
                   },
                   icon: Icon(Icons.chevron_left));
             },

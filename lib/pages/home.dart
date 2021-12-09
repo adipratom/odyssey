@@ -43,7 +43,7 @@ class _HomeState extends State<Home> {
 
   Future<List<Destination>> _fetchAllDestinations() async {
     final response = await http
-        .get("https://odyssey-app-staging.herokuapp.com/api/v1/destination");
+        .get("http://192.168.18.6:3000/api/v1/destination");
 
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);

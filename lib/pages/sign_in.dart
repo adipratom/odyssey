@@ -44,7 +44,7 @@ class InitState extends State<SignInScreen> {
 
   Future<List<Login>> _fetchAllDestinations() async {
     final response = await http.post(
-        "https://odyssey-app-staging.herokuapp.com/api/v1/auth/login",
+        "http://192.168.18.6:3000/api/v1/auth/login",
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -57,7 +57,7 @@ class InitState extends State<SignInScreen> {
     print(emailController.text + " EMAIL");
     print(passwordController.text + " PASSWORD");
     if (response.statusCode == 200) {
-      final List<dynamic> result = jsonDecode(response.body);
+      final List<dynamic> result = jsonDecode("[" + response.body + "]");
       return result.map((item) => Login.fromJson(item)).toList();
     } else {
       throw Exception("Failed to load movies");

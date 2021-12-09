@@ -102,7 +102,7 @@ class PickedExploreComponent extends StatelessWidget {
                                   'destinationId': destinationId,
                                 });
                                 await http.put(
-                                    "https://odyssey-app-staging.herokuapp.com/api/v1/users/6185512b11cd9b410c43833a/favorite",
+                                    "http://192.168.18.6:3000/api/v1/users/6185512b11cd9b410c43833a/favorite",
                                     body: jsonStr,
                                     headers: {
                                       "Content-Type": "application/json"

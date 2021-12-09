@@ -91,7 +91,7 @@ class PaymentPendingPage extends State<PaymentPending> {
                                   String jsonStr =
                                       jsonEncode({'status': 'failed'});
                                   await http.put(
-                                      "http://192.168.100.1:3000/api/v1/order/${widget.id}",
+                                      "http://192.168.18.6:3000/api/v1/order/${widget.id}",
                                       body: jsonStr,
                                       headers: {
                                         "Content-Type": "application/json"
@@ -167,7 +167,7 @@ class PaymentPendingPage extends State<PaymentPending> {
                         MaterialPageRoute(
                             builder: (BuildContext context) => Main(
                                   id: "6185512b11cd9b410c43833a",
-                                  indexPage: 0,
+                                  indexPage: 1,
                                 )));
                   },
                   icon: Icon(Icons.chevron_left));

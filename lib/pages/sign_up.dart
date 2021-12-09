@@ -45,7 +45,7 @@ class InitState extends State<SignUpScreen> {
 
   Future<List<Login>> _fetchAllDestinations() async {
     final response = await http.post(
-        "https://odyssey-app-staging.herokuapp.com/api/v1/auth/register",
+        "http://192.168.18.6:3000/api/v1/auth/register",
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },

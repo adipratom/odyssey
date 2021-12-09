@@ -35,22 +35,7 @@ class AddDestination extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          leading: Builder(
-            builder: (BuildContext context) {
-              return IconButton(
-                  onPressed: () {
-                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("ASDASD")));
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Main(
-                                  id: "6185512b11cd9b410c43833a",
-                                  indexPage: 0,
-                                )));
-                  },
-                  icon: Icon(Icons.chevron_left));
-            },
-          ),
+          leading: const Icon(Icons.chevron_left),
           title: const Text(appTitle,
               style: TextStyle(fontFamily: 'Poppins', fontSize: 20)),
           backgroundColor: Colors.white,
@@ -116,30 +101,46 @@ class MyCustomFormState extends State<MyCustomForm> {
 
   Future upload() async {
     String responseString = '';
-    final file = File(_image.path);
-    print(file);
-    print(file.path);
-    // Set URI
-    final uri = Uri.parse(
-        'https://odyssey-app-staging.herokuapp.com/api/v1/destination');
-    // Set the name of file parameter
-    final parameter = 'photo';
+    // // final file = File(_image.path);
+    // // print(file);
+    // // print(file.path);
+    // // Set URI
+    // final uri = Uri.parse('http://192.168.18.6:3000/api/v1/destination');
+    // // Set the name of file parameter
+    // final parameter = 'photo';
 
-    // Upload
-    final request = http.MultipartRequest('POST', uri)
-      ..files.add(await http.MultipartFile.fromPath('photo', file.path,
-          contentType: new MediaType('image', 'jpeg')));
-    request.fields['name'] = nameController.text;
-    request.fields['type'] = dropdownValueTrip.toLowerCase();
-    request.fields['activityLevel'] = dropdownValueActivity.toLowerCase();
-    request.fields['description'] = descriptionController.text;
-    request.fields['benefits'] = benefitsController.text;
-    request.fields['price'] = priceController.text;
-    request.fields['guide'] = "6185512b11cd9b410c43833a";
+    // // Upload
+    // final request = http.MultipartRequest('POST', uri);
+    //   // ..files.add(await http.MultipartFile.fromPath('photo', file.path,
+    //   //     contentType: new MediaType('image', 'jpeg')));
+    // request.fields['name'] = nameController.text;
+    // request.fields['type'] = dropdownValueTrip.toLowerCase();
+    // request.fields['activityLevel'] = dropdownValueActivity.toLowerCase();
+    // request.fields['description'] = descriptionController.text;
+    // request.fields['benefits'] = benefitsController.text;
+    // request.fields['price'] = priceController.text;
+    // request.fields['guide'] = "6185512b11cd9b410c43833a";
+    final response =
+        await http.post("http://192.168.18.6:3000/api/v1/auth/login",
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: jsonEncode(<String, String>{
+             'name' : nameController.text,
+             'type' : dropdownValueTrip.toLowerCase(),
+             'activityLevel' : dropdownValueActivity.toLowerCase(),
+             'description' : descriptionController.text,
+             'benefits': benefitsController.text,
+             'price' :priceController.text,
+             'guide' : "6185512b11cd9b410c43833a"
+              // 'email': emailController.text,
+              // 'password': passwordController.text
+            }));
 
-    final response = await request.send();
+    // final response = await request.send();
     if (response.statusCode == 201) {
-      responseString = String.fromCharCodes(await response.stream.toBytes());
+      // responseString = String.fromCharCodes(await response.stream.toBytes());
+      print(response.body);
     }
     print(responseString);
   }
@@ -366,6 +367,13 @@ class MyCustomFormState extends State<MyCustomForm> {
                     );
                     upload();
                   }
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Main(
+                                id: "6185512b11cd9b410c43833a",
+                                indexPage: 3,
+                              )));
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 20),

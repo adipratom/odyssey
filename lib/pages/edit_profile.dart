@@ -40,7 +40,7 @@ class _EditProfileState extends State<EditProfile> {
                         MaterialPageRoute(
                             builder: (context) => Main(
                                   id: "6185512b11cd9b410c43833a",
-                                  indexPage: 0,
+                                  indexPage: 3,
                                 )));
                   },
                   icon: Icon(Icons.chevron_left));
@@ -109,7 +109,7 @@ class MyCustomFormState extends State<MyCustomForm> {
     print(file.path);
     // Set URI
     final uri = Uri.parse(
-        'https://odyssey-app-staging.herokuapp.com/api/v1/users/6185512b11cd9b410c43833a');
+        'http://192.168.18.6:3000/api/v1/users/6185512b11cd9b410c43833a');
     // Set the name of file parameter
     final parameter = 'photo';
 
@@ -248,7 +248,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                       'phone': phoneController.text,
                     });
                     await http.put(
-                        "https://odyssey-app-staging.herokuapp.com/api/v1/users/6185512b11cd9b410c43833a",
+                        "http://192.168.18.6:3000/api/v1/users/6185512b11cd9b410c43833a",
                         body: jsonStr,
                         headers: {
                           "Content-Type": "application/json"
@@ -265,6 +265,13 @@ class MyCustomFormState extends State<MyCustomForm> {
                       const SnackBar(content: Text('Processing Data')),
                     );
                   }
+                  Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Main(
+                                  id: "6185512b11cd9b410c43833a",
+                                  indexPage: 3,
+                                )));
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 20),
