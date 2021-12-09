@@ -57,8 +57,10 @@ class _SettingsState extends State<Settings> {
           children: <Widget>[
             ListTile(
               onTap: () {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => EditProfile()));
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => EditProfile(id: widget.id)));
               },
               title: Text("Edit Profile",
                   style: TextStyle(fontFamily: 'Poppins', fontSize: 14)),
@@ -80,8 +82,10 @@ class _SettingsState extends State<Settings> {
             widget.guide
                 ? ListTile(
                     onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => Guide()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Guide(id: widget.id)));
                     },
                     enabled: isEnableTile,
                     title: Text("Open Guide Profile",

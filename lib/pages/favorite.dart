@@ -9,7 +9,8 @@ import 'package:odyssey/model/destination.dart';
 import 'package:http/http.dart' as http;
 
 class Favorite extends StatefulWidget {
-  const Favorite({Key? key}) : super(key: key);
+  late final String id;
+  Favorite({required this.id});
 
   @override
   _FavoriteState createState() => _FavoriteState();
@@ -34,8 +35,8 @@ class _FavoriteState extends State<Favorite> {
   }
 
   Future<List<Destination>> _fetchAllDestinations() async {
-    final response = await http.get(
-        "http://192.168.18.6:3000/api/v1/users/6185512b11cd9b410c43833a/favorite");
+    final response = await http
+        .get("http://192.168.100.10:3000/api/v1/users/${widget.id}/favorite");
 
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);

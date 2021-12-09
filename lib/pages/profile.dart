@@ -10,7 +10,9 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class Profile extends StatefulWidget {
-  const Profile({Key? key}) : super(key: key);
+  late final String id;
+  Profile({required this.id});
+  // const Profile({Key? key}) : super(key: key);
 
   @override
   _ProfileState createState() => _ProfileState();
@@ -35,8 +37,8 @@ class _ProfileState extends State<Profile> {
   }
 
   Future<List<ProfileModel>> _fetchAllDestinations() async {
-    final response = await http.get(
-        "http://192.168.18.6:3000/api/v1/users/6185512b11cd9b410c43833a");
+    final response =
+        await http.get("http://192.168.100.10:3000/api/v1/users/${widget.id}");
 
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);

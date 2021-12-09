@@ -105,7 +105,7 @@ class MyCustomFormState extends State<MyCustomForm> {
     // // print(file);
     // // print(file.path);
     // // Set URI
-    // final uri = Uri.parse('http://192.168.18.6:3000/api/v1/destination');
+    // final uri = Uri.parse('http://192.168.100.10:3000/api/v1/destination');
     // // Set the name of file parameter
     // final parameter = 'photo';
 
@@ -121,20 +121,18 @@ class MyCustomFormState extends State<MyCustomForm> {
     // request.fields['price'] = priceController.text;
     // request.fields['guide'] = "6185512b11cd9b410c43833a";
     final response =
-        await http.post("http://192.168.18.6:3000/api/v1/auth/login",
+        await http.post("http://192.168.100.10:3000/api/v1/destination",
             headers: <String, String>{
               'Content-Type': 'application/json; charset=UTF-8',
             },
             body: jsonEncode(<String, String>{
-             'name' : nameController.text,
-             'type' : dropdownValueTrip.toLowerCase(),
-             'activityLevel' : dropdownValueActivity.toLowerCase(),
-             'description' : descriptionController.text,
-             'benefits': benefitsController.text,
-             'price' :priceController.text,
-             'guide' : "6185512b11cd9b410c43833a"
-              // 'email': emailController.text,
-              // 'password': passwordController.text
+              'name': nameController.text,
+              'type': dropdownValueTrip.toLowerCase(),
+              'activityLevel': dropdownValueActivity.toLowerCase(),
+              'description': descriptionController.text,
+              'benefits': benefitsController.text,
+              'price': priceController.text,
+              'guide': "6185512b11cd9b410c43833a"
             }));
 
     // final response = await request.send();

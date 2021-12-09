@@ -11,10 +11,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 
-void main() => runApp(const EditProfile());
+// void main() => runApp(const EditProfile(id: ,));
 
 class EditProfile extends StatefulWidget {
-  const EditProfile({Key? key}) : super(key: key);
+  late final String id;
+
+  // const EditProfile({Key? key}) : super(key: key);
+  EditProfile({required this.id});
 
   @override
   State<EditProfile> createState() => _EditProfileState();
@@ -39,7 +42,7 @@ class _EditProfileState extends State<EditProfile> {
                         context,
                         MaterialPageRoute(
                             builder: (context) => Main(
-                                  id: "6185512b11cd9b410c43833a",
+                                  id: widget.id,
                                   indexPage: 3,
                                 )));
                   },
@@ -52,7 +55,7 @@ class _EditProfileState extends State<EditProfile> {
           foregroundColor: Colors.black,
         ),
         body: SingleChildScrollView(
-          child: MyCustomForm(),
+          child: MyCustomForm(id: widget.id),
         ),
       ),
     );
@@ -61,7 +64,9 @@ class _EditProfileState extends State<EditProfile> {
 
 // Create a Form widget.
 class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({Key? key}) : super(key: key);
+  late final String id;
+  MyCustomForm({required this.id});
+  // const MyCustomForm({Key? key}) : super(key: key);
 
   @override
   MyCustomFormState createState() {
@@ -108,8 +113,8 @@ class MyCustomFormState extends State<MyCustomForm> {
     print(file);
     print(file.path);
     // Set URI
-    final uri = Uri.parse(
-        'http://192.168.18.6:3000/api/v1/users/6185512b11cd9b410c43833a');
+    final uri =
+        Uri.parse('http://192.168.100.10:3000/api/v1/users/${widget.id}');
     // Set the name of file parameter
     final parameter = 'photo';
 
@@ -248,7 +253,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                       'phone': phoneController.text,
                     });
                     await http.put(
-                        "http://192.168.18.6:3000/api/v1/users/6185512b11cd9b410c43833a",
+                        "http://192.168.100.10:3000/api/v1/users/${widget.id}",
                         body: jsonStr,
                         headers: {
                           "Content-Type": "application/json"
@@ -266,12 +271,12 @@ class MyCustomFormState extends State<MyCustomForm> {
                     );
                   }
                   Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Main(
-                                  id: "6185512b11cd9b410c43833a",
-                                  indexPage: 3,
-                                )));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Main(
+                                id: "6185512b11cd9b410c43833a",
+                                indexPage: 3,
+                              )));
                 },
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(vertical: 20),

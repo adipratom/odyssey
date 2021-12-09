@@ -44,16 +44,16 @@ class InitState extends State<SignUpScreen> {
   }
 
   Future<List<Login>> _fetchAllDestinations() async {
-    final response = await http.post(
-        "http://192.168.18.6:3000/api/v1/auth/register",
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(<String, String>{
-          'email': emailController.text,
-          'password': passwordController.text,
-          'name': nameController.text,
-        }));
+    final response =
+        await http.post("http://192.168.100.10:3000/api/v1/auth/register",
+            headers: <String, String>{
+              'Content-Type': 'application/json; charset=UTF-8',
+            },
+            body: jsonEncode(<String, String>{
+              'email': emailController.text,
+              'password': passwordController.text,
+              'name': nameController.text,
+            }));
     print(emailController.text + " EMAIL");
     print(passwordController.text + " PASSWORD");
     if (response.statusCode == 200) {

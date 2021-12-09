@@ -34,12 +34,7 @@ class Main extends StatefulWidget {
 
 class _MainState extends State<Main> {
   int _currentIndex = 1;
-  List<Widget> pageList = <Widget>[
-    Home(),
-    TransactionPage(),
-    Favorite(),
-    Profile(),
-  ];
+  String userId = "";
 
   void onTap(int index) {
     setState(() {
@@ -49,7 +44,28 @@ class _MainState extends State<Main> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    userId = widget.id;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    List<Widget> pageList = <Widget>[
+      Home(
+        id: widget.id,
+      ),
+      TransactionPage(
+        id: widget.id,
+      ),
+      Favorite(
+        id: widget.id,
+      ),
+      Profile(
+        id: widget.id,
+      ),
+    ];
+
     return Scaffold(
       body: pageList[widget.indexPage],
       bottomNavigationBar: BottomNavigationBar(

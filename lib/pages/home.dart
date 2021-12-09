@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:odyssey/components/card.dart';
 import 'package:odyssey/components/card_stateless.dart';
+import 'package:odyssey/components/card_stateless_home.dart';
 import 'package:odyssey/main.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:dio/dio.dart';
@@ -15,7 +16,9 @@ import 'package:odyssey/pages/explore.dart';
 import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  late final String id;
+  Home({required this.id});
+  // const Home({Key? key}) : super(key: key);
 
   @override
   _HomeState createState() => _HomeState();
@@ -42,8 +45,8 @@ class _HomeState extends State<Home> {
   }
 
   Future<List<Destination>> _fetchAllDestinations() async {
-    final response = await http
-        .get("http://192.168.18.6:3000/api/v1/destination");
+    final response =
+        await http.get("http://192.168.100.10:3000/api/v1/destination");
 
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);
@@ -277,7 +280,7 @@ class _HomeState extends State<Home> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                         padding: EdgeInsets.fromLTRB(0, 20, 0, 50),
                         height: 300,
-                        child: CardStateless(destination: _destinations)),
+                        child: CardStatelessHome(destination: _destinations)),
                   ),
                 ],
               ),

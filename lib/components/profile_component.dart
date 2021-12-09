@@ -40,8 +40,12 @@ class ProfileComponent extends StatelessWidget {
             profile[0].isGuide
                 ? TextButton.icon(
                     onPressed: () {
-                      Navigator.pushReplacement(context,
-                          MaterialPageRoute(builder: (context) => Guide()));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Guide(
+                                    id: profile[0].id,
+                                  )));
                     },
                     icon: Icon(Icons.store),
                     label: Text(""),
