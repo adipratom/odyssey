@@ -65,29 +65,29 @@ class GuideComponent extends StatelessWidget {
                       ))
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  TextButton.icon(
-                    onPressed: () {},
-                    icon: Icon(Icons.store),
-                    label: Text(""),
-                    style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all(Colors.black)),
-                  ),
-                  TextButton.icon(
-                    onPressed: () {},
-                    icon: Icon(Icons.settings),
-                    label: Text(""),
-                    style: ButtonStyle(
-                        foregroundColor:
-                            MaterialStateProperty.all(Colors.black)),
-                  ),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.end,
+              //   children: <Widget>[
+              //     TextButton.icon(
+              //       onPressed: () {},
+              //       icon: Icon(Icons.store),
+              //       label: Text(""),
+              //       style: ButtonStyle(
+              //           foregroundColor:
+              //               MaterialStateProperty.all(Colors.black)),
+              //     ),
+              //     TextButton.icon(
+              //       onPressed: () {},
+              //       icon: Icon(Icons.settings),
+              //       label: Text(""),
+              //       style: ButtonStyle(
+              //           foregroundColor:
+              //               MaterialStateProperty.all(Colors.black)),
+              //     ),
+              //   ],
+              // ),
               SizedBox(
-                height: 10,
+                height: 50,
               ),
               ListTile(
                 title: Text(profile[0].guideDetails!.guideName,

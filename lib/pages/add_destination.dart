@@ -35,7 +35,22 @@ class AddDestination extends StatelessWidget {
       home: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          leading: const Icon(Icons.chevron_left),
+          leading: Builder(
+            builder: (BuildContext context) {
+              return IconButton(
+                  onPressed: () {
+                    // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("ASDASD")));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Main(
+                                  id: "6185512b11cd9b410c43833a",
+                                  indexPage: 0,
+                                )));
+                  },
+                  icon: Icon(Icons.chevron_left));
+            },
+          ),
           title: const Text(appTitle,
               style: TextStyle(fontFamily: 'Poppins', fontSize: 20)),
           backgroundColor: Colors.white,
@@ -105,7 +120,8 @@ class MyCustomFormState extends State<MyCustomForm> {
     print(file);
     print(file.path);
     // Set URI
-    final uri = Uri.parse('http://192.168.100.10:3000/api/v1/destination');
+    final uri = Uri.parse(
+        'https://odyssey-app-staging.herokuapp.com/api/v1/destination');
     // Set the name of file parameter
     final parameter = 'photo';
 

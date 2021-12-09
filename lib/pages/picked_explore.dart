@@ -56,8 +56,8 @@ class PickedExploreState extends State<PickedExplore> {
   }
 
   Future<List<Destination>> _fetchAllDestinations() async {
-    final response = await http
-        .get("http://192.168.100.10:3000/api/v1/destination/${widget.id}");
+    final response = await http.get(
+        "https://odyssey-app-staging.herokuapp.com/api/v1/destination/${widget.id}");
 
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);

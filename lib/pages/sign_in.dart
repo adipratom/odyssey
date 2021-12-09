@@ -43,17 +43,17 @@ class InitState extends State<SignInScreen> {
   }
 
   Future<List<Login>> _fetchAllDestinations() async {
-    final response =
-        await http.post("http://192.168.100.10:3000/api/v1/auth/login",
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: jsonEncode(<String, String>{
-              'email': 'testing1@gmail.com',
-              'password': 'Password0'
-              // 'email': emailController.text,
-              // 'password': passwordController.text
-            }));
+    final response = await http.post(
+        "https://odyssey-app-staging.herokuapp.com/api/v1/auth/login",
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'email': 'testing1@gmail.com',
+          'password': 'Password0'
+          // 'email': emailController.text,
+          // 'password': passwordController.text
+        }));
     print(emailController.text + " EMAIL");
     print(passwordController.text + " PASSWORD");
     if (response.statusCode == 200) {
