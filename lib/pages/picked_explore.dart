@@ -13,8 +13,9 @@ import 'dart:async';
 
 class PickedExplore extends StatefulWidget {
   late final String id;
+  late final String userId;
   // ignore: non_constant_identifier_names
-  PickedExplore({required this.id});
+  PickedExplore({required this.id, required this.userId});
 
   @override
   PickedExploreState createState() => PickedExploreState();
@@ -82,7 +83,9 @@ class PickedExploreState extends State<PickedExplore> {
               builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                 if (snapshot.hasData) {
                   return PickedExploreComponent(
-                      destination: _destinations, id: widget.id);
+                      destination: _destinations,
+                      id: widget.id,
+                      userId: widget.userId);
                 } else {
                   return Center(
                     child: CircularProgressIndicator(),

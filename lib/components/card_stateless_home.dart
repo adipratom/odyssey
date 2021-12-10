@@ -4,8 +4,9 @@ import 'package:odyssey/pages/picked_explore.dart';
 
 class CardStatelessHome extends StatelessWidget {
   final List<Destination> destination;
+  final String userId;
   // ignore: use_key_in_widget_constructors
-  const CardStatelessHome({required this.destination});
+  const CardStatelessHome({required this.destination, required this.userId});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +29,10 @@ class CardStatelessHome extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  PickedExplore(id: item.id)));
+                              builder: (context) => PickedExplore(
+                                    id: item.id,
+                                    userId: userId,
+                                  )));
                     },
                     child: ListTile(
                       title: Row(

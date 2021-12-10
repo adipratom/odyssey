@@ -10,8 +10,9 @@ import 'package:http/http.dart' as http;
 import 'package:odyssey/model/destination.dart';
 
 class Explore extends StatefulWidget {
+  late final String id;
   late final String name;
-  Explore({required this.name});
+  Explore({required this.name, required this.id});
   @override
   State<StatefulWidget> createState() => ExplorePage();
 }
@@ -120,6 +121,7 @@ class ExplorePage extends State<Explore> {
                                                     builder: (BuildContext
                                                             context) =>
                                                         Explore(
+                                                            id: widget.id,
                                                             name: nameController
                                                                 .text)))
                                           },
@@ -131,7 +133,10 @@ class ExplorePage extends State<Explore> {
                           top: size.height * 0.125,
                           left: 0,
                           right: 0,
-                          child: CardStateless(destination: _destinations))
+                          child: CardStateless(
+                            destination: _destinations,
+                            id: widget.id,
+                          ))
                     ])))),
       ),
     );

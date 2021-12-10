@@ -191,7 +191,7 @@ class InitState extends State<SignInScreen> {
                   child: Image.asset('assets/images/submit.png', width: 45),
                 ),
               ),
-              Padding(padding: EdgeInsets.only(bottom: 162)),
+              Padding(padding: EdgeInsets.only(bottom: 120)),
               //Bottom text
               RichText(
                 textAlign: TextAlign.center,

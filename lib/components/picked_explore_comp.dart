@@ -10,7 +10,9 @@ class PickedExploreComponent extends StatelessWidget {
   // const PickedExploreComponent({ Key? key }) : super(key: key);
   final List<Destination> destination;
   final String id;
-  PickedExploreComponent({required this.destination, required this.id});
+  final String userId;
+  PickedExploreComponent(
+      {required this.destination, required this.id, required this.userId});
   TextEditingController destinationId = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -103,12 +105,18 @@ class PickedExploreComponent extends StatelessWidget {
                                   'destinationId': destinationId,
                                 });
                                 await http.put(
-                                    "https://odyssey-app-staging.herokuapp.com/api/v1/users/${id}/favorite",
+                                    // "http://192.168.100.10:3000/api/v1/users/${userId}/favorite",
+                                    "https://odyssey-app-staging.herokuapp.com/api/v1/users/${userId}/favorite",
                                     body: jsonStr,
                                     headers: {
                                       "Content-Type": "application/json"
                                     }).then((result) {
                                   print(result);
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Main(id: userId, indexPage: 2)));
                                 });
                               } catch (e) {
                                 print(e);

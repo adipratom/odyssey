@@ -127,6 +127,7 @@ class _HomeState extends State<Home> {
                                                 builder:
                                                     (BuildContext context) =>
                                                         Explore(
+                                                            id: widget.id,
                                                             name: nameController
                                                                 .text)))
                                       },
@@ -207,6 +208,7 @@ class _HomeState extends State<Home> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (BuildContext context) => Explore(
+                                          id: widget.id,
                                           name: '',
                                         )))
                           },
@@ -280,7 +282,8 @@ class _HomeState extends State<Home> {
                         margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
                         padding: EdgeInsets.fromLTRB(0, 20, 0, 50),
                         height: 300,
-                        child: CardStatelessHome(destination: _destinations)),
+                        child: CardStatelessHome(
+                            destination: _destinations, userId: widget.id)),
                   ),
                 ],
               ),

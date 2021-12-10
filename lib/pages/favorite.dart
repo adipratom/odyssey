@@ -35,6 +35,7 @@ class _FavoriteState extends State<Favorite> {
   }
 
   Future<List<Destination>> _fetchAllDestinations() async {
+    print(widget.id);
     final response = await http.get(
         "https://odyssey-app-staging.herokuapp.com/api/v1/users/${widget.id}/favorite");
 
@@ -68,7 +69,10 @@ class _FavoriteState extends State<Favorite> {
                   fontWeight: FontWeight.w600,
                 )),
           ),
-          CardStateless(destination: _destinations)
+          CardStateless(
+            destination: _destinations,
+            id: widget.id,
+          )
           // Container(
           //   padding: EdgeInsets.symmetric(horizontal: 20),
           //   child: GridView(

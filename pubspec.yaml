@@ -51,7 +51,7 @@ dev_dependencies:
   build_runner: ^1.11.1
 
 flutter_icons:
-  image_path: "assets/images/white_logo.png" 
+  image_path: "assets/images/icon.png" 
   android: true
   ios: true
   # optionally, as transparency is not allowed on app store

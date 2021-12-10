@@ -9,8 +9,9 @@ import 'dart:ui';
 class CardComponent extends StatefulWidget {
   // const CardComponent({Key? key}) : super(key: key);
   Destination destination = {} as Destination;
+  final String userId;
   // ignore: use_key_in_widget_constructors
-  CardComponent({required this.destination});
+  CardComponent({required this.destination, required this.userId});
 
   @override
   State<CardComponent> createState() => _CardComponentState();
@@ -24,11 +25,12 @@ class _CardComponentState extends State<CardComponent> {
 
   Widget buildCard(context) => InkWell(
         onTap: () => {
-          Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      PickedExplore(id: "nulll")))
+          // Navigator.pushReplacement(
+          //     context,
+          //     MaterialPageRoute(
+          //         builder: (BuildContext context) => PickedExplore(
+          //               id: "null",
+          //             )))
         },
         child: Container(
           decoration: BoxDecoration(
