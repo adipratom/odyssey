@@ -6,8 +6,9 @@ import 'package:odyssey/pages/payment_fail.dart';
 import 'package:odyssey/pages/payment_pending.dart';
 
 class TransactionCardStateless extends StatefulWidget {
+  final String id;
   final List<Order> orders;
-  const TransactionCardStateless({required this.orders});
+  const TransactionCardStateless({required this.orders, required this.id});
 
   @override
   State<TransactionCardStateless> createState() =>
@@ -34,6 +35,7 @@ class _TransactionCardStatelessState extends State<TransactionCardStateless> {
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) => PaymentPending(
+                                  userId: widget.id,
                                   id: item.id,
                                   name: item.destination!.name,
                                   dueDate: item.dueDate,
@@ -48,6 +50,7 @@ class _TransactionCardStatelessState extends State<TransactionCardStateless> {
                           context,
                           MaterialPageRoute(
                               builder: (BuildContext context) => PaymentFailed(
+                                  userId: widget.id,
                                   id: item.id,
                                   name: item.destination!.name,
                                   dueDate: item.dueDate,

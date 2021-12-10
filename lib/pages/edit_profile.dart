@@ -113,8 +113,8 @@ class MyCustomFormState extends State<MyCustomForm> {
     print(file);
     print(file.path);
     // Set URI
-    final uri =
-        Uri.parse('http://192.168.100.10:3000/api/v1/users/${widget.id}');
+    final uri = Uri.parse(
+        'https://odyssey-app-staging.herokuapp.com/api/v1/users/${widget.id}');
     // Set the name of file parameter
     final parameter = 'photo';
 
@@ -253,7 +253,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                       'phone': phoneController.text,
                     });
                     await http.put(
-                        "http://192.168.100.10:3000/api/v1/users/${widget.id}",
+                        "https://odyssey-app-staging.herokuapp.com/api/v1/users/${widget.id}",
                         body: jsonStr,
                         headers: {
                           "Content-Type": "application/json"
@@ -274,7 +274,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => Main(
-                                id: "6185512b11cd9b410c43833a",
+                                id: widget.id,
                                 indexPage: 3,
                               )));
                 },

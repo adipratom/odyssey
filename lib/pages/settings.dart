@@ -99,7 +99,7 @@ class _SettingsState extends State<Settings> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => Main(
-                                    id: "6185512b11cd9b410c43833a",
+                                    id: widget.id,
                                     indexPage: 0,
                                   )));
                     },

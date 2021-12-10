@@ -6,6 +6,7 @@ import 'package:odyssey/main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PaymentSuccess extends StatefulWidget {
+  late final String userId;
   late final String id;
   late final String name;
   late final String dueDate;
@@ -18,6 +19,7 @@ class PaymentSuccess extends StatefulWidget {
 
   // ignore: non_constant_identifier_names
   PaymentSuccess({
+    required this.userId,
     required this.id,
     required this.name,
     required this.dueDate,
@@ -53,7 +55,7 @@ class PaymentSuccessPage extends State<PaymentSuccess> {
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) => Main(
-                                  id: "6185512b11cd9b410c43833a",
+                                  id: widget.userId,
                                   indexPage: 1,
                                 )));
                   },

@@ -123,8 +123,10 @@ class GuideComponent extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => AddDestination()));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => AddDestination(id: profile[0].id)));
           },
           child: const Icon(Icons.add),
           backgroundColor: Colors.green,
