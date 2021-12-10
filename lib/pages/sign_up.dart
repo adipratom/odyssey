@@ -44,19 +44,19 @@ class InitState extends State<SignUpScreen> {
   }
 
   Future<List<Login>> _fetchAllDestinations() async {
-    final response =
-        await http.post("http://192.168.100.10:3000/api/v1/auth/register",
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: jsonEncode(<String, String>{
-              'email': emailController.text,
-              'password': passwordController.text,
-              'name': nameController.text,
-            }));
+    final response = await http.post(
+        "https://odyssey-app-staging.herokuapp.com/api/v1/auth/register",
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'email': emailController.text,
+          'password': passwordController.text,
+          'name': nameController.text,
+        }));
     print(emailController.text + " EMAIL");
     print(passwordController.text + " PASSWORD");
-    if (response.statusCode == 200) {
+    if (response.statusCode == 201) {
       final List<dynamic> result = jsonDecode(response.body);
       return result.map((item) => Login.fromJson(item)).toList();
     } else {
@@ -117,6 +117,7 @@ class InitState extends State<SignUpScreen> {
               SizedBox(
                 width: 300,
                 child: TextFormField(
+                    controller: nameController,
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'Poppins',
@@ -143,6 +144,7 @@ class InitState extends State<SignUpScreen> {
               SizedBox(
                 width: 300,
                 child: TextFormField(
+                    controller: emailController,
                     style: TextStyle(
                       color: Colors.white,
                       fontFamily: 'Poppins',
@@ -169,6 +171,7 @@ class InitState extends State<SignUpScreen> {
               SizedBox(
                   width: 300,
                   child: TextFormField(
+                      controller: passwordController,
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Poppins',
@@ -218,7 +221,7 @@ class InitState extends State<SignUpScreen> {
                   child: Image.asset('assets/images/submit.png', width: 45),
                 ),
               ),
-              Padding(padding: EdgeInsets.only(bottom: 95)),
+              Padding(padding: EdgeInsets.only(bottom: 60)),
               //Bottom text
               RichText(
                 textAlign: TextAlign.center,

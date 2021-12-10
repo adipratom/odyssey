@@ -9,7 +9,10 @@ import 'dart:convert';
 class PickedExploreComponent extends StatelessWidget {
   // const PickedExploreComponent({ Key? key }) : super(key: key);
   final List<Destination> destination;
-  PickedExploreComponent({required this.destination});
+  final String id;
+  final String userId;
+  PickedExploreComponent(
+      {required this.destination, required this.id, required this.userId});
   TextEditingController destinationId = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -57,7 +60,7 @@ class PickedExploreComponent extends StatelessWidget {
                                         MaterialPageRoute(
                                             builder: (BuildContext context) =>
                                                 Main(
-                                                  id: "6185512b11cd9b410c43833a",
+                                                  id: id,
                                                   indexPage: 0,
                                                 )))
                                   },
@@ -102,12 +105,18 @@ class PickedExploreComponent extends StatelessWidget {
                                   'destinationId': destinationId,
                                 });
                                 await http.put(
-                                    "http://192.168.100.10:3000/api/v1/users/6185512b11cd9b410c43833a/favorite",
+                                    // "http://192.168.100.10:3000/api/v1/users/${userId}/favorite",
+                                    "https://odyssey-app-staging.herokuapp.com/api/v1/users/${userId}/favorite",
                                     body: jsonStr,
                                     headers: {
                                       "Content-Type": "application/json"
                                     }).then((result) {
                                   print(result);
+                                  Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              Main(id: userId, indexPage: 2)));
                                 });
                               } catch (e) {
                                 print(e);

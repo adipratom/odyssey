@@ -12,6 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:http/http.dart' as http;
 
 class PaymentPending extends StatefulWidget {
+  late final String userId;
   late final String id;
   late final String name;
   late final String dueDate;
@@ -24,6 +25,7 @@ class PaymentPending extends StatefulWidget {
 
   // ignore: non_constant_identifier_names
   PaymentPending({
+    required this.userId,
     required this.id,
     required this.name,
     required this.dueDate,
@@ -91,7 +93,7 @@ class PaymentPendingPage extends State<PaymentPending> {
                                   String jsonStr =
                                       jsonEncode({'status': 'failed'});
                                   await http.put(
-                                      "http://192.168.100.10:3000/api/v1/order/${widget.id}",
+                                      "https://odyssey-app-staging.herokuapp.com/api/v1/order/${widget.id}",
                                       body: jsonStr,
                                       headers: {
                                         "Content-Type": "application/json"
@@ -106,6 +108,7 @@ class PaymentPendingPage extends State<PaymentPending> {
                                     MaterialPageRoute(
                                         builder: (BuildContext context) =>
                                             PaymentFailed(
+                                                userId: widget.userId,
                                                 id: widget.id,
                                                 name: widget.name,
                                                 dueDate: widget.dueDate,
@@ -166,7 +169,7 @@ class PaymentPendingPage extends State<PaymentPending> {
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) => Main(
-                                  id: "6185512b11cd9b410c43833a",
+                                  id: widget.userId,
                                   indexPage: 1,
                                 )));
                   },

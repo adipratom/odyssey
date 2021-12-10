@@ -10,8 +10,9 @@ import 'package:http/http.dart' as http;
 import 'package:odyssey/model/destination.dart';
 
 class Explore extends StatefulWidget {
+  late final String id;
   late final String name;
-  Explore({required this.name});
+  Explore({required this.name, required this.id});
   @override
   State<StatefulWidget> createState() => ExplorePage();
 }
@@ -36,11 +37,11 @@ class ExplorePage extends State<Explore> {
   Future<List<Destination>> _fetchAllDestinations() async {
     late final response;
     if (widget.name == '') {
-      response =
-          await http.get("http://192.168.100.10:3000/api/v1/destination");
+      response = await http
+          .get("https://odyssey-app-staging.herokuapp.com/api/v1/destination");
     } else {
       response = await http.get(
-          "http://192.168.100.10:3000/api/v1/destination/name/${widget.name}");
+          "https://odyssey-app-staging.herokuapp.com/api/v1/destination/name/${widget.name}");
     }
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);
@@ -120,6 +121,7 @@ class ExplorePage extends State<Explore> {
                                                     builder: (BuildContext
                                                             context) =>
                                                         Explore(
+                                                            id: widget.id,
                                                             name: nameController
                                                                 .text)))
                                           },
@@ -131,7 +133,10 @@ class ExplorePage extends State<Explore> {
                           top: size.height * 0.125,
                           left: 0,
                           right: 0,
-                          child: CardStateless(destination: _destinations))
+                          child: CardStateless(
+                            destination: _destinations,
+                            id: widget.id,
+                          ))
                     ])))),
       ),
     );

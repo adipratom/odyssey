@@ -14,14 +14,14 @@ class CheckOut extends StatefulWidget {
   late final String picture;
   late final String id;
   late final int price;
-  // late final String userId;
+  late final String userId;
 
   CheckOut(
       {required this.person,
       required this.date,
       required this.name,
       required this.price,
-      // required this.userId,
+      required this.userId,
       required this.picture,
       required this.id});
   @override
@@ -48,7 +48,7 @@ class CheckOutPage extends State<CheckOut> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) => Main(
-                                      id: "6185512b11cd9b410c43833a",
+                                      id: widget.id,
                                       indexPage: 0,
                                     )))
                       },
@@ -463,10 +463,10 @@ class CheckOutPage extends State<CheckOut> {
                             'finishedDate': '${dateEnd}',
                             'destination': '${widget.id}',
                             'totalPrice': '${totalPrice}',
-                            'orderedBy': '6185512b11cd9b410c43833a',
+                            'orderedBy': widget.userId,
                           });
                           await http.post(
-                              "http://192.168.100.10:3000/api/v1/order/",
+                              "https://odyssey-app-staging.herokuapp.com/api/v1/order/",
                               body: jsonStr,
                               headers: {
                                 "Content-Type": "application/json"
@@ -480,7 +480,7 @@ class CheckOutPage extends State<CheckOut> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) => Main(
-                                      id: "6185512b11cd9b410c43833a",
+                                      id: widget.userId,
                                       indexPage: 0,
                                     )));
                       },

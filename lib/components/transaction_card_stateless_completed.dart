@@ -5,9 +5,10 @@ import 'package:odyssey/model/order.dart';
 import 'package:odyssey/pages/payment_success.dart';
 
 class TransactionCardStatelessCompleted extends StatefulWidget {
+  final String id;
   final List<Order> orders;
   // ignore: use_key_in_widget_constructors
-  TransactionCardStatelessCompleted({required this.orders});
+  TransactionCardStatelessCompleted({required this.orders, required this.id});
 
   @override
   State<TransactionCardStatelessCompleted> createState() =>
@@ -34,6 +35,7 @@ class _TransactionCardStatelessCompletedState
                         context,
                         MaterialPageRoute(
                             builder: (BuildContext context) => PaymentSuccess(
+                                userId: widget.id,
                                 id: item.id,
                                 name: item.destination!.name,
                                 dueDate: item.dueDate,

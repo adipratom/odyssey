@@ -22,10 +22,12 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 
-void main() => runApp(const AddDestination());
+// void main() => runApp(const AddDestination());
 
 class AddDestination extends StatelessWidget {
-  const AddDestination({Key? key}) : super(key: key);
+  late final String id;
+  AddDestination({required this.id});
+  // const AddDestination({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,7 @@ class AddDestination extends StatelessWidget {
           foregroundColor: Colors.black,
         ),
         body: SingleChildScrollView(
-          child: MyCustomForm(),
+          child: MyCustomForm(id: id),
         ),
       ),
     );
@@ -51,7 +53,9 @@ class AddDestination extends StatelessWidget {
 
 // Create a Form widget.
 class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({Key? key}) : super(key: key);
+  late final String id;
+  MyCustomForm({required this.id});
+  // const MyCustomForm({Key? key}) : super(key: key);
 
   @override
   MyCustomFormState createState() {
@@ -101,44 +105,45 @@ class MyCustomFormState extends State<MyCustomForm> {
 
   Future upload() async {
     String responseString = '';
-    // // final file = File(_image.path);
-    // // print(file);
-    // // print(file.path);
-    // // Set URI
-    // final uri = Uri.parse('http://192.168.100.10:3000/api/v1/destination');
-    // // Set the name of file parameter
-    // final parameter = 'photo';
+    final file = File(_image.path);
+    print(file);
+    print(file.path);
+    // Set URI
+    final uri = Uri.parse(
+        'https://odyssey-app-staging.herokuapp.com/api/v1/destination');
+    // Set the name of file parameter
+    final parameter = 'photo';
 
-    // // Upload
-    // final request = http.MultipartRequest('POST', uri);
-    //   // ..files.add(await http.MultipartFile.fromPath('photo', file.path,
-    //   //     contentType: new MediaType('image', 'jpeg')));
-    // request.fields['name'] = nameController.text;
-    // request.fields['type'] = dropdownValueTrip.toLowerCase();
-    // request.fields['activityLevel'] = dropdownValueActivity.toLowerCase();
-    // request.fields['description'] = descriptionController.text;
-    // request.fields['benefits'] = benefitsController.text;
-    // request.fields['price'] = priceController.text;
-    // request.fields['guide'] = "6185512b11cd9b410c43833a";
-    final response =
-        await http.post("http://192.168.100.10:3000/api/v1/destination",
-            headers: <String, String>{
-              'Content-Type': 'application/json; charset=UTF-8',
-            },
-            body: jsonEncode(<String, String>{
-              'name': nameController.text,
-              'type': dropdownValueTrip.toLowerCase(),
-              'activityLevel': dropdownValueActivity.toLowerCase(),
-              'description': descriptionController.text,
-              'benefits': benefitsController.text,
-              'price': priceController.text,
-              'guide': "6185512b11cd9b410c43833a"
-            }));
+    // Upload
+    final request = http.MultipartRequest('POST', uri)
+      ..files.add(await http.MultipartFile.fromPath('photo', file.path,
+          contentType: new MediaType('image', 'jpeg')));
+    request.fields['name'] = nameController.text;
+    request.fields['type'] = dropdownValueTrip.toLowerCase();
+    request.fields['activityLevel'] = dropdownValueActivity.toLowerCase();
+    request.fields['description'] = descriptionController.text;
+    request.fields['benefits'] = benefitsController.text;
+    request.fields['price'] = priceController.text;
+    request.fields['guide'] = widget.id;
+    final response = await request.send();
+    // final response = await http.post(
+    //     "https://odyssey-app-staging.herokuapp.com/api/v1/destination",
+    //     headers: <String, String>{
+    //       'Content-Type': 'application/json; charset=UTF-8',
+    //     },
+    //     body: jsonEncode(<String, String>{
+    //       'name': nameController.text,
+    //       'type': dropdownValueTrip.toLowerCase(),
+    //       'activityLevel': dropdownValueActivity.toLowerCase(),
+    //       'description': descriptionController.text,
+    //       'benefits': benefitsController.text,
+    //       'price': priceController.text,
+    //       'guide': widget.id,
+    //     }));
 
-    // final response = await request.send();
     if (response.statusCode == 201) {
-      // responseString = String.fromCharCodes(await response.stream.toBytes());
-      print(response.body);
+      responseString = String.fromCharCodes(await response.stream.toBytes());
+      // print(response.body);
     }
     print(responseString);
   }
@@ -369,7 +374,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => Main(
-                                id: "6185512b11cd9b410c43833a",
+                                id: widget.id,
                                 indexPage: 3,
                               )));
                 },
