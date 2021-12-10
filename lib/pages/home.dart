@@ -262,7 +262,7 @@ class _HomeState extends State<Home> {
                             child: Container(
                               padding: EdgeInsets.fromLTRB(5, 15, 0, 0),
                               child: Text(
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                                  "Coming soon to you: Discover Baduy. Enjoy the trip to natural attraction in Baduy and having fun wit locals!",
                                   style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontSize: 13,
