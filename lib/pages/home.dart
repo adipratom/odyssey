@@ -24,15 +24,16 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin {
   TextEditingController nameController = TextEditingController();
   int _currentIndex = 2;
 
   bool isLoading = false;
-  List<Destination> _destinations = <Destination>[];
+  late List<Destination> _destinations = <Destination>[];
   @override
   void initState() {
     super.initState();
+
     _populateDestinations();
   }
 
@@ -60,6 +61,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    super.build(context);
     return MaterialApp(
       title: 'Odyssey Home',
       theme: ThemeData(
@@ -262,7 +264,7 @@ class _HomeState extends State<Home> {
                             child: Container(
                               padding: EdgeInsets.fromLTRB(5, 15, 0, 0),
                               child: Text(
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                                  "Coming soon to you: Discover Baduy. Enjoy the trip to natural attraction in Baduy and having fun wit locals!",
                                   style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontSize: 13,
@@ -275,16 +277,27 @@ class _HomeState extends State<Home> {
                     ),
                   ),
                   Positioned(
-                    top: size.height * 0.71,
-                    left: 0,
-                    right: 0,
-                    child: Container(
-                        margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        padding: EdgeInsets.fromLTRB(0, 20, 0, 50),
-                        height: 300,
-                        child: CardStatelessHome(
-                            destination: _destinations, userId: widget.id)),
-                  ),
+                      top: size.height * 0.71,
+                      left: 0,
+                      right: 0,
+                      child: FutureBuilder(
+                          future: _fetchAllDestinations(),
+                          builder: (BuildContext context,
+                              AsyncSnapshot<dynamic> snapshot) {
+                            if (snapshot.hasData) {
+                              return Container(
+                                  margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                  padding: EdgeInsets.fromLTRB(0, 20, 0, 50),
+                                  height: 300,
+                                  child: CardStatelessHome(
+                                      destination: _destinations,
+                                      userId: widget.id));
+                            } else {
+                              return Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            }
+                          })),
                 ],
               ),
             ),
@@ -293,4 +306,7 @@ class _HomeState extends State<Home> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
