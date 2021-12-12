@@ -27,45 +27,52 @@ class InitState extends State<SignInScreen> {
     // _populateDestinations();
   }
 
-  void _populateDestinations() async {
-    final destinations = await _fetchAllDestinations();
-    setState(() {
-      _destinations = destinations;
-      print(_destinations);
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => Main(
-                    id: _destinations[0].id,
-                    indexPage: 0,
-                  )));
-    });
-  }
-
-  Future<List<Login>> _fetchAllDestinations() async {
-    final response = await http.post(
-        "https://odyssey-app-staging.herokuapp.com/api/v1/auth/login",
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: jsonEncode(<String, String>{
-          // 'email': 'testing1@gmail.com',
-          // 'password': 'Password0'
-          'email': emailController.text,
-          'password': passwordController.text
-        }));
-    print(emailController.text + " EMAIL");
-    print(passwordController.text + " PASSWORD");
-    if (response.statusCode == 200) {
-      final List<dynamic> result = jsonDecode(response.body);
-      return result.map((item) => Login.fromJson(item)).toList();
-    } else {
-      throw Exception("Failed to load movies");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
+    Future<List<Login>> _fetchAllDestinations() async {
+      final response = await http.post(
+          "https://odyssey-app-staging.herokuapp.com/api/v1/auth/login",
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: jsonEncode(<String, String>{
+            'email': 'testing1@gmail.com',
+            'password': 'Password0'
+            // 'email': emailController.text,
+            // 'password': passwordController.text
+          }));
+      print(emailController.text + " EMAIL");
+      print(passwordController.text + " PASSWORD");
+      if (response.statusCode == 200) {
+        final List<dynamic> result = jsonDecode(response.body);
+        return result.map((item) => Login.fromJson(item)).toList();
+      } else {
+        throw Exception("Failed to Login.");
+      }
+    }
+
+    void _populateDestinations() async {
+      try {
+        final destinations = await _fetchAllDestinations();
+        setState(() {
+          _destinations = destinations;
+          print(_destinations);
+          Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Main(
+                        id: _destinations[0].id,
+                        indexPage: 0,
+                      )));
+        });
+      } catch (Exception) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: const Text('Failed to Sign In'),
+          duration: const Duration(seconds: 1),
+        ));
+      }
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
@@ -183,10 +190,31 @@ class InitState extends State<SignInScreen> {
                   height: 45,
                   onPressed: () => {
                     _populateDestinations()
-                    // Navigator.pushReplacement(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (BuildContext context) => Main()))
+                    // if (emailController.text.isEmpty ||
+                    //     passwordController.text.isEmpty)
+                    //   {
+                    //     ScaffoldMessenger.of(context).showSnackBar(
+                    //       const SnackBar(
+                    //           content: Text('Empty Email or Password.')),
+                    //     )
+                    //   }
+                    // else if (!RegExp(
+                    //         r'^.+@[a-zA-Z]+\.{1}[a-zA-Z]+(\.{0,1}[a-zA-Z]+)$')
+                    //     .hasMatch(emailController.text))
+                    //   {
+                    //     ScaffoldMessenger.of(context).showSnackBar(
+                    //       const SnackBar(content: Text('Email not valid.')),
+                    //     )
+                    //   }
+                    // else if (passwordController.text.length < 8)
+                    //   {
+                    //     ScaffoldMessenger.of(context).showSnackBar(
+                    //       const SnackBar(
+                    //           content: Text('Password is less than 8.')),
+                    //     )
+                    //   }
+                    // else
+                    //   {_populateDestinations()}
                   },
                   child: Image.asset('assets/images/submit.png', width: 45),
                 ),

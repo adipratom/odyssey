@@ -33,7 +33,7 @@ class Main extends StatefulWidget {
 }
 
 class _MainState extends State<Main> {
-  int _currentIndex = 1;
+  int _currentIndex = 0;
   String userId = "";
 
   void onTap(int index) {
@@ -51,6 +51,7 @@ class _MainState extends State<Main> {
 
   @override
   Widget build(BuildContext context) {
+    final pageController = PageController();
     List<Widget> pageList = <Widget>[
       Home(
         id: widget.id,
@@ -68,6 +69,15 @@ class _MainState extends State<Main> {
 
     return Scaffold(
       body: pageList[widget.indexPage],
+      // body: PageView(
+      //   children: pageList,
+      //   controller: pageController,
+      //   onPageChanged: onTap,
+      // ),
+      // body: IndexedStack(
+      //   index: widget.indexPage,
+      //   children: pageList,
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Colors.white,
         currentIndex: widget.indexPage,

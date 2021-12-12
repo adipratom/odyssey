@@ -9,6 +9,8 @@ import 'package:odyssey/pages/settings.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import '../main.dart';
+
 class Profile extends StatefulWidget {
   late final String id;
   Profile({required this.id});
@@ -19,26 +21,12 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  int _currentIndex = 3;
-
   List<ProfileModel> _destinations = <ProfileModel>[];
-  @override
-  void initState() {
-    super.initState();
-    _populateDestinations();
-  }
-
-  void _populateDestinations() async {
-    final destinations = await _fetchAllDestinations();
-    setState(() {
-      _destinations = destinations;
-      print(_destinations);
-    });
-  }
-
   Future<List<ProfileModel>> _fetchAllDestinations() async {
-    final response = await http.get(
-        "https://odyssey-app-staging.herokuapp.com/api/v1/users/${widget.id}");
+    final response =
+        // await http.get("http://192.168.100.10:3000/api/v1/users/${widget.id}");
+        await http.get(
+            "https://odyssey-app-staging.herokuapp.com/api/v1/users/${widget.id}");
     // "https://odyssey-app-staging.herokuapp.com/api/v1/users/${widget.id}");
 
     if (response.statusCode == 200) {
@@ -48,6 +36,39 @@ class _ProfileState extends State<Profile> {
     } else {
       throw Exception("Failed to load movies");
     }
+  }
+
+  void _populateDestinations() async {
+    try {
+      final destinations = await _fetchAllDestinations();
+      setState(() {
+        _destinations = destinations;
+        print(_destinations);
+      });
+    } catch (Exception) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: const Text('Error fetching profile data.'),
+        duration: const Duration(seconds: 1),
+        action: SnackBarAction(
+          label: 'Reload',
+          onPressed: () {
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Main(
+                          id: widget.id,
+                          indexPage: 3,
+                        )));
+          },
+        ),
+      ));
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _populateDestinations();
   }
 
   @override

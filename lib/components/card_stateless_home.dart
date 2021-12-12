@@ -2,20 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:odyssey/model/destination.dart';
 import 'package:odyssey/pages/picked_explore.dart';
 
-class CardStatelessHome extends StatelessWidget {
+class CardStatelessHome extends StatefulWidget {
   final List<Destination> destination;
   final String userId;
   // ignore: use_key_in_widget_constructors
   const CardStatelessHome({required this.destination, required this.userId});
 
   @override
+  State<CardStatelessHome> createState() => _CardStatelessHomeState();
+}
+
+class _CardStatelessHomeState extends State<CardStatelessHome>
+    with AutomaticKeepAliveClientMixin {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return SafeArea(
         child: ListView.builder(
             shrinkWrap: true,
-            itemCount: destination.length,
+            itemCount: widget.destination.length,
             itemBuilder: (context, index) {
-              final item = destination[index];
+              final item = widget.destination[index];
 
               return Padding(
                 padding:
@@ -31,7 +38,7 @@ class CardStatelessHome extends StatelessWidget {
                           MaterialPageRoute(
                               builder: (context) => PickedExplore(
                                     id: item.id,
-                                    userId: userId,
+                                    userId: widget.userId,
                                   )));
                     },
                     child: ListTile(
@@ -72,31 +79,9 @@ class CardStatelessHome extends StatelessWidget {
                 ),
               );
             }));
-    //   return ListView.builder(
-    //     shrinkWrap: true,
-    //     itemCount: destination.length,
-    //     itemBuilder: (context, index) {
-    //       final item = destination[index];
-
-    //       return ListTile(
-    //         title: Row(
-    //           children: [
-    //             SizedBox(
-    //               width: 100,
-    //               child: Image.network(item.photo)
-    //             ),
-    //             Flexible(
-    //               child: Padding(
-    //                 padding: const EdgeInsets.all(8.0),
-    //                 child: Column(children: [
-    //                   Text(item.name)
-    //                 ],),
-    //               ),
-    //             )
-    //           ],
-    //         ),
-
-    //     );
-    // });
   }
+
+  @override
+  // TODO: implement wantKeepAlive
+  bool get wantKeepAlive => true;
 }
