@@ -36,10 +36,8 @@ class InitState extends State<SignInScreen> {
             'Content-Type': 'application/json; charset=UTF-8',
           },
           body: jsonEncode(<String, String>{
-            'email': 'testing1@gmail.com',
-            'password': 'Password0'
-            // 'email': emailController.text,
-            // 'password': passwordController.text
+            'email': emailController.text,
+            'password': passwordController.text
           }));
       print(emailController.text + " EMAIL");
       print(passwordController.text + " PASSWORD");
