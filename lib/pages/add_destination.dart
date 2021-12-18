@@ -109,8 +109,7 @@ class MyCustomFormState extends State<MyCustomForm> {
     print(file);
     print(file.path);
     // Set URI
-    final uri = Uri.parse(
-        'https://odyssey-app-staging.herokuapp.com/api/v1/destination');
+    final uri = Uri.parse('http://192.168.100.10:3000/api/v1/destination');
     // Set the name of file parameter
     final parameter = 'photo';
 
@@ -127,7 +126,7 @@ class MyCustomFormState extends State<MyCustomForm> {
     request.fields['guide'] = widget.id;
     final response = await request.send();
     // final response = await http.post(
-    //     "https://odyssey-app-staging.herokuapp.com/api/v1/destination",
+    //     "http://192.168.100.10:3000/api/v1/destination",
     //     headers: <String, String>{
     //       'Content-Type': 'application/json; charset=UTF-8',
     //     },

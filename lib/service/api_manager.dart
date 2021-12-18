@@ -11,8 +11,8 @@ class API_Manager {
     var destinations = null;
 
     try {
-      var response = await client
-          .get("https://odyssey-app-staging.herokuapp.com/api/v1/destination");
+      var response =
+          await client.get("http://192.168.100.10:3000/api/v1/destination");
       if (response.statusCode == 200) {
         var jsonString = response.body;
         var jsonMap = json.decode(jsonString);

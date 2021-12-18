@@ -48,7 +48,7 @@ class CheckOutPage extends State<CheckOut> {
                             context,
                             MaterialPageRoute(
                                 builder: (BuildContext context) => Main(
-                                      id: widget.id,
+                                      id: widget.userId,
                                       indexPage: 0,
                                     )))
                       },
@@ -463,10 +463,11 @@ class CheckOutPage extends State<CheckOut> {
                             'finishedDate': '${dateEnd}',
                             'destination': '${widget.id}',
                             'totalPrice': '${totalPrice}',
-                            'orderedBy': widget.userId,
+                            'orderedBy': '${widget.userId}',
                           });
                           await http.post(
-                              "https://odyssey-app-staging.herokuapp.com/api/v1/order/",
+                              //{{BASE_URL}}/api/{{VERSION}}/order/
+                              "http://192.168.100.10:3000/api/v1/order/",
                               body: jsonStr,
                               headers: {
                                 "Content-Type": "application/json"

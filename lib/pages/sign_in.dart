@@ -31,7 +31,7 @@ class InitState extends State<SignInScreen> {
   Widget build(BuildContext context) {
     Future<List<Login>> _fetchAllDestinations() async {
       final response = await http.post(
-          "https://odyssey-app-staging.herokuapp.com/api/v1/auth/login",
+          "http://192.168.100.10:3000/api/v1/auth/login",
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },

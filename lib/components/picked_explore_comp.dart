@@ -60,7 +60,7 @@ class PickedExploreComponent extends StatelessWidget {
                                         MaterialPageRoute(
                                             builder: (BuildContext context) =>
                                                 Main(
-                                                  id: id,
+                                                  id: userId,
                                                   indexPage: 0,
                                                 )))
                                   },
@@ -106,7 +106,7 @@ class PickedExploreComponent extends StatelessWidget {
                                 });
                                 await http.put(
                                     // "http://192.168.100.10:3000/api/v1/users/${userId}/favorite",
-                                    "https://odyssey-app-staging.herokuapp.com/api/v1/users/${userId}/favorite",
+                                    "http://192.168.100.10:3000/api/v1/users/${userId}/favorite",
                                     body: jsonStr,
                                     headers: {
                                       "Content-Type": "application/json"
@@ -130,7 +130,7 @@ class PickedExploreComponent extends StatelessWidget {
                           fontWeight: FontWeight.w700,
                           fontFamily: 'KulimPark',
                           color: Colors.white,
-                          fontSize: 30,
+                          fontSize: 25,
                         )),
                   ]))),
             ]),

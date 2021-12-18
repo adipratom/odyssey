@@ -49,7 +49,7 @@ class GuideComponent extends StatelessWidget {
                 // alignment: Alignment.center,
                 children: <Widget>[
                   Image(
-                    image: NetworkImage(profile[0].headerPicture),
+                    image: NetworkImage(profile[0].profilePicture),
                     height: MediaQuery.of(context).size.height / 4,
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.cover,

@@ -24,10 +24,10 @@ class _ProfileState extends State<Profile> {
   List<ProfileModel> _destinations = <ProfileModel>[];
   Future<List<ProfileModel>> _fetchAllDestinations() async {
     final response =
-        // await http.get("http://192.168.100.10:3000/api/v1/users/${widget.id}");
-        await http.get(
-            "https://odyssey-app-staging.herokuapp.com/api/v1/users/${widget.id}");
-    // "https://odyssey-app-staging.herokuapp.com/api/v1/users/${widget.id}");
+        await http.get("http://192.168.100.10:3000/api/v1/users/${widget.id}");
+    // await http.get(
+    //     "http://192.168.100.10:3000/api/v1/users/${widget.id}");
+    // "http://192.168.100.10:3000/api/v1/users/${widget.id}");
 
     if (response.statusCode == 200) {
       final List<dynamic> result = jsonDecode(response.body);

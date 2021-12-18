@@ -93,7 +93,7 @@ class PaymentPendingPage extends State<PaymentPending> {
                                   String jsonStr =
                                       jsonEncode({'status': 'failed'});
                                   await http.put(
-                                      "https://odyssey-app-staging.herokuapp.com/api/v1/order/${widget.id}",
+                                      "http://192.168.100.10:3000/api/v1/order/${widget.id}",
                                       body: jsonStr,
                                       headers: {
                                         "Content-Type": "application/json"
